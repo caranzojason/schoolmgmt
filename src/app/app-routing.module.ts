@@ -3,13 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { BlankComponent } from './layouts/blank/blank.component';
+import { LandingComponent } from './landing/landing.component';
 
 export const Approutes: Routes = [
   {
     path: '',
     component: FullComponent,
     children: [
-      { path: '', redirectTo: '/starter', pathMatch: 'full' },
+      { path: '', redirectTo: '/landing', pathMatch: 'full' },
+     
       {
         path: 'starter',
         loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule)
@@ -21,7 +23,17 @@ export const Approutes: Routes = [
     ]
   },
   {
+		path: '',
+		component: BlankComponent,
+		children: [
+      {
+        path: 'landing',
+        loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
+      }
+		]
+	},
+  {
     path: '**',
-    redirectTo: '/starter'
+    redirectTo: '/landing'
   }
 ];
