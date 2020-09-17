@@ -6,13 +6,27 @@ import { map } from 'rxjs/operators'
 
 @Injectable()
 export class StudentService {
+
+    api="http://127.0.0.1:8000/api/";
+
     constructor(private _httpClient: HttpClient,//public _env: EnvService,
          private _uploadHttpClient: HttpClient, private _uploadHandler: HttpBackend ) {
         this._uploadHttpClient = new HttpClient(_uploadHandler);
     }
 
+
     getEnrollmentRefNo(refNo:String): Observable<any> {
-        return this._httpClient.get<any>('http://127.0.0.1:8000/api/enrollmentgetByReff/'+refNo)
+        return this._httpClient.get<any>(this.api+'enrollmentgetByReff/'+refNo)
         .pipe(map((res: any) => res));
+    }
+
+    getEnrollmentByEnrolNo(enrolNo:String): Observable<any> {
+        return this._httpClient.get<any>(this.api+'enrollmentgetByEnrolNo/'+enrolNo)
+        .pipe(map((res: any) => res));
+    }
+
+    uploadFile(inv: String,formData: FormData) {
+        return this._uploadHttpClient.post<FormData>(this.api+'enrollmentUpload?enrolId='+inv,formData)
+        .pipe(map((event:any) => event));
     }
 }
