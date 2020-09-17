@@ -1,0 +1,103 @@
+<div class="row">
+ 
+
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+
+                <h4 class="card-title">Payment Form S.Y. 2020-2021</h4>
+                <!-- <h6 class="card-subtitle">To use add
+                    <code>.r-separator</code> class in the form with form styling.</h6> -->
+            </div>
+            <hr class="m-t-0">
+            <form class="form-horizontal r-separator">
+
+                <!-- <ngb-alert [dismissible]="false">
+                    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                  </ngb-alert> -->
+
+                     <ngb-alert *ngIf="alerts.length > 0" [type]='alerts[0].type' (close)="closeAlert(alerts[0])">{{alerts[0].message}}</ngb-alert>
+
+                <div class="form-group row p-b-15">
+                    <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Enrollment Reference Number:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control"  [(ngModel)]="enrolNo" name = "ref" placeholder="Reference Number Here"/>
+                      <button type="submit" (click)="onClickRefNo()" class="btn btn-info waves-effect waves-light">Search</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Information</h4>
+                    <div class="form-group row p-b-15">
+                        <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">First Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" disabled [(ngModel)]="firstName" name = "fName"   class="form-control" id="inputEmail3">
+                        </div>
+                    </div>
+                    <div class="form-group row p-b-15">
+                        <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" disabled [(ngModel)]="lastName" name = "lName"     class="form-control" id="inputEmail3">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body bg-light">
+                    <h4 class="card-title m-t-10 p-b-20">Make Payment</h4>
+                    <div class="form-group row p-b-15">
+                        <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Payment Method</label>
+                        <div class="col-sm-9">
+                            <select   class="form-control" name="pOptions" [(ngModel)]="payment.paymentMethod">
+                                <option name="o" *ngFor="let o of paymentOptions">
+                                   {{o.name}}
+                                </option>
+                             </select>  
+                        </div>
+                    </div>
+                    <div class="form-group row p-b-15">
+                        <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Amount to Pay</label>
+                        <div class="col-sm-9">
+                            <input type="text"  [(ngModel)]="payment.amountToPay" name="amtPay" class="form-control" id="inputEmail3" placeholder="amount">
+                        </div>
+                    </div>
+                    <div class="form-group row p-b-15">
+                        <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Payment Description</label>
+                        <div class="col-sm-9">
+                                <select   class="form-control" name="pOptions1" [(ngModel)]="payment.paymentDescription">
+                                    <option  name="o" *ngFor="let o of paymentType">
+                                       {{o.name}}
+                                    </option>
+                                 </select> 
+                        </div>
+                    </div>
+                    <div class="form-group row p-b-15">
+                        <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Proof of Payment</label>
+                        <div class="col-sm-9">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input"   name="f"  (change)="handleFileInput($event.target.files)">
+                             
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                </div>
+                            <br>
+                                <div>
+                                    <label class="custom-file-label" for="inputGroupFile01">{{fileName}}</label>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-group m-b-0 text-right">
+                        <button type="submit" (click)="save()"  class="btn btn-info waves-effect waves-light">Save</button>
+                        <button type="submit" (click)="cancel()"  class="btn btn-dark waves-effect waves-light">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
