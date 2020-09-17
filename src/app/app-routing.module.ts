@@ -19,9 +19,29 @@ export const Approutes: Routes = [
       {
         path: 'component',
         loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
+      },
+      {
+        path: 'enrollment',
+        loadChildren: () => import('./enrollment/enrollment.module').then(m => m.EnrollmentModule)
       }
     ]
   },
+
+  // {
+  //   path: '',
+  //   component: FullComponent,
+  //   children: [
+  //     { path: '', redirectTo: '/enrollment', pathMatch: 'full' },
+  //     {
+  //       path: 'enrollment',
+  //       loadChildren: () => import('./enrollment/enrollment.module').then(m => m.EnrollmentModule)
+  //     }
+  //   ]
+  // },
+
+
+
+
 
   {
 		path: '',
