@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
@@ -40,6 +41,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { EnrollmentComponent } from './enrolment.component';
+import {EnrollmentService} from './service/enrollment.service';
 
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(EnrollmentRoutes),ReactiveFormsModule,
@@ -77,7 +80,11 @@ import {MatTreeModule} from '@angular/material/tree';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule],
-  declarations: [ForVerificationComponent  ,ForApprovalComponent,ApproveList]
+    MatTreeModule,
+    NgbModule],
+  declarations: [ForVerificationComponent  ,ForApprovalComponent,ApproveList,EnrollmentComponent],
+  providers: [
+    EnrollmentService
+  ]
 })
 export class EnrollmentModule {}

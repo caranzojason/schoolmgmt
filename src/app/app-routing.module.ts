@@ -3,14 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { BlankComponent } from './layouts/blank/blank.component';
-import { LandingComponent } from './landing/landing.component';
 
 export const Approutes: Routes = [
   {
     path: '',
     component: FullComponent,
     children: [
-      { path: '', redirectTo: '/landing', pathMatch: 'full' },
+      { path: '', redirectTo: '/starter', pathMatch: 'full' },
      
       {
         path: 'starter',
@@ -26,47 +25,22 @@ export const Approutes: Routes = [
       }
     ]
   },
-
-  // {
-  //   path: '',
-  //   component: FullComponent,
-  //   children: [
-  //     { path: '', redirectTo: '/enrollment', pathMatch: 'full' },
-  //     {
-  //       path: 'enrollment',
-  //       loadChildren: () => import('./enrollment/enrollment.module').then(m => m.EnrollmentModule)
-  //     }
-  //   ]
-  // },
-
-
-
-
-
   {
 		path: '',
 		component: BlankComponent,
 		children: [
 			{
 				path: 'student',
-				loadChildren:
-					() => import('./student/student.module').then(m => m.StudentModule)
-			}
-		]
-  },
-  
-  {
-		path: '',
-		component: BlankComponent,
-		children: [
+        loadChildren: 	() => import('./student/student.module').then(m => m.StudentModule)
+      },
       {
-        path: 'landing',
-        loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
+        path: 'studentenrollment',
+        loadChildren: () => import('./enrollment/enrollment.module').then(m => m.EnrollmentModule)
       }
 		]
-	},
+  },
   {
     path: '**',
-    redirectTo: '/landing'
+    redirectTo: '/enrollment'
   }
 ];
