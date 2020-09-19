@@ -2,7 +2,7 @@ import { Component,Input } from '@angular/core';
 import {StudentService} from '../service/student.service'
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-payment',
   templateUrl: './payment.component.html',
   styles: [`
   :host >>> .alert-custom {
@@ -10,7 +10,8 @@ import {StudentService} from '../service/student.service'
     background-color: #f169b4;
     border-color: #800040;
   }
-`]
+`],
+styleUrls: ['./payment.scss'],
 })
 export class PaymentComponent {
 
