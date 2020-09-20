@@ -11,9 +11,13 @@ import { SignupComponent } from './signup/signup.component';
 import { Signup2Component } from './signup2/signup2.component';
 
 import { AuthenticationRoutes } from './authentication.routing';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {UserService} from './service/user.service'
 
 @NgModule({
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild(AuthenticationRoutes),
     NgbModule
@@ -24,6 +28,9 @@ import { AuthenticationRoutes } from './authentication.routing';
     SignupComponent,
     LockComponent,
     Signup2Component
+  ],
+  providers: [
+    UserService
   ]
 })
 export class AuthenticationModule {}

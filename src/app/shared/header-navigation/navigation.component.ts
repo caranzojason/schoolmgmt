@@ -1,4 +1,7 @@
 import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { CookieService } from 'ngx-cookie';
+import { Router} from '@angular/router';
+
 import {
   NgbModal,
   ModalDismissReasons,
@@ -19,7 +22,7 @@ export class NavigationComponent implements AfterViewInit {
 
   public showSearch = false;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private _cookieService: CookieService,private _router: Router) {}
 
   // This is for Notifications
   notifications: Object[] = [
@@ -86,4 +89,10 @@ export class NavigationComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit() {}
+
+  logout()
+  {
+    this._cookieService.removeAll();
+    this._router.navigate(['/authentication/login'],{ replaceUrl: true });
+  }
 }
