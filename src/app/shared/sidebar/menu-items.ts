@@ -2,14 +2,14 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
 
-  {
-    path: '/starter',
-    title: 'Dashboard',
-    icon: 'mdi mdi-gauge',
-    class: '',
-    extralink: false,
-    submenu: []
-  },
+  // {
+  //   path: '/starter',
+  //   title: 'Dashboard',
+  //   icon: 'mdi mdi-gauge',
+  //   class: '',
+  //   extralink: false,
+  //   submenu: []
+  // },
   {
     path: '',
     title: 'Enrollment',

@@ -3,6 +3,7 @@ import { ROUTES } from './menu-items';
 import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie';
 declare var $: any;
 
 @Component({
@@ -38,11 +39,18 @@ export class SidebarComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _cookieService: CookieService
   ) {}
 
   // End open close
   ngOnInit() {
-    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    let username = this._cookieService.get("username");
+    if(username == 'registrar' ){
+      this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    }else{
+      this.sidebarnavItems =  [{  path: "/starter",  title: 'Dashboard',  icon: 'mdi mdi-gauge',   class: '', extralink: false, submenu: []  }];
+    }
+
   }
 }

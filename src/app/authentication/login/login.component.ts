@@ -27,7 +27,12 @@ export class LoginComponent {
         if(data.found === true){
           this._cookieService.put("username",data.username);
           this._cookieService.put("usersession",data.session);
-          this._router.navigate(['/enrollment'],{ replaceUrl: true });
+          if(data.username == 'registrar'){
+            this._router.navigate(['/enrollment'],{ replaceUrl: true });
+          }else{
+            this._router.navigate(['/starter'],{ replaceUrl: true });
+          }
+         
         }else{
           console.log(data.message);
           this.message = data.message;

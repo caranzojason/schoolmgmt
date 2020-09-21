@@ -39,4 +39,14 @@ export class EnrollmentService {
         return this._httpClient.post<Enrollment>(this.api +'enrol',data)
         .pipe(map((res: Enrollment) => res));
     }
+
+    getEnrollmentForVerification(){
+        return this._httpClient.get<any>(this.api+'enrollgetForverification/')
+        .pipe(map((res: any) => res));
+    }
+
+    updateStatus(data:Enrollment): Observable<Enrollment> {
+        return this._httpClient.post<Enrollment>(this.api +'enrolVerify',data)
+        .pipe(map((res: Enrollment) => res));
+    }
 }

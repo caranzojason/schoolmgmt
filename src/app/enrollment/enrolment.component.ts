@@ -30,7 +30,7 @@ export class EnrollmentComponent implements AfterViewInit {
         "religion": "",
         "fathername": "",
         "fatherocc": "",
-        "fathercontact": 527,
+        "fathercontact": 0,
         "fatherplace": "",
         "mothername": "",
         "motherocc": "",
@@ -63,7 +63,6 @@ export class EnrollmentComponent implements AfterViewInit {
     constructor(private _enrollService:EnrollmentService) {
         this._enrollService.getAllDepartment().subscribe((data:any) => 
         {
-            console.log(data);
             this.deparmentList = data;
         })
     }
@@ -100,7 +99,6 @@ export class EnrollmentComponent implements AfterViewInit {
     }
 
     public enrol(){
-        console.log(this.enrollment);
         this._enrollService.saveEnrolment(this.enrollment).subscribe((data:any) => 
         {
             console.log(data);

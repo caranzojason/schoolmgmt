@@ -27,6 +27,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { CookieModule } from 'ngx-cookie';
+import { CoreModule } from './core/core.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -54,7 +55,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgbModule,
     RouterModule.forRoot(Approutes),
     PerfectScrollbarModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    CoreModule
   ],
   providers: [
     {
