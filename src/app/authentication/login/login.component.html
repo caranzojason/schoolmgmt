@@ -1,8 +1,8 @@
-<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(assets/images/background/CTGFBG.jpg) no-repeat;">
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background: azure;">
     <div class="auth-box m-3 m-md-0">
         <div id="loginform" [ngClass]="{'d-none': recoverform}">
-            <div class="logo">
-                <span class="db"><img src="assets/images/ctgflogo.png" alt="logo" style="width: 60%;" /></span>
+            <div class="logo" style="background: #3d8bf1;">
+                <span class="db"><img src="/assets/images/header/header.png" alt="logo" style="width: 70%;" /></span>
             </div>
             <!-- Form -->
             <div class="row">
@@ -18,41 +18,39 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Password" aria-label="Password" [(ngModel)]= "user.password" name = "ppassword"  aria-describedby="basic-addon1">
+                            <input type="password" class="form-control" placeholder="Password" aria-label="Password" [(ngModel)]= "user.password" name = "ppassword"  aria-describedby="basic-addon1">
                         </div>
-                        <!-- <div class="form-group row">
-                            <div class="col-md-12">
-                                <div class="custom-control custom-checkbox d-flex">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label font-14" for="customCheck1">Remember me</label>
-                                    <a (click)="showRecoverForm()" href="javascript:void(0)" id="to-recover" class="text-dark font-14 ml-auto"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label>   {{message}}</label>
-                                </div>
-                        </div>
-                     
                         <div class="form-group text-center">
-                            <div class="col-xs-12 p-b-20">
-                                <a class="btn btn-block btn-lg btn-info" (click)="login()">Log In</a>
+                            <div class="col-xs-12" style="padding-bottom: 10px;">
+                                <button class="btn btn-block btn-lg btn-info" style="font-size: 15px;color: #f9f9f9bf;" (click)="login()">Log In</button>
                             </div>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row" style="background: #efefefd4">
                             <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
                                 <div class="social">
-                                    <a href="javascript:void(0)" class="btn btn-facebook mr-2" data-toggle="tooltip" title="" data-original-title="Login with Facebook"> <i aria-hidden="true" class="fab fa-facebook"></i> </a>
-                                    <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="" data-original-title="Login with Google"> <i aria-hidden="true" class="fab fa-google-plus"></i> </a>
+                                  <span style="font-size: 15; font-weight: 600;">
+                                      New Student & Transferees
+                                  </span>
+                                    <div style="font-size: 12px;
+                                    padding: 15px;
+                                    text-align: center;" >
+                                    <span>For new Student & Transferees please click the link below
+                                    </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div> -->
-                        <!-- <div class="form-group m-b-0 m-t-10">
+                        </div>
+                        <div class="form-group m-b-0 m-t-10">
                             <div class="col-sm-12 text-center">
-                                Don't have an account? <a href="authentication/signup" class="text-info m-l-5"><b>Sign Up</b></a>
+                                <i class="mdi mdi-note-text" aria-hidden="true"></i><a href="enrollment/enrol" class="text-info m-l-5" style="font-weight: 400;
+                                font-size: 14px;"><b>Online Enrollment Registration</b></a>
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label> {{message}}</label>
+                                </div>
+                        </div>
                     </form>
                 </div>
             </div>

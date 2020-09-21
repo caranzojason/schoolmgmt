@@ -37,11 +37,11 @@ export const Approutes: Routes = [
         path: 'studentenrollment',
         loadChildren: () => import('./enrollment/enrollment.module').then(m => m.EnrollmentModule)
       }
-      ,
-      {
-        path: 'authentication',
-        loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
-      }
+      // ,
+      // {
+      //   path: 'authentication',
+      //   loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
+      // }
 		]
   },
   {
