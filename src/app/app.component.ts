@@ -15,14 +15,13 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.checksession();
-    setInterval(() => { 
-      this.checksession() 
-    }, 5000);
+    // this.checksession();
+    // setInterval(() => { 
+    //   this.checksession() 
+    // }, 5000);
   }
 
   private checksession(){
-    console.log("checksession");
     let usersession = this._cookieService.get("usersession");
     if(usersession == undefined ){
       this._cookieService.removeAll();

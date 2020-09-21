@@ -42,6 +42,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { EnrollmentComponent } from './enrolment.component';
+import { EnrollmentDialog } from './enrollmentdialog';
 import {EnrollmentService} from './service/enrollment.service';
 
 @NgModule({
@@ -82,9 +83,10 @@ import {EnrollmentService} from './service/enrollment.service';
     MatTooltipModule,
     MatTreeModule,
     NgbModule],
-  declarations: [ForVerificationComponent  ,ForApprovalComponent,ApproveList,EnrollmentComponent],
+  declarations: [ForVerificationComponent  ,ForApprovalComponent,ApproveList,EnrollmentComponent,EnrollmentDialog],
   providers: [
     EnrollmentService
-  ]
+  ],
+  entryComponents: [EnrollmentDialog]
 })
 export class EnrollmentModule {}

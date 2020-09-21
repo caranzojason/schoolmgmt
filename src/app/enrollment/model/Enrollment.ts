@@ -12,7 +12,7 @@ export interface Enrollment{
     grade:Number;
     department:Number;
     strand:Number;
-    dob:string;
+    dob:any;
     place_of_birth:string;
     contactno:string;
     address:string;
