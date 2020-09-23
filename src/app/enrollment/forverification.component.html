@@ -3,30 +3,30 @@
         <div class="card">
             <div class="card-body">
               <mat-tab-group #tabs (selectedTabChange)="onTabChange($event)">
-                <mat-tab label="Enrollment For Verification List">
+                <mat-tab label="Enrollment For Verification List" style="margin-top: 30px;">
                   <ng-template matTabContent >
-                <mat-form-field>
+                <mat-form-field style="width: 20%; margin-top: 20px;">
                   <mat-label>Filter</mat-label>
                   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
                 </mat-form-field>
                     <div class="mat-elevation-z8">
-                      <table mat-table [dataSource]="dataSource" matSort>
+                      <table mat-table [dataSource]="dataSource" matSort >
                     
                         <!-- ID Column -->
-                        <ng-container matColumnDef="ref_no">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Reference No. </th>
+                        <ng-container matColumnDef="ref_no" >
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Reference No. </th>
                           <td mat-cell *matCellDef="let row"> {{row.ref_no}} </td>
                         </ng-container>
                     
                         <!-- Progress Column -->
                         <ng-container matColumnDef="lastname">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> lastname </th>
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Last Name </th>
                           <td mat-cell *matCellDef="let row"> {{row.lastname}} </td>
                         </ng-container>
                     
                         <!-- Name Column -->
                         <ng-container matColumnDef="email">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Email </th>
                           <td mat-cell *matCellDef="let row"> {{row.email}} </td>
                         </ng-container>
                     
@@ -37,7 +37,7 @@
                         </ng-container> -->
   
                         <ng-container matColumnDef="status">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header> status </th>
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Status </th>
                           <td mat-cell *matCellDef="let row" [style.color]="row.status"> {{row.status}} </td>
                         </ng-container>
                     
@@ -45,9 +45,9 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     
                         <ng-container matColumnDef="actions">
-                          <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
-                          <mat-cell *matCellDef="let row" >
-                               <button (click)="edit(row)" mat-button >Verify</button>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Actions </th>
+                          <mat-cell *matCellDef="let row" style="padding: 5px;" >
+                               <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="edit(row)" mat-button >Verify</button>
                           </mat-cell>
                         </ng-container>
   
@@ -63,485 +63,467 @@
                 </mat-tab>
                 <mat-tab label="Enrollment" >
                   <ng-template matTabContent>
-                  <div class="site-inner">
-                      <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
-                          <div style="box-shadow: 0px 1px 3px 0px #c8cec8;
-                          border-radius: 10px;">
-                              <h4 style="padding: 10px;font-weight: 500;">Admission Form</h4>
-                          </div>
-                          <div class="col-md-6">
-                              <form >
-                                  <label style="font-size: 13px;">Are you an old student??</label>
-                                  <div class="form-group">
-                                      <div class="input-group">
-                                      <input type="radio" id="yes" name="type" value="yes">
-                                      <label for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
-                                      <input type="radio" id="no" name="type" value="no">
-                                      <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
-                                      </div>
-                                  </div>
-                              </form>
-                          </div>
-                          <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
-                              <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Lastname</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)] = "enrollment.lastname"  name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Firstname</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)] = "enrollment.firstname"   name="fName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Middlename</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"   [(ngModel)]= "enrollment.middlename"   name="mName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-1" style="padding: 1px;">
-                                      <form >
-                                           <label style="font-size: 13px;margin-bottom: 0px;">Age</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)]= "enrollment.age"  type="number"  name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-1" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Gender </label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <select name="filter" [(ngModel)]= "enrollment.gender"   class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
-                                                      <option></option>
-                                                      <option value="Male">Male</option>
-                                                      <option value="Female">Female</option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Nationality</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.nationality"   name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Religion</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.religion"   name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                              <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-3" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">LRN/Student No.</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)]= "enrollment.studentno"  name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-3" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Department </label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <select name="filter"   [(ngModel)]= "enrollment.department" (change)="selectDepartment()" class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
-                                                      <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
-                                                          {{o.name}}
-                                                      </option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-3" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Grade </label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <select name="gradex"  [(ngModel)]= "enrollment.grade"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
-                                                      <option name="x" *ngFor = "let o of gradesList"  [ngValue]="o.id">
-                                                          {{o.name}}
-                                                      </option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                 <div class="col-md-3" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Track & Strand/Course </label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <select name="strand"  [(ngModel)]= "enrollment.strand"   class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
-                                                      <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
-                                                          {{o.name}}
-                                                      </option>
-                                                  </select>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                           
-                              <div class="row" style="margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-3" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Address</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <textarea  name="naddress" [(ngModel)]= "enrollment.address"  style="font-size: 11px;
-                                                  padding: 5px;
-                                                  border-radius: 5px;
-                                                  margin-top: 0px;
-                                                  margin-bottom: 0px;
-                                                  height: 30px;
-                                                  border: 1px solid #ededed;
-                                                  width: 100%;"> </textarea>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Date of Birth</label>
-                                          <div class="input-group">
-                                              <input class="form-control form-control-date" [(ngModel)]= "enrollment.dob"   name="dp2" ngbDatepicker #Date="ngbDatepicker">
-                                              <div class="input-group-append">
-                                                  <button class="btn btn-light btn-filter-date" (click)="Date.toggle()" type="button">
-                                                      <i class="fa fa-calendar"></i>
-                                                  </button>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                      
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Place of Birth</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)]= "enrollment.place_of_birth"  name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
+                    <div >
+                        <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
+                            <div style="box-shadow: 0px 1px 3px 0px #c8cec8;
+                            border-radius: 10px;">
+                                <h4 style="padding: 10px;font-weight: 500;">Admission Form</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <form >
+                                    <label style="font-size: 13px;">Are you an old student??</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                        <input type="radio" id="yes" name="type" value="yes">
+                                        <label for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
+                                        <input type="radio" id="no" name="type" value="no">
+                                        <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
+                                <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Lastname</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)] = "enrollment.lastname"  name="lName" class="form-control inputText" >
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Firstname</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)] = "enrollment.firstname"   name="fName" class="form-control inputText" >
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Middlename</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"   [(ngModel)]= "enrollment.middlename"   name="mName" class="form-control inputText" >
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-1" style="padding: 1px;">
+                                        <form >
+                                             <label style="font-size: 13px;margin-bottom: 0px;">Age</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)]= "enrollment.age"  type="number"  name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-1" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Gender </label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <select name="filter" [(ngModel)]= "enrollment.gender"   class="form-control inputText">
+                                                        <option></option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Nationality</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.nationality"   name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Religion</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.religion"   name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-3" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">LRN/Student No.</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)]= "enrollment.studentno"  name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Department </label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <select name="filter"  [(ngModel)]= "enrollment.department" (change)="selectDepartment()" class="form-control inputText">
+                                                        <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
+                                                            {{o.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-3" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Grade </label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <select name="gradex"  [(ngModel)]= "enrollment.grade"  class="form-control inputText" >
+                                                        <option name="x" *ngFor = "let o of gradesList"  [ngValue]="o.id">
+                                                            {{o.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                   <div class="col-md-3" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Track & Strand/Course </label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <select name="strand"  [(ngModel)]= "enrollment.strand"   class="form-control inputText">
+                                                        <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
+                                                            {{o.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                             
+                                <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-3" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Address</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <textarea  name="naddress" [(ngModel)]= "enrollment.address"  style="font-size: 11px;
+                                                    padding: 5px;
+                                                    border-radius: 5px;
+                                                    margin-top: 0px;
+                                                    margin-bottom: 0px;
+                                                    height: 30px;
+                                                    border: 1px solid #ededed;
+                                                    width: 100%;"> </textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)]= "enrollment.contactno" name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                   
-                                  <div class="col-md-3"style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Email</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.email" name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                          </div> 
-                         
-                          <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
-                              <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-3" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Father's Name</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.fathername"   name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Occupation</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.fatherocc"   name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                              <input type="text"  name="lName"  [(ngModel)]= "enrollment.contactno"  class="form-control" style=" font-size: 11px;
-                                              padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-5" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Address</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <textarea name="nFatherPlace"  [(ngModel)]= "enrollment.fatherplace"  style="font-size: 11px;
-                                                  padding: 5px;
-                                                  border-radius: 5px;
-                                                  margin-top: 0px;
-                                                  margin-bottom: 0px;
-                                                  height: 30px;
-                                                  border: 1px solid #ededed;
-                                                  width: 100%;"> </textarea>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                              <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-3" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Mother's Name</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.mothername" name="lName" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Occupation</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  name="lName" [(ngModel)]= "enrollment.motherocc"  class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-2" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                              <input type="text"  name="lName" class="form-control" [(ngModel)]= "enrollment.mothercontact"  style=" font-size: 11px;
-                                              padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-5" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Address</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <textarea  name="nMotherPlace" [(ngModel)]= "enrollment.motherplace"   style="font-size: 11px;
-                                                  padding: 5px;
-                                                  border-radius: 5px;
-                                                  margin-top: 0px;
-                                                  margin-bottom: 0px;
-                                                  height: 30px;
-                                                  border: 1px solid #ededed;
-                                                  width: 100%;"> </textarea>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                              <div class="row" style="margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-4" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Guardian's Name</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.guardian_name"  name="nguardiannane" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-4" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)]= "enrollment.guardian_contactno"   name="nguardiancontact" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-4" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Relationship to Child</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)]= "enrollment.guardian_relation"   name="nguardian" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                          </div>      
-                          <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
-                              <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-4" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Last Grade Level</label>
-                                              <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  [(ngModel)]= "enrollment.last_school_grade_level"  name="nGradelevel" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <!-- <div class="col-md-4" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Last Date of Attendance</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text"  name="nattencance" [(ngModel)]= "enrollment.last_school_date_of_attendance"  class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div> -->
-                                  <div class="col-md-4" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Last School Year</label>
-                                              <div class="form-group">
-                                              <div class="input-group">
-                                                  <input type="text" [(ngModel)]= "enrollment.last_school_year"   name="nlastSchool" class="form-control" style=" font-size: 11px;
-                                                  padding: 5px;border-radius: 5px;">
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                              <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                  <div class="col-md-6" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Last School Attend</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <textarea  name="nlastSchoolatended"  [(ngModel)]= "enrollment.last_school_attended"  style="font-size: 11px;
-                                                  padding: 5px;
-                                                  border-radius: 5px;
-                                                  margin-top: 0px;
-                                                  margin-bottom: 0px;
-                                                  height: 30px;
-                                                  border: 1px solid #ededed;
-                                                  width: 100%;"> </textarea>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-6" style="padding: 1px;">
-                                      <form >
-                                          <label style="font-size: 13px;margin-bottom: 0px;">Last School Address</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                                  <textarea  name="nlastSchooladress" [(ngModel)]= "enrollment.last_school_address"    style="font-size: 11px;
-                                                  padding: 5px;
-                                                  border-radius: 5px;
-                                                  margin-top: 0px;
-                                                  margin-bottom: 0px;
-                                                  height: 30px;
-                                                  border: 1px solid #ededed;
-                                                  width: 100%;"> </textarea>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                          </div>   
-                              <div class="row" style="margin-bottom: -10px;">
-                                  <div class="col-md-6" >
-                                      <form >
-                                          <label style="font-size: 13px;">Are you an indigenous?</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                              <input type="radio" id="yes" name="indigenous" [(ngModel)]="enrollment.indigenous" value="yes">
-                                              <label for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
-                                              <input type="radio" id="no" name="indigenous" [(ngModel)]="enrollment.indigenous"  value="no">
-                                              <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <form >
-                                          <label style="font-size: 13px;">Choice of Learning Modality</label>
-                                          <div class="form-group">
-                                              <div class="input-group">
-                                              <input type="radio" id="blend_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"   value="blend_mode">
-                                              <label for="mblend_modeale" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Blend Mode</label>
-                                              <input type="radio" id="online_mode" name="learning_modality" [(ngModel)]="enrollment.learning_modality"  value="online_mode">
-                                              <label for="online_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Online Mode</label>
-                                              <input type="radio" id="modular_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"  value="modular_mode">
-                                              <label for="modular_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Modular Mode</label>
-                                              </div>
-                                          </div>
-                                      </form>
-                                  </div>
-                              </div>
-                          <div class="modal-footer att-modal-footer">
-                              <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
-                              <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="verify()" type="button">Verify</button>
-                          </div>
-                      </div>
-                  </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Date of Birth</label>
+                                            <div class="input-group">
+                                                <input class="form-control form-control-date" [(ngModel)]= "enrollment.dob"   name="dp2" ngbDatepicker #Date="ngbDatepicker">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-light btn-filter-date" (click)="Date.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                        
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Place of Birth</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)]= "enrollment.place_of_birth"  name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                  
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)]= "enrollment.contactno" name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                     
+                                    <div class="col-md-3"style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Email</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.email" name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> 
+                           
+                            <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
+                                <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-3" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Father's Name</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.fathername"   name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Occupation</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.fatherocc"   name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                <input type="text"  name="lName"  [(ngModel)]= "enrollment.contactno"  class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-5" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Address</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <textarea name="nFatherPlace"  [(ngModel)]= "enrollment.fatherplace"  style="font-size: 11px;
+                                                    padding: 5px;
+                                                    border-radius: 5px;
+                                                    margin-top: 0px;
+                                                    margin-bottom: 0px;
+                                                    height: 30px;
+                                                    border: 1px solid #ededed;
+                                                    width: 100%;"> </textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-3" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Mother's Name</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.mothername" name="lName" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Occupation</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  name="lName" [(ngModel)]= "enrollment.motherocc"  class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-2" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                <input type="text"  name="lName" class="form-control inputText" [(ngModel)]= "enrollment.mothercontact" >
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-5" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Address</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <textarea  name="nMotherPlace" [(ngModel)]= "enrollment.motherplace"   style="font-size: 11px;
+                                                    padding: 5px;
+                                                    border-radius: 5px;
+                                                    margin-top: 0px;
+                                                    margin-bottom: 0px;
+                                                    height: 30px;
+                                                    border: 1px solid #ededed;
+                                                    width: 100%;"> </textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-4" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Guardian's Name</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.guardian_name"  name="nguardiannane" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)]= "enrollment.guardian_contactno"   name="nguardiancontact" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Relationship to Child</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)]= "enrollment.guardian_relation"   name="nguardian" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>      
+                            <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
+                                <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-4" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Last Grade Level</label>
+                                                <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  [(ngModel)]= "enrollment.last_school_grade_level"  name="nGradelevel" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- <div class="col-md-4" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Last Date of Attendance</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"  name="nattencance" [(ngModel)]= "enrollment.last_school_date_of_attendance"  class="form-control" style=" font-size: 11px;
+                                                    padding: 5px;border-radius: 5px;">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div> -->
+                                    <div class="col-md-4" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Last School Year</label>
+                                                <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [(ngModel)]= "enrollment.last_school_year"   name="nlastSchool" class="form-control inputText">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
+                                    <div class="col-md-6" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Last School Attend</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <textarea  name="nlastSchoolatended"  [(ngModel)]= "enrollment.last_school_attended"  style="font-size: 11px;
+                                                    padding: 5px;
+                                                    border-radius: 5px;
+                                                    margin-top: 0px;
+                                                    margin-bottom: 0px;
+                                                    height: 30px;
+                                                    border: 1px solid #ededed;
+                                                    width: 100%;"> </textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6" style="padding: 1px;">
+                                        <form >
+                                            <label style="font-size: 13px;margin-bottom: 0px;">Last School Address</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <textarea  name="nlastSchooladress" [(ngModel)]= "enrollment.last_school_address"    style="font-size: 11px;
+                                                    padding: 5px;
+                                                    border-radius: 5px;
+                                                    margin-top: 0px;
+                                                    margin-bottom: 0px;
+                                                    height: 30px;
+                                                    border: 1px solid #ededed;
+                                                    width: 100%;"> </textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>   
+                                <div class="row" style="margin-bottom: -10px;">
+                                    <div class="col-md-6" >
+                                        <form >
+                                            <label style="font-size: 13px;">Are you an indigenous?</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                <input type="radio" id="yes" name="indigenous" [(ngModel)]="enrollment.indigenous" value="yes">
+                                                <label for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
+                                                <input type="radio" id="no" name="indigenous" [(ngModel)]="enrollment.indigenous"  value="no">
+                                                <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form >
+                                            <label style="font-size: 13px;">Choice of Learning Modality</label>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                <input type="radio" id="blend_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"   value="blend_mode">
+                                                <label for="mblend_modeale" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Blend Mode</label>
+                                                <input type="radio" id="online_mode" name="learning_modality" [(ngModel)]="enrollment.learning_modality"  value="online_mode">
+                                                <label for="online_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Online Mode</label>
+                                                <input type="radio" id="modular_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"  value="modular_mode">
+                                                <label for="modular_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Modular Mode</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div> 
+                            <div class="modal-footer att-modal-footer">
+                                <div>
+                                    <p >By clicking Enroll, you agree to our Terms & Conditions.</p>
+                                </div>
+                                <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
+                                <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="enrol()" type="button">Enroll</button>
+                            </div>
+                        </div>
+                    </div>
                   </ng-template>
                 </mat-tab>
               </mat-tab-group>
