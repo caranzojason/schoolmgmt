@@ -29,4 +29,10 @@ export class StudentService {
         return this._uploadHttpClient.post<FormData>(this.api+'enrollmentUpload?enrolId='+inv,formData)
         .pipe(map((event:any) => event));
     }
+
+    makePayment(payment:any): Observable<any> {
+        console.log("pay");
+        return this._httpClient.post<any>(this.api +'enrollmentMakePayment',payment)
+        .pipe(map((res: any) => res));
+    }
 }

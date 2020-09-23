@@ -8,7 +8,13 @@ export const StudentRoutes: Routes = [
     children: [
       {
         path: 'payment',
-        component: PaymentComponent
+        component: PaymentComponent,
+        data: {
+          title: 'Payment',
+          urls: [
+            { title: 'Payment', url: '/student/payment' }
+          ]
+        }
       }
     ]
   }

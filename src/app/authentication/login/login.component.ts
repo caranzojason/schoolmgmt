@@ -30,9 +30,8 @@ export class LoginComponent {
           if(data.username == 'registrar'){
             this._router.navigate(['/enrollment'],{ replaceUrl: true });
           }else{
-            this._router.navigate(['/starter'],{ replaceUrl: true });
+            this._router.navigate(['/myenrollment'],{ replaceUrl: true });
           }
-         
         }else{
           console.log(data.message);
           this.message = data.message;

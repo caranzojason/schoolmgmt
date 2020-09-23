@@ -49,7 +49,9 @@ export class SidebarComponent implements OnInit {
     if(username == 'registrar' ){
       this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
     }else{
-      this.sidebarnavItems =  [{  path: "/starter",  title: 'Dashboard',  icon: 'mdi mdi-gauge',   class: '', extralink: false, submenu: []  }];
+      this.sidebarnavItems =[{  path: "/myenrollment",  title: 'My Enrollment',  icon: 'mdi mdi-gauge',   class: '', extralink: false, submenu: []  },
+                            {  path: "/student/payment",  title: 'Payment',  icon: 'mdi mdi-gauge',   class: '', extralink: false, submenu: []  }
+                            ];
     }
 
   }

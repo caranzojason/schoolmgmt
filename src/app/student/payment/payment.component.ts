@@ -18,6 +18,9 @@ export class PaymentComponent {
     public enrolNo:any;
     public firstName:any;
     public lastName:any;
+
+    public studentPayment:any = { student_name: "", enrollment_ref_no: "",method:"",amount:0,description:"", status:0,approval_status:0   } //0 is not yet approve or newly created
+
     public payment:any = {paymentMethod:"",amountToPay:"",paymentDescription:""}
     public url:any = '';
     public fileName:any;
@@ -48,9 +51,8 @@ export class PaymentComponent {
 
     public onClickRefNo(){
         console.log(this.enrolNo);
-        this._studService.getEnrollmentByEnrolNo(this.enrolNo).subscribe((data:any) => 
+        this._studService.getEnrollmentRefNo(this.enrolNo).subscribe((data:any) => 
         {
-            console.log(data);
             this.firstName = data.firstname;
             this.lastName = data.lastname
         })
@@ -71,7 +73,6 @@ export class PaymentComponent {
             return;
         }
         this.fileToUpload = files.item(0);
-        console.log(this.fileToUpload);
         this.fileName = this.fileToUpload.name;
         const formData: FormData = new FormData();
         formData.append('uploads', this.fileToUpload, this.fileToUpload.name);
@@ -88,7 +89,16 @@ export class PaymentComponent {
       }
 
     public save(){
-        console.log(this.payment)
+        this.studentPayment.student_name = this.firstName + " " + this.lastName;
+        this.studentPayment.enrollment_ref_no = this.enrolNo;
+        this.studentPayment.method = this.payment.paymentMethod;
+        this.studentPayment.amount = this.payment.amountToPay;
+        this.studentPayment.description = this.payment.paymentDescription;
+        
+        this._studService.makePayment(this.studentPayment).subscribe((data:any) => 
+        {
+            console.log(data);
+        });
     }
 
     public cancel(){

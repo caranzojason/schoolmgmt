@@ -11,7 +11,7 @@ export const Approutes: Routes = [
     component: FullComponent,
     children: [
       {
-        path: 'starter',
+        path: 'myenrollment',
         loadChildren: () => import('./starter/starter.module').then(m => m.StarterModule),
         canActivate: [AuthRouteGuard]
       },
@@ -24,7 +24,11 @@ export const Approutes: Routes = [
         path: 'enrollment',
         loadChildren: () => import('./enrollment/enrollment.module').then(m => m.EnrollmentModule),
         canActivate: [AuthRouteGuard]
-      }
+      },
+      {
+				path: 'student',
+        loadChildren: 	() => import('./student/student.module').then(m => m.StudentModule)
+      },
     ]
   },
   {
@@ -33,19 +37,16 @@ export const Approutes: Routes = [
 		component: BlankComponent,
 		children: [
       { path: '', redirectTo: 'authentication/login', pathMatch: 'full' },
-			{
-				path: 'student',
-        loadChildren: 	() => import('./student/student.module').then(m => m.StudentModule)
-      },
+
       {
         path: 'studentenrollment',
         loadChildren: () => import('./enrollment/enrollment.module').then(m => m.EnrollmentModule)
       }
-      // ,
-      // {
-      //   path: 'authentication',
-      //   loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
-      // }
+      ,
+      {
+        path: 'authentication',
+        loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
+      }
 		]
   },
   {
