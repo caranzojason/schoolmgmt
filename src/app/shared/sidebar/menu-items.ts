@@ -36,8 +36,8 @@ export const ROUTES: RouteInfo[] = [
       },
     
       {
-        path: '/enrollment/approvelist',
-        title: 'Approve List',
+        path: '/enrollment/inquiry',
+        title: 'Inquiry',
         icon: 'mdi mdi-gauge',
         class: '',
         extralink: false,

@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { ForVerificationComponent } from './forverification.component';
 import { ForApprovalComponent } from './forapproval.component';
-import { ApproveList } from './approvelist.component'
+import { Inquiry } from './inquiry.component'
 import { EnrollmentComponent } from './enrolment.component';
 export const EnrollmentRoutes: Routes = [
 	{
@@ -31,13 +31,13 @@ export const EnrollmentRoutes: Routes = [
 				}
             },
             {
-				path: 'approvelist',
-				component: ApproveList,
+				path: 'inquiry',
+				component: Inquiry,
 				data: {
-					title: 'Approve List',
+					title: 'Inquiry',
 					urls: [
-						{ title: 'Enrollment', url: '/enrollment/approvelist' },
-						{ title: 'Approve List' }
+						{ title: 'Enrollment', url: '/enrollment/inquiry' },
+						{ title: 'inquiry' }
 					]
 				}
 			},

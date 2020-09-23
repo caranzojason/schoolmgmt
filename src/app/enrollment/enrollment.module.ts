@@ -5,7 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ForVerificationComponent } from './forverification.component';
 import { ForApprovalComponent } from './forapproval.component';
-import { ApproveList } from './approvelist.component';
+import { Inquiry } from './inquiry.component';
 import { EnrollmentRoutes } from './enrollment.routing';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -83,7 +83,7 @@ import {EnrollmentService} from './service/enrollment.service';
     MatTooltipModule,
     MatTreeModule,
     NgbModule],
-  declarations: [ForVerificationComponent  ,ForApprovalComponent,ApproveList,EnrollmentComponent,EnrollmentDialog],
+  declarations: [ForVerificationComponent  ,ForApprovalComponent,EnrollmentComponent,EnrollmentDialog,Inquiry],
   providers: [
     EnrollmentService
   ],

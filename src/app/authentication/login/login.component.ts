@@ -23,7 +23,6 @@ export class LoginComponent {
   login(){
     this._userService.login(this.user).subscribe((data:any) => 
     {
-      console.log(data);
         if(data.found === true){
           this._cookieService.put("username",data.username);
           this._cookieService.put("usersession",data.session);
@@ -33,8 +32,8 @@ export class LoginComponent {
             this._router.navigate(['/myenrollment'],{ replaceUrl: true });
           }
         }else{
-          console.log(data.message);
-          this.message = data.message;
+          console.log(data[0].message);
+          this.message = data[0].message;
         }
     });
   }

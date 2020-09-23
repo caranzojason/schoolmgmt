@@ -3,11 +3,11 @@
         <div class="card">
             <div class="card-body">
               <mat-tab-group #tabs (selectedTabChange)="onTabChange($event)">
-                <mat-tab label="Enrollment For Approval List" style="margin-top: 30px;">
+                <mat-tab label="Enrollment List" style="margin-top: 30px;">
                   <ng-template matTabContent >
                 <mat-form-field style="width: 20%; margin-top: 20px;">
                   <mat-label>Filter</mat-label>
-                  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                  <input matInput (keyup)="applyFilter($event)" ([ngModel]) = "filter" placeholder="Ex. Mia" #input>
                 </mat-form-field>
                     <div class="mat-elevation-z8">
                       <table mat-table [dataSource]="dataSource" matSort >
@@ -47,7 +47,7 @@
                         <ng-container matColumnDef="actions">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Actions </th>
                           <mat-cell *matCellDef="let row" style="padding: 5px;" >
-                               <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="edit(row)" mat-button >Approve</button>
+                               <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="edit(row)" mat-button >View</button>
                           </mat-cell>
                         </ng-container>
   
@@ -57,7 +57,13 @@
                         </tr>
                       </table>
                     
-                      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+                      <mat-paginator  [length]="length" [pageSize]="pageSize" [pageIndex]="pageNo" [pageSizeOptions]="pageSizeOptions"  (page)="pageEvents($event)"></mat-paginator>
+                      <!-- <div *ngIf="pageEvent">
+                        <h5>Page Change Event Properties</h5>
+                        <div>List length: {{pageEvent.length}}</div>
+                        <div>Page size: {{pageEvent.pageSize}}</div>
+                        <div>Page index: {{pageEvent.pageIndex}}</div>
+                    </div> -->
                     </div>
                   </ng-template>
                 </mat-tab>

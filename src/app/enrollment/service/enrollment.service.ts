@@ -49,4 +49,10 @@ export class EnrollmentService {
         return this._httpClient.post<Enrollment>(this.api +'enrolVerify',data)
         .pipe(map((res: Enrollment) => res));
     }
+
+    getEnrollmentList(page:Number,pageSize:Number,searchField:string){
+        console.log('erolList');
+        return this._httpClient.get<any>(this.api+'enrollmentinquiry/'+page+'/'+pageSize+'/'+searchField)
+        .pipe(map((res: any) => res));
+    }
 }
