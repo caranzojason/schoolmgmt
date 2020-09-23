@@ -15,11 +15,22 @@
                             </div>
                             <input type="text" class="form-control" placeholder="Username" name="pusername" [(ngModel)]= "user.username" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
+                        <div>
+                            <span style="font-size: 12px;padding: 2px;"><i class="mdi mdi-key"></i>Password:(Birthdate: <b style="font-weight: 600;">mm/dd/yyyy</b>)</span>
+                        </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
                             </div>
                             <input type="password" class="form-control" placeholder="Password" aria-label="Password" [(ngModel)]= "user.password" name = "ppassword"  aria-describedby="basic-addon1">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12 text-center" style="margin-bottom: -15px;
+                            margin-top: -10px;">
+                                <label><span style="
+                                    font-size: 12px;
+                                    color: #ef1e44;"><span #noimg></span> {{message}}</span> </label>
+                                </div>
                         </div>
                         <div class="form-group text-center">
                             <div class="col-xs-12" style="padding-bottom: 10px;">
@@ -46,11 +57,6 @@
                                 <i class="mdi mdi-note-text" aria-hidden="true"></i><a href="enrollment/enrol" class="text-info m-l-5" style="font-weight: 400;
                                 font-size: 14px;"><b>Online Enrollment Registration</b></a>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label> {{message}}</label>
-                                </div>
                         </div>
                     </form>
                 </div>
