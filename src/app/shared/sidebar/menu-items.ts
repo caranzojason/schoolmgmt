@@ -34,10 +34,25 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: []
       },
-    
       {
         path: '/enrollment/inquiry',
         title: 'Inquiry',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/enrollment/forapprovalpayment',
+        title: 'For Approval(Payment)',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
+      {
+        path: '/enrollment/inquirypayment',
+        title: 'Inquiry(Payment)',
         icon: 'mdi mdi-gauge',
         class: '',
         extralink: false,
