@@ -1,20 +1,20 @@
 
 <div class="site-inner">
-    <h3>Enrolment Status: {{this.status}}</h3>
-    <h4>{{this.message}}</h4>
+
     <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
         <div style="box-shadow: 0px 1px 3px 0px #c8cec8;
         border-radius: 10px;">
-            <h4 style="padding: 10px;font-weight: 500;">Admission Form</h4>
+       <h3>Enrolment Status: {{this.status}}</h3>
+       <h4>{{this.message}}</h4>
         </div>
         <div class="col-md-6">
             <form >
                 <label style="font-size: 13px;">Are you an old student??</label>
                 <div class="form-group">
                     <div class="input-group">
-                    <input type="radio" id="yes" name="type" value="yes">
-                    <label for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
-                    <input type="radio" id="no" name="type" value="no">
+                    <input [(ngModel)]="enrollment.type"  type="radio" id="yes" name="type" value="yes">
+                    <label  for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
+                    <input [(ngModel)]="enrollment.type" type="radio" id="no" name="type" value="no">
                     <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
                     </div>
                 </div>
@@ -27,8 +27,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Lastname</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)] = "enrollment.lastname"  name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)] = "enrollment.lastname"  name="lName" class="form-control inputText" >
                             </div>
                         </div>
                     </form>
@@ -38,8 +37,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Firstname</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)] = "enrollment.firstname"   name="fName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)] = "enrollment.firstname"   name="fName" class="form-control inputText" >
                             </div>
                         </div>
                     </form>
@@ -49,8 +47,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Middlename</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"   [(ngModel)]= "enrollment.middlename"   name="mName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"   [(ngModel)]= "enrollment.middlename"   name="mName" class="form-control inputText" >
                             </div>
                         </div>
                     </form>
@@ -60,8 +57,7 @@
                          <label style="font-size: 13px;margin-bottom: 0px;">Age</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)]= "enrollment.age"  type="number"  name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)]= "enrollment.age"  type="number"  name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -71,7 +67,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Gender </label>
                         <div class="form-group">
                             <div class="input-group">
-                                <select name="filter" [(ngModel)]= "enrollment.gender"   class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
+                                <select name="filter" [(ngModel)]= "enrollment.gender"   class="form-control inputText">
                                     <option></option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -85,8 +81,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Nationality</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.nationality"   name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.nationality"   name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -96,8 +91,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Religion</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.religion"   name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.religion"   name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -109,8 +103,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">LRN/Student No.</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)]= "enrollment.studentno"  name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)]= "enrollment.studentno"  name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -120,7 +113,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Department </label>
                         <div class="form-group">
                             <div class="input-group">
-                                <select name="filter"  [(ngModel)]= "enrollment.department" (change)="selectDepartment()" class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
+                                <select name="filter"  [(ngModel)]= "enrollment.department" (change)="selectDepartment()" class="form-control inputText">
                                     <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
                                         {{o.name}}
                                     </option>
@@ -134,7 +127,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Grade </label>
                         <div class="form-group">
                             <div class="input-group">
-                                <select name="gradex"  [(ngModel)]= "enrollment.grade"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
+                                <select name="gradex"  [(ngModel)]= "enrollment.grade"  class="form-control inputText" >
                                     <option name="x" *ngFor = "let o of gradesList"  [ngValue]="o.id">
                                         {{o.name}}
                                     </option>
@@ -148,7 +141,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Track & Strand/Course </label>
                         <div class="form-group">
                             <div class="input-group">
-                                <select name="strand"  [(ngModel)]= "enrollment.strand"   class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
+                                <select name="strand"  [(ngModel)]= "enrollment.strand"   class="form-control inputText">
                                     <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
                                         {{o.name}}
                                     </option>
@@ -197,8 +190,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Place of Birth</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)]= "enrollment.place_of_birth"  name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)]= "enrollment.place_of_birth"  name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -209,8 +201,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)]= "enrollment.contactno" name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)]= "enrollment.contactno" name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -221,8 +212,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Email</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.email" name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.email" name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -237,8 +227,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Father's Name</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.fathername"   name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.fathername"   name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -248,8 +237,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Occupation</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.fatherocc"   name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.fatherocc"   name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -259,8 +247,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
                         <div class="form-group">
                             <div class="input-group">
-                            <input type="text"  name="lName"  [(ngModel)]= "enrollment.contactno"  class="form-control" style=" font-size: 11px;
-                            padding: 5px;border-radius: 5px;">
+                            <input type="text"  name="lName"  [(ngModel)]= "enrollment.fathercontact"  class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -289,8 +276,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Mother's Name</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.mothername" name="lName" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.mothername" name="lName" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -300,8 +286,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Occupation</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  name="lName" [(ngModel)]= "enrollment.motherocc"  class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  name="lName" [(ngModel)]= "enrollment.motherocc"  class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -311,8 +296,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
                         <div class="form-group">
                             <div class="input-group">
-                            <input type="text"  name="lName" class="form-control" [(ngModel)]= "enrollment.mothercontact"  style=" font-size: 11px;
-                            padding: 5px;border-radius: 5px;">
+                            <input type="text"  name="lName" class="form-control inputText" [(ngModel)]= "enrollment.mothercontact" >
                             </div>
                         </div>
                     </form>
@@ -341,8 +325,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Guardian's Name</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.guardian_name"  name="nguardiannane" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.guardian_name"  name="nguardiannane" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -352,8 +335,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Contact No.</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)]= "enrollment.guardian_contactno"   name="nguardiancontact" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)]= "enrollment.guardian_contactno"   name="nguardiancontact" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -363,8 +345,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Relationship to Child</label>
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)]= "enrollment.guardian_relation"   name="nguardian" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)]= "enrollment.guardian_relation"   name="nguardian" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -378,8 +359,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Last Grade Level</label>
                             <div class="form-group">
                             <div class="input-group">
-                                <input type="text"  [(ngModel)]= "enrollment.last_school_grade_level"  name="nGradelevel" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text"  [(ngModel)]= "enrollment.last_school_grade_level"  name="nGradelevel" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -400,8 +380,7 @@
                         <label style="font-size: 13px;margin-bottom: 0px;">Last School Year</label>
                             <div class="form-group">
                             <div class="input-group">
-                                <input type="text" [(ngModel)]= "enrollment.last_school_year"   name="nlastSchool" class="form-control" style=" font-size: 11px;
-                                padding: 5px;border-radius: 5px;">
+                                <input type="text" [(ngModel)]= "enrollment.last_school_year"   name="nlastSchool" class="form-control inputText">
                             </div>
                         </div>
                     </form>
@@ -474,13 +453,12 @@
                     </form>
                 </div>
             </div> 
-
-        <div *ngIf="status == ''" class="modal-footer att-modal-footer">
+        <div class="modal-footer att-modal-footer">
             <div>
                 <p >By clicking Enroll, you agree to our Terms & Conditions.</p>
             </div>
-            <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
-            <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="enrol()" type="button">Update</button>
+            <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="cancel()" type="button">Cancel</button>
+            <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="enrol()" type="button">Updte</button>
         </div>
     </div>
 </div>

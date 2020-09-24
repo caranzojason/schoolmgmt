@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
-import { EnrollmentDialog } from './enrollmentdialog';
+import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EnrollmentService } from './service/enrollment.service';
@@ -42,14 +42,14 @@ export class ForApprovalComponent implements AfterViewInit {
     "religion": "",
     "fathername": "",
     "fatherocc": "",
-    "fathercontact":0,
+    "fathercontact":"",
     "fatherplace": "",
     "mothername": "",
     "motherocc": "",
-    "mothercontact": 0,
+    "mothercontact": "",
     "motherplace": "",
     "guardian_name": "",
-    "guardian_contactno": 0,
+    "guardian_contactno": "",
     "guardian_relation": "",
     "last_school_attended": "",
     "last_school_grade_level": "",

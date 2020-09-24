@@ -40,6 +40,11 @@ export class EnrollmentService {
         .pipe(map((res: Enrollment) => res));
     }
 
+    updateEnrolment(data:Enrollment): Observable<Enrollment> {
+        return this._httpClient.post<Enrollment>(this.api +'updateEnrol',data)
+        .pipe(map((res: Enrollment) => res));
+    }
+    
     getEnrollmentForVerification(){
         return this._httpClient.get<any>(this.api+'enrollgetForverification/')
         .pipe(map((res: any) => res));

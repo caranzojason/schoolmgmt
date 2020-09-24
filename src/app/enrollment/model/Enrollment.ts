@@ -22,14 +22,14 @@ export interface Enrollment{
     religion:string;
     fathername:string;
     fatherocc:string;
-    fathercontact:Number;
+    fathercontact:string;
     fatherplace:string;
     mothername:string;
     motherocc:string;
-    mothercontact:Number;
+    mothercontact:string;
     motherplace:string;
     guardian_name:string;
-    guardian_contactno:Number;
+    guardian_contactno:string;
     guardian_relation:string;
     last_school_attended:string;
     last_school_grade_level:string;

@@ -42,7 +42,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { EnrollmentComponent } from './enrolment.component';
-import { EnrollmentDialog } from './enrollmentdialog';
+import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
 import {EnrollmentService} from './service/enrollment.service';
 
 @NgModule({

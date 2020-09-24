@@ -7,7 +7,7 @@ import {EnrollmentService} from './service/enrollment.service';
 import {ThemePalette} from '@angular/material/core';
 import { MatTabChangeEvent,MatTabGroup } from '@angular/material/tabs';
 import {MatDialog} from '@angular/material/dialog';
-import {EnrollmentDialog} from './enrollmentdialog';
+import {EnrollmentDialog} from '../common/dialog/enrollmentdialog';
 
 @Component({
   templateUrl: './forverification.component.html',
@@ -17,7 +17,7 @@ import {EnrollmentDialog} from './enrollmentdialog';
 export class ForVerificationComponent implements AfterViewInit {
   enrolmentList:Array<Enrollment>;
   subtitle: string;
-  displayedColumns: string[] = ['ref_no', 'lastname', 'email','status','actions'];
+  displayedColumns: string[] = ['ref_no', 'lastname', 'firstname', 'email','status','actions'];
   dataSource: MatTableDataSource<Enrollment>;
   links = ['First', 'Second', 'Third'];
   activeLink = this.links[0];
@@ -44,14 +44,14 @@ export class ForVerificationComponent implements AfterViewInit {
     "religion": "",
     "fathername": "",
     "fatherocc": "",
-    "fathercontact":0,
+    "fathercontact":"",
     "fatherplace": "",
     "mothername": "",
     "motherocc": "",
-    "mothercontact": 0,
+    "mothercontact": "",
     "motherplace": "",
     "guardian_name": "",
-    "guardian_contactno": 0,
+    "guardian_contactno": "",
     "guardian_relation": "",
     "last_school_attended": "",
     "last_school_grade_level": "",

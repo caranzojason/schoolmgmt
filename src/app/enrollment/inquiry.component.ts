@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input} from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
-import { EnrollmentDialog } from './enrollmentdialog';
+import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
 import { PageEvent,MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EnrollmentService } from './service/enrollment.service';
@@ -45,14 +45,14 @@ export class Inquiry implements AfterViewInit {
     "religion": "",
     "fathername": "",
     "fatherocc": "",
-    "fathercontact":0,
+    "fathercontact":"",
     "fatherplace": "",
     "mothername": "",
     "motherocc": "",
-    "mothercontact": 0,
+    "mothercontact": "",
     "motherplace": "",
     "guardian_name": "",
-    "guardian_contactno": 0,
+    "guardian_contactno": "",
     "guardian_relation": "",
     "last_school_attended": "",
     "last_school_grade_level": "",
@@ -111,22 +111,6 @@ export class Inquiry implements AfterViewInit {
       this.dataSource.paginator.length = data.NoOfRecords;
       this.length = data.NoOfRecords;
     });
-
-
-    // this._route.queryParamMap.subscribe((paramMap)=>{
-    //   console.log({paramMap})
-    //   const pageIndex = Number(paramMap.get('pageIndex'))
-    //   const pageSize = Number(paramMap.get('pageSize'))
-    //   if(pageSize){
-    //     this.pageSize = pageSize
-    //     this.paginator.pageSize = pageSize
-    //   }
-    //   if(pageIndex){
-    //     this.pageIndex = pageIndex
-    //     this.paginator.pageIndex = pageIndex
-    //   }
-    //   this.length = 50
-    // })
   }
 
   toggleBackground() {
@@ -218,11 +202,8 @@ export class Inquiry implements AfterViewInit {
 
 
   pageEvents(event: any) {
-    console.log(event.pageIndex);
-    console.log(event.pageSize);
     this._enrollService.getEnrollmentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
     {
-      console.log(data);
       this.enrolmentList = data.Enrollment;
       this.dataSource = new MatTableDataSource( this.enrolmentList);
     });
@@ -230,7 +211,11 @@ export class Inquiry implements AfterViewInit {
 
  search(){
    console.log(this.filter);
+   this._enrollService.getEnrollmentList(0,this.pageSize,this.filter).subscribe((data:any) => 
+   {
+     this.enrolmentList = data.Enrollment;
+     this.dataSource = new MatTableDataSource( this.enrolmentList);
+   });
  }
-
 
 }
