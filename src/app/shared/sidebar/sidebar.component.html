@@ -1,5 +1,5 @@
 <nav class="sidebar-nav">
-    <ul id="sidebarnav">
+    <ul id="sidebarnav" class="sjcc-left-sidebar">
         <!-- First level menu -->
         <li class="sidebar-item" [class.active]="showMenu === sidebarnavItem.title" *ngFor="let sidebarnavItem of sidebarnavItems"
             [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
@@ -13,7 +13,7 @@
                 </span>
             </a>
             <!-- Second level menu -->
-            <ul aria-expanded="false" class="collapse first-level" *ngIf="sidebarnavItem.submenu.length > 0" [ngClass]="{'in' : showMenu === sidebarnavItem.title }">
+            <ul aria-expanded="false" style="background:#0f6cc7"  class="collapse first-level" *ngIf="sidebarnavItem.submenu.length > 0" [ngClass]="{'in' : showMenu === sidebarnavItem.title }">
                 <li class="sidebar-item" *ngFor="let sidebarnavSubItem of sidebarnavItem.submenu" [class.active]="showSubMenu === sidebarnavSubItem.title"
                     [routerLinkActive]="sidebarnavSubItem.submenu.length > 0 ? '' : 'active'">
                     <a class="sidebar-link" [routerLink]="sidebarnavSubItem.submenu.length > 0 ? null : [sidebarnavSubItem.path]" [routerLinkActive]="sidebarnavSubItem.submenu.length > 0 ? '' : 'router-link-active'"
