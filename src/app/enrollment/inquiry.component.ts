@@ -225,32 +225,12 @@ export class Inquiry implements AfterViewInit {
       console.log(data);
       this.enrolmentList = data.Enrollment;
       this.dataSource = new MatTableDataSource( this.enrolmentList);
-     // this.dataSource.paginator = this.paginator;
-     // this.dataSource.sort = this.sort;
-      //this.length = data.NoOfRecords;
     });
  }
 
-  handlePageIndexChange(value:number){
-    console.log("handlePageIndexChange");
-    console.log({value})
-
-    // this.pageIndex = value
-    this.paginator.pageIndex = Number(value)
-
-    this._enrollService.getEnrollmentList(this.pageIndex,this.pageSize,this.filter).subscribe((data:any) => 
-    {
-      console.log(data);
-      this.enrolmentList = data.Enrollment;
-      this.dataSource = new MatTableDataSource( this.enrolmentList);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator.length = data.NoOfRecords;
-      this.length = data.NoOfRecords;
-    });
-    console.log(this.pageIndex);
-    console.log(this.pageSize);
-  }
+ search(){
+   console.log(this.filter);
+ }
 
 
 }
