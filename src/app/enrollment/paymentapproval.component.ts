@@ -241,9 +241,13 @@ export class PaymentApprovalComponent implements AfterViewInit {
   onTabChange(event: MatTabChangeEvent) {
     this.currentTabIndex = event.index
     if(event.index == 0){
-      this.dataSource = new MatTableDataSource( this.paymentList);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+
+      this._enrollService.getPaymentList(0,this.pageSize,"").subscribe((data:any) => 
+      {
+        this.paymentList = data.EnrollmentPayment;
+        this.dataSource = new MatTableDataSource( this.paymentList);
+        this.changeDetectorRefs.detectChanges();
+      });
     }
   }
 
@@ -270,6 +274,7 @@ export class PaymentApprovalComponent implements AfterViewInit {
     {
       this.paymentList = data.EnrollmentPayment;
       this.dataSource = new MatTableDataSource( this.paymentList);
+      this.changeDetectorRefs.detectChanges();
     });
  }
 
@@ -277,6 +282,7 @@ export class PaymentApprovalComponent implements AfterViewInit {
    this._enrollService.getPaymentList(0,this.pageSize,this.filter).subscribe((data:any) => 
    {
      this.paymentList = data.EnrollmentPayment;
+     this.changeDetectorRefs.detectChanges();
      this.dataSource = new MatTableDataSource( this.paymentList);
    });
  }
