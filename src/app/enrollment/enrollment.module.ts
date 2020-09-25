@@ -44,6 +44,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { EnrollmentComponent } from './enrolment.component';
 import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
 import {EnrollmentService} from './service/enrollment.service';
+import { PaymentApprovalComponent } from './paymentapproval.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(EnrollmentRoutes),ReactiveFormsModule,
@@ -83,7 +84,7 @@ import {EnrollmentService} from './service/enrollment.service';
     MatTooltipModule,
     MatTreeModule,
     NgbModule],
-  declarations: [ForVerificationComponent  ,ForApprovalComponent,EnrollmentComponent,EnrollmentDialog,Inquiry],
+  declarations: [ForVerificationComponent  ,ForApprovalComponent,EnrollmentComponent,EnrollmentDialog,Inquiry,PaymentApprovalComponent],
   providers: [
     EnrollmentService
   ],

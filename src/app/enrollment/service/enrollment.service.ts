@@ -60,4 +60,19 @@ export class EnrollmentService {
         return this._httpClient.get<any>(this.api+'enrollmentinquiry/'+page+'/'+pageSize+'/'+searchField)
         .pipe(map((res: any) => res));
     }
+    getPaymentList(page:Number,pageSize:Number,searchField:string){
+        console.log('paymentList');
+        return this._httpClient.get<any>(this.api+'forapprovalPayment/'+page+'/'+pageSize+'/'+searchField)
+        .pipe(map((res: any) => res));
+    }
+    getEnrollRefNo(refNo:any): Observable<any>{
+        console.log('refNo');
+        return this._httpClient.get<any>(this.api+'enrollmentgetByReff/'+refNo)
+        .pipe(map((res: any) => res));
+    }
+    getPaymentByEnrollRefNo(refNo:any): Observable<any>{
+        console.log('payment');
+        return this._httpClient.get<any>(this.api+'paymentEnrollmentgetByReff/'+refNo)
+        .pipe(map((res: any) => res));
+    }
 }

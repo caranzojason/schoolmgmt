@@ -43,7 +43,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/enrollment/forapprovalpayment',
+        path: '/enrollment/paymentapproval',
         title: 'For Approval(Payment)',
         icon: 'mdi mdi-gauge',
         class: '',
