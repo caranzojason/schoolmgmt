@@ -1,16 +1,16 @@
 import { Component, AfterViewInit } from '@angular/core';
-import {Enrollment} from '../enrollment/model/Enrollment';
-import {EnrollmentService} from '../enrollment/service/enrollment.service';
-import {StarterService} from '../starter/service/starter.service';
+import {Enrollment} from '../../enrollment/model/Enrollment';
+import {EnrollmentService} from '../../enrollment/service/enrollment.service';
+import {MyEnrollmentService} from './myenrollmentservice';
 import { CookieService } from 'ngx-cookie';
 import {MatDialog} from '@angular/material/dialog';
-import {EnrollmentDialog} from '../common/dialog/enrollmentdialog';
+import {EnrollmentDialog} from '../../common/dialog/enrollmentdialog';
 
 @Component({
-  templateUrl: './starter.component.html',
-  styleUrls: ['./starter.scss'],
+  templateUrl: './myenrollment.component.html',
+  styleUrls: ['./myenrollment.scss'],
 })
-export class StarterComponent implements AfterViewInit {
+export class MyEnrollmentComponent implements AfterViewInit {
   subtitle: string;
   status: string;
   message: string;
@@ -67,7 +67,7 @@ public deparmentList:any;
 public gradesList:any =  [{id:0,name:""}];
 public trackStandardCourse:any = [{id:0,name:""}];
 
-constructor(private _enrollService:EnrollmentService,private _starterService:StarterService, 
+constructor(private _enrollService:EnrollmentService,private _starterService:MyEnrollmentService, 
             private _cookieService:CookieService,public dialog: MatDialog) {
     this._enrollService.getAllDepartment().subscribe((data:any) => 
     {
@@ -77,9 +77,7 @@ constructor(private _enrollService:EnrollmentService,private _starterService:Sta
     let refNo = this._cookieService.get("username");
     this._starterService.getEnrollmentByRefNo(refNo).subscribe((data:any) => 
     {
-        console.log(data);
         this.enrollment = data;
-
         const [year, month, day] = this.enrollment.dob.split('-');
         const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
         this.enrollment.dob = obj;
@@ -141,20 +139,18 @@ public selectDepartment()
         });
     }
 }
-    setDialog(message){
-        const dialogRef = this.dialog.open(EnrollmentDialog, {
-            width: '300px',
-            data: {  message: message}
-        });
+setDialog(message){
+    const dialogRef = this.dialog.open(EnrollmentDialog, {
+        width: '300px',
+        data: {  message: message}
+    });
 
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog result: ${result}`);
-        });
-    }
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+    });
+}
 
 public enrol(){
-
-    console.log(this.enrollment);
     if(this.enrollment.type == null){
         this.setDialog("Please select old or new student!");
         return;

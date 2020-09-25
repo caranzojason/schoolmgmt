@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import { MyEnrollmentComponent } from './myenrollment/myenrollment.component';
 import { PaymentComponent } from './payment/payment.component';
 
 export const StudentRoutes: Routes = [
@@ -13,6 +13,16 @@ export const StudentRoutes: Routes = [
           title: 'Payment',
           urls: [
             { title: 'Payment', url: '/student/payment' }
+          ]
+        }
+      },
+      {
+        path: 'myenrollment',
+        component: MyEnrollmentComponent,
+        data: {
+          title: 'My Enrollment',
+          urls: [
+            { title: 'My Enrollment', url: '/student/myenrollment' }
           ]
         }
       }

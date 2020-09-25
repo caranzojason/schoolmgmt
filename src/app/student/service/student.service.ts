@@ -20,6 +20,11 @@ export class StudentService {
         .pipe(map((res: any) => res));
     }
 
+    getPayment(refNo:String): Observable<any> {
+        return this._httpClient.get<any>(this.api+'enrollmentgetPayment/'+refNo)
+        .pipe(map((res: any) => res));
+    }
+    
     getEnrollmentByEnrolNo(enrolNo:String): Observable<any> {
         return this._httpClient.get<any>(this.api+'enrollmentgetByEnrolNo/'+enrolNo)
         .pipe(map((res: any) => res));

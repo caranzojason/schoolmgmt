@@ -5,7 +5,7 @@ import { Observable  } from 'rxjs';
 import { map } from 'rxjs/operators'
 
 @Injectable()
-export class StarterService {
+export class MyEnrollmentService {
 
     api="http://127.0.0.1:8000/api/";
 

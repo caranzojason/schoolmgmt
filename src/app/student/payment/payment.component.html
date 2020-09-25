@@ -1,18 +1,19 @@
 <div class="site-inner">
     <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
-        <span>
-            <ngb-alert *ngIf="alerts.length > 0" [type]='alerts[0].type' (close)="closeAlert(alerts[0])">{{alerts[0].message}}</ngb-alert>
-        </span>
         <div style="box-shadow: 0px 1px 3px 0px #c8cec8;
         border-radius: 10px;">
+        <div *ngIf="this.enrolmentStatus == 'approved'" >
+            <h3>Enrolment Status: {{this.enrolmentStatus}}</h3>
+            <h4>You're payment is sucessfully processed!</h4>
+        </div>
             <h4 style="padding: 10px;font-weight: 500;">Payment Form S.Y. 2020-2021</h4>
         </div>
         <div class="col-md-3" style="margin-bottom: 20px;">
             <form >
-                <label style="font-size: 13px;margin-bottom: 0px;">Enrollment Reference Number:</label>
+                <label style="font-size: 13px;margin-bottom: 0px;">Reference/Enrol Number:</label>
                 <div class="form-group">
                     <div class="input-group">
-                    <input type="text"  name="ref"  [(ngModel)]= "enrolNo"  class="form-control" placeholder="Reference Number Here" style=" font-size: 11px;padding: 5px;border-radius: 5px 0px 0px 5px;">
+                    <input type="text"  name="ref" disabled  [(ngModel)]= "enrolNo"  class="form-control" placeholder="Reference Number Here" style=" font-size: 11px;padding: 5px;border-radius: 5px 0px 0px 5px;">
                          <button type="submit" (click)="onClickRefNo()" class="btn btn-info waves-effect waves-light" style="height: 30px;font-size: 12px;border-radius: 0px 5px 5px 0px;"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                             <label style="font-size: 13px;margin-bottom: 0px;">Payment Method</label>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <select  name="pOptions1" [(ngModel)]="payment.paymentMethod"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
+                                    <select  name="pOptions2" [(ngModel)]="payment.paymentMethod"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
                                         <option  name="o" *ngFor="let o of paymentOptions">
                                            {{o.name}}
                                         </option>
@@ -73,26 +74,35 @@
                             <label style="font-size: 13px;margin-bottom: 0px;">Proof of Payment</label>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
+                        
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input"   name="f"  (change)="handleFileInput($event.target.files)">
                                  
                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                     </div>
-                                    <br>
-                                    <div>
-                                        <label class="custom-file-label" for="inputGroupFile01">{{fileName}}</label>
-                                    </div>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label> {{fileName}}</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label>Previous Attachment:</label><br>
+                                    <label>  <a  target="_blank" href="http://127.0.0.1:8000/{{payment.attachmentpath}}">{{payment.filename}}</a> </label>
+                                </div>
+                            </div>
+
                         </form>
                 </div>
             </div>
         </div> 
         <div class="modal-footer att-modal-footer">
-            <button type="submit" (click)="save()"  class="btn btn-info btn-secondary btn-modal-footer-x">Pay</button>
+            <button *ngIf="!alreadyMakePaymentB4 && enrolmentStatus == 'pending'" type="submit" (click)="save()"  class="btn btn-info btn-secondary btn-modal-footer-x">Pay</button>
+            <button *ngIf="alreadyMakePaymentB4 && enrolmentStatus == 'pending' " type="submit" (click)="save()"  class="btn btn-info btn-secondary btn-modal-footer-x">Update</button>
             <button type="submit" (click)="cancel()" class="btn btn-info btn-secondary btn-modal-footer-x">Cancel</button>
         </div>
     </div>
