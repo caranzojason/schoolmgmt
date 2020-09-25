@@ -9,20 +9,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { Enrollment } from './model/Enrollment';
 import { ThemePalette } from '@angular/material/core';
 import { ActivatedRoute,Router} from '@angular/router';
+import { Payment } from './model/Payment';
 
 @Component({
-  templateUrl: './inquiry.component.html',
-  styleUrls: ['./inquiry.scss'],
+  templateUrl: './paymentinquiry.component.html',
+  styleUrls: ['./paymentinquiry.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Inquiry implements AfterViewInit {
+export class PaymentInquiryComponent implements AfterViewInit {
   enrolmentList:Array<Enrollment>;
+  paymentList:Array<Payment>;
   subtitle: string;
-  displayedColumns: string[] = ['ref_no', 'lastname', 'email','status','actions'];
-  dataSource: MatTableDataSource<Enrollment>;
+  displayedColumns: string[] = ['enrollment_ref_no', 'student_name', 'method','description','amount','status','actions'];
+//   dataSource: MatTableDataSource<Enrollment>;
+  dataSource: MatTableDataSource<Payment>;
   links = ['First', 'Second', 'Third'];
   activeLink = this.links[0];
   background: ThemePalette = undefined;
+  public payment:any = {paymentMethod:"",amountToPay:"",paymentDescription:""}
   public enrollment:Enrollment = {
     "id": 0,
     "ref_no": "",
@@ -70,6 +74,21 @@ export class Inquiry implements AfterViewInit {
     "created_at": "",
     "school_year": 0
   }
+  public listpayment:Payment = {
+    "id": 0,
+    "ref_no": "",
+    "student_name":"",
+    "enrollment_ref_no":"",
+    "method":"",
+    "amount":0,
+    "description":"",
+    "attachment":"",
+    "approval_remarks":"",
+    "approval_status":0,
+    "approval_by":0,
+    "approval_date":"",
+    "created_at":"",
+  }
 
   public deparmentList:any;
   public gradesList:any =  [{id:0,name:""}];
@@ -91,8 +110,6 @@ export class Inquiry implements AfterViewInit {
   @ViewChild('tabs',{static:false}) tabGroup: MatTabGroup;
 
   constructor(private _enrollService:EnrollmentService,public dialog: MatDialog, private _route: ActivatedRoute) {
-    this.subtitle = 'for verification';
-
   }
   
   ngAfterViewInit() {
@@ -100,13 +117,12 @@ export class Inquiry implements AfterViewInit {
     {
         this.deparmentList = data;
     })
-
-    this._enrollService.getEnrollmentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
+    this._enrollService.getInquiryPaymentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
     {
       console.log(data.NoOfRecords);
-      this.enrolmentList = data.Enrollment;
-      console.log(this.enrolmentList);
-      this.dataSource = new MatTableDataSource( this.enrolmentList);
+      this.paymentList = data.EnrollmentPayment;
+      console.log(this.paymentList);
+      this.dataSource = new MatTableDataSource( this.paymentList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator.length = data.NoOfRecords;
@@ -159,15 +175,44 @@ export class Inquiry implements AfterViewInit {
 
   public edit(row)
   {
-    this.enrollment = row;
-    if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
-    else{
-      const [year, month, day] = this.enrollment.dob.split('-');
-      const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
-      this.enrollment.dob = obj;
-    }
- 
+      let ref = row.enrollment_ref_no
+    this._enrollService.getEnrollRefNo(ref).subscribe((data:any) => 
+    {
+        this.enrollment = data;
+        console.log(this.enrollment);
+        if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
+        else{
+          const [year, month, day] = this.enrollment.dob.split('-');
+          const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
+          this.enrollment.dob = obj;
+        }
+    });
     this.selectDepartment();
+    this.tabGroup.selectedIndex = 2
+  }
+  public paymentOptions = [
+    { name: "Cash", value: "Cash" },
+    { name: "Bank", value: "Bank" }
+  ];
+
+  public paymentType = [
+    { name: "Enrollment Fee", value: "EnrollmentFee" },
+    { name: "Bank Account Fee", value: "BankAccountFee" },
+    { name: "Enrolment Fee & Bank Account Fee", value: "EnrollmentFeeBankAcount" },
+    { name: "Monthly Fee", value: "MonthlyFee" },
+    { name: "Quarterly Fee", value: "QuarterlyFee" },
+    { name: "Yearly Fee", value: "YearlyFee" }
+  ];
+  public editPayment(row)
+  {
+    let ref = row.enrollment_ref_no
+    this._enrollService.getPaymentByEnrollRefNo(ref).subscribe((data:any) => 
+    {
+        console.log(data);
+        this.listpayment = data;
+        console.log(this.listpayment);
+      
+    });
     this.tabGroup.selectedIndex = 1
   }
 
@@ -178,7 +223,7 @@ export class Inquiry implements AfterViewInit {
   onTabChange(event: MatTabChangeEvent) {
     this.currentTabIndex = event.index
     if(event.index == 0){
-      this.dataSource = new MatTableDataSource( this.enrolmentList);
+      this.dataSource = new MatTableDataSource( this.paymentList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
@@ -203,18 +248,19 @@ export class Inquiry implements AfterViewInit {
 
 
   pageEvents(event: any) {
-    this._enrollService.getEnrollmentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
+    this._enrollService.getInquiryPaymentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
     {
-      this.enrolmentList = data.Enrollment;
-      this.dataSource = new MatTableDataSource( this.enrolmentList);
+      this.paymentList = data.EnrollmentPayment;
+      this.dataSource = new MatTableDataSource( this.paymentList);
     });
  }
 
  search(){
-   this._enrollService.getEnrollmentList(0,this.pageSize,this.filter).subscribe((data:any) => 
+   console.log(this.filter);
+   this._enrollService.getInquiryPaymentList(0,this.pageSize,this.filter).subscribe((data:any) => 
    {
-     this.enrolmentList = data.Enrollment;
-     this.dataSource = new MatTableDataSource( this.enrolmentList);
+     this.paymentList = data.EnrollmentPayment;
+     this.dataSource = new MatTableDataSource( this.paymentList);
    });
  }
 

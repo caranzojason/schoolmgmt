@@ -26,14 +26,14 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
     
-      {
-        path: '/enrollment/forapproval',
-        title: 'For Approval',
-        icon: 'mdi mdi-gauge',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
+      // {
+      //   path: '/enrollment/forapproval',
+      //   title: 'For Approval',
+      //   icon: 'mdi mdi-gauge',
+      //   class: '',
+      //   extralink: false,
+      //   submenu: []
+      // },
       {
         path: '/enrollment/inquiry',
         title: 'Inquiry',
@@ -43,7 +43,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/enrollment/forapprovalpayment',
+        path: '/enrollment/paymentapproval',
         title: 'For Approval(Payment)',
         icon: 'mdi mdi-gauge',
         class: '',
@@ -51,7 +51,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '/enrollment/inquirypayment',
+        path: '/enrollment/paymentinquiry',
         title: 'Inquiry(Payment)',
         icon: 'mdi mdi-gauge',
         class: '',

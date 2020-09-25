@@ -8,13 +8,14 @@ export interface DialogData {
 
 
   @Component({
+    styleUrls: ['dailogenrollment.scss'],
     selector: 'dialog-overview-example-dialog',
     templateUrl: 'enrollmentdialog.html',
   })
 export class EnrollmentDialog {
     constructor(
         public dialogRef: MatDialogRef<EnrollmentDialog>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+        @Inject(MAT_DIALOG_DATA) public data: DialogData) {dialogRef.disableClose = true;}
     
       onNoClick(): void {
         this.dialogRef.close();

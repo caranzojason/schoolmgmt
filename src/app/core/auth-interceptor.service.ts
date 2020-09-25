@@ -20,7 +20,6 @@ export class AuthInterceptorService implements HttpInterceptor {
         }    
         return event;
     }, error => {
-      
       var respError = error as HttpErrorResponse;
       this.spinnerService.hide();
       console.log(respError);

@@ -1,7 +1,8 @@
-<h1 mat-dialog-title>System Message:</h1>
+<h1 mat-dialog-title class="dialog-title">System Message:</h1>
 <div mat-dialog-content>
-  <p>    {{data.message}}</p>
+  <p style="text-align: center;
+  font-size: 15px;"> {{data.message}}</p>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">OK</button>
+<div mat-dialog-actions style="float: right;">
+  <button mat-button (click)="onNoClick()" class="btn btn-info btn-secondary ok-btn">OK</button>
 </div>

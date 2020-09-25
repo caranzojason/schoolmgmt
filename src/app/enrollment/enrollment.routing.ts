@@ -4,6 +4,8 @@ import { ForVerificationComponent } from './forverification.component';
 import { ForApprovalComponent } from './forapproval.component';
 import { Inquiry } from './inquiry.component'
 import { EnrollmentComponent } from './enrolment.component';
+import { PaymentApprovalComponent } from './paymentapproval.component';
+import { PaymentInquiryComponent } from './paymentinquiry.component';
 export const EnrollmentRoutes: Routes = [
 	{
 		path: '',
@@ -38,6 +40,28 @@ export const EnrollmentRoutes: Routes = [
 					urls: [
 						{ title: 'Enrollment', url: '/enrollment/inquiry' },
 						{ title: 'inquiry' }
+					]
+				}
+			},
+			{
+				path: 'paymentapproval',
+				component: PaymentApprovalComponent,
+				data: {
+					title: 'For Approval(Payment)',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment/paymentapproval' },
+						{ title: 'For Approval(Payment)' }
+					]
+				}
+			},
+			{
+				path: 'paymentinquiry',
+				component: PaymentInquiryComponent,
+				data: {
+					title: 'Inquiry(Payment)',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment/paymentinquiry' },
+						{ title: 'Inquiry(Payment)' }
 					]
 				}
 			},

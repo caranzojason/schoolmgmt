@@ -56,8 +56,35 @@ export class EnrollmentService {
     }
 
     getEnrollmentList(page:Number,pageSize:Number,searchField:string){
-        console.log('erolList');
         return this._httpClient.get<any>(this.api+'enrollmentinquiry/'+page+'/'+pageSize+'/'+searchField)
+        .pipe(map((res: any) => res));
+    }
+    getPaymentList(page:Number,pageSize:Number,searchField:string){
+        return this._httpClient.get<any>(this.api+'forapprovalPayment/'+page+'/'+pageSize+'/'+searchField)
+        .pipe(map((res: any) => res));
+    }
+
+    getInquiryPaymentList(page:Number,pageSize:Number,searchField:string){
+        return this._httpClient.get<any>(this.api+'inquiryPayment/'+page+'/'+pageSize+'/'+searchField)
+        .pipe(map((res: any) => res));
+    }
+
+    approvePayment(refNo){
+        return this._httpClient.get<any>(this.api+'approvePayment/'+refNo)
+        .pipe(map((res: any) => res));
+    }
+
+    disapprovePayment(refNo){
+        return this._httpClient.get<any>(this.api+'disapprovePayment/'+refNo)
+        .pipe(map((res: any) => res));
+    }
+    
+    getEnrollRefNo(refNo:any): Observable<any>{
+        return this._httpClient.get<any>(this.api+'enrollmentgetByReff/'+refNo)
+        .pipe(map((res: any) => res));
+    }
+    getPaymentByEnrollRefNo(refNo:any): Observable<any>{
+        return this._httpClient.get<any>(this.api+'paymentEnrollmentgetByReff/'+refNo)
         .pipe(map((res: any) => res));
     }
 }
