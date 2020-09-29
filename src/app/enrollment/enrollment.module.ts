@@ -46,6 +46,7 @@ import { EnrollmentComponent } from './enrolment.component';
 import {EnrollmentService} from './service/enrollment.service';
 import { PaymentApprovalComponent } from './paymentapproval.component';
 import { PaymentInquiryComponent } from './paymentinquiry.component';
+import { EnrollmentDialogComponent } from './modal/enrolldialog.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(EnrollmentRoutes),ReactiveFormsModule,
@@ -85,9 +86,11 @@ import { PaymentInquiryComponent } from './paymentinquiry.component';
     MatTooltipModule,
     MatTreeModule,
     NgbModule],
-  declarations: [ForVerificationComponent  ,ForApprovalComponent,EnrollmentComponent,Inquiry,PaymentApprovalComponent,PaymentInquiryComponent],
+  declarations: [ForVerificationComponent,ForApprovalComponent,EnrollmentComponent,Inquiry,PaymentApprovalComponent,PaymentInquiryComponent,EnrollmentDialogComponent],
+  entryComponents: [EnrollmentDialogComponent],
   providers: [
-    EnrollmentService
+    EnrollmentService,
+    //EnrollmentDialogBox
   ],
   // entryComponents: [EnrollmentDialog]
 })

@@ -3,6 +3,7 @@ import {Enrollment} from './model/Enrollment';
 import {EnrollmentService} from './service/enrollment.service';
 import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../common/dialog/enrollmentdialog';
+import { EnrollmentDialogMsBox } from '../common/dialog/enrollDialogMsgBox';
 @Component({
     selector: 'app-enroll',
     styleUrls: ['./enrollment.scss'],
@@ -121,6 +122,16 @@ export class EnrollmentComponent implements AfterViewInit {
             console.log(`Dialog result: ${result}`);
           });
     }
+    setDialogBox(message){
+        const dialogRef = this.dialog.open(EnrollmentDialogMsBox, {
+            width: '300px',
+            data: {  message: message}
+          });
+  
+          dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+          });
+    }
 
     public enrol(){
         if(this.enrollment.type == null){
@@ -226,8 +237,9 @@ export class EnrollmentComponent implements AfterViewInit {
 
         this._enrollService.saveEnrolment(this.enrollment).subscribe((data:any) => 
         {
-            console.log(data);
-            this.setDialog("Please save following details: User Name: " + data.ref_no + "Password: " + data.password + "login regularly to http://localhost:4200/");
+     
+            this.setDialogBox("User Name:"+ " " + data.ref_no + '\n'+"Password: "+ " " + data.password );
+ 
         });
     }
 

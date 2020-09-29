@@ -25,6 +25,7 @@ import { SpinnerService } from './core/loader/spinner.service';
 import { AuthInterceptorService } from './core/auth-interceptor.service';
 import { EnrollmentDialog } from './common/dialog/enrollmentdialog';
 import {MatDialogModule} from '@angular/material/dialog';
+import { EnrollmentDialogMsBox } from './common/dialog/enrollDialogMsgBox';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -43,7 +44,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NavigationComponent,
     BreadcrumbComponent,
     SidebarComponent,
-    EnrollmentDialog
+    EnrollmentDialog,
+    EnrollmentDialogMsBox,
+  
   ],
   imports: [
     CommonModule,
@@ -67,6 +70,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EnrollmentDialog]
+  entryComponents: [EnrollmentDialog,EnrollmentDialogMsBox]
 })
 export class AppModule {}
