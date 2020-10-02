@@ -50,17 +50,22 @@ export class EnrollmentComponent implements AfterViewInit {
         "learning_modality": "",
         "status": "",
         "validated_by": "",
-        "approved_by": 0,
+        "approved_by": "",
         "cancelled_by": 0,
         "updated_by": "",
         "remarks": "",
         "created_at": "",
-        "school_year": 0
+        "school_year": 0,
+        "schoolyearfrom": 0,
+        "schoolyearto": 0,
+        "semester": 0,
     }
 
     public deparmentList:any;
     public gradesList:any =  [{id:0,name:""}];
     public trackStandardCourse:any = [{id:0,name:""}];
+    public schoolyearList:any = [{id:2020,name:"2020"},{id:2021,name:"2021"},{id:2022,name:"2022"}];
+    public schoolsemesterList:any = [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}]; //3 is summer
 
     constructor(private _enrollService:EnrollmentService,public dialog: MatDialog) {
         this._enrollService.getAllDepartment().subscribe((data:any) => 
@@ -72,6 +77,7 @@ export class EnrollmentComponent implements AfterViewInit {
 
     public selectDepartment()
     {
+        this.schoolsemesterList= [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}];
         if(this.enrollment.department != 5){//not equal to colege
             this._enrollService.getGrades(this.enrollment.department).subscribe((data:any) => 
             {
@@ -89,6 +95,9 @@ export class EnrollmentComponent implements AfterViewInit {
             }else{
                 this.enrollment.grade = 9;
             }
+            this.gradesList = [{id:0,name:"N/A"}];
+            this.schoolsemesterList = [{id:0,name:"N/A"}];
+            
         }
 
         if(this.enrollment.department == 3 ) //senior
@@ -96,14 +105,16 @@ export class EnrollmentComponent implements AfterViewInit {
             //set default selected value
             this.enrollment.grade = 13;
             this.enrollment.strand = 1;
+            this.enrollment.semester = 1;
             this._enrollService.getStrand().subscribe((data:any) => 
             {
                 this.trackStandardCourse = data;
             });
         }
-        if(this.enrollment.department == 4 || this.enrollment.department == 5 ){//,colege
+        if(this.enrollment.department == 4 || this.enrollment.department == 5 ){//,colege, master grad
             this.enrollment.grade = 15;
             this.enrollment.strand = 1;
+            this.enrollment.semester = 1;
             this._enrollService.getCoursesByDeptId(this.enrollment.department).subscribe((data:any) => 
             {
                 this.trackStandardCourse = data;
@@ -224,9 +235,18 @@ export class EnrollmentComponent implements AfterViewInit {
             return;
         }
 
+        if(this.enrollment.schoolyearfrom == 0){
+            this.setDialog("School Year from is required!");
+            return;
+        }
+
+        if(this.enrollment.schoolyearto == 0){
+            this.setDialog("School Year To is required!");
+            return;
+        }
+
         this._enrollService.saveEnrolment(this.enrollment).subscribe((data:any) => 
         {
-            console.log(data);
             this.setDialog("Please save following details: User Name: " + data.ref_no + "Password: " + data.password + "login regularly to http://localhost:4200/");
         });
     }
@@ -272,12 +292,15 @@ export class EnrollmentComponent implements AfterViewInit {
           "learning_modality": "",
           "status": "",
           "validated_by": "",
-          "approved_by": 0,
+          "approved_by": "",
           "cancelled_by": 0,
           "updated_by": "",
           "remarks": "",
           "created_at": "",
-          "school_year": 0
+          "school_year": 0,
+          "schoolyearfrom": "",
+          "schoolyearto": "",
+          "semester": 0
       }
     }
 }

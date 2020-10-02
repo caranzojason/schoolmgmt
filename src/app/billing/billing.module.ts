@@ -1,12 +1,37 @@
+// import { NgModule } from '@angular/core';
+// import { RouterModule } from '@angular/router';
+// import { CommonModule } from '@angular/common';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { FormsModule } from '@angular/forms';
+// import {BillingComponent} from './billing.component';
+// import {BillingService} from './services/billing.services';
+// import { BillingRoutes } from './billing.routing';
+// import {FeeComponent} from './fee/fee.component'
+
+// @NgModule({
+//   imports: [
+//     CommonModule,
+//     RouterModule.forChild(BillingRoutes),
+//     NgbModule,
+//     FormsModule
+//   ],
+//   declarations: [
+//     FeeComponent,
+//     BillingComponent,
+//   ],
+//   providers: [
+//     BillingService,
+//   ],
+// })
+// export class BillingModule {}
+
+
+
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { ForVerificationComponent } from './forverification.component';
-import { ForApprovalComponent } from './forapproval.component';
-import { Inquiry } from './inquiry.component';
-import { EnrollmentRoutes } from './enrollment.routing';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -41,15 +66,15 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import { EnrollmentComponent } from './enrolment.component';
-// import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
-import {EnrollmentService} from './service/enrollment.service';
-import { PaymentApprovalComponent } from './paymentapproval.component';
-import { PaymentInquiryComponent } from './paymentinquiry.component';
 import { MatTableFilterModule } from 'mat-table-filter';
-
+import { BillingRoutes } from './billing.routing';
+import {BillingComponent} from './billing.component';
+import {BillingService} from './services/billing.services';
+import {FeeComponent} from './fee/fee.component'
+import {YearlyFeeComponent} from './yearlyfee/yearlyfee.component'
+import {YearlyFeeService} from './yearlyfee/services/yearlyfee.service';
 @NgModule({
-  imports: [FormsModule, CommonModule, RouterModule.forChild(EnrollmentRoutes),ReactiveFormsModule,
+  imports: [FormsModule, CommonModule, RouterModule.forChild(BillingRoutes),ReactiveFormsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -87,10 +112,12 @@ import { MatTableFilterModule } from 'mat-table-filter';
     MatTreeModule,
     NgbModule,
     MatTableFilterModule],
-  declarations: [ForVerificationComponent  ,ForApprovalComponent,EnrollmentComponent,Inquiry,PaymentApprovalComponent,PaymentInquiryComponent],
+  declarations: [FeeComponent, BillingComponent,YearlyFeeComponent],
   providers: [
-    EnrollmentService
-  ],
-  // entryComponents: [EnrollmentDialog]
+    BillingService,
+    YearlyFeeService
+  ]
 })
-export class EnrollmentModule {}
+export class BillingModule {}
+
+

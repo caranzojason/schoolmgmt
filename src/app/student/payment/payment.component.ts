@@ -85,7 +85,6 @@ export class PaymentComponent {
       this.enrolNo = enrolNo;
       this._studService.getEnrollmentRefNo(enrolNo).subscribe((data:any) => 
       {
-        console.log(data);
         this.enrolmentStatus = data.status;
         if(data.firstname === undefined){
           this.setDialog('Reference No/Enrol no not Found!')
@@ -118,7 +117,7 @@ export class PaymentComponent {
         this.fileName = this.fileToUpload.name;
         this.formData = new FormData();
         this.formData.append('uploads', this.fileToUpload, this.fileToUpload.name);
-        this.isUploaded = true;
+          this.isUploaded = true;
     }
 
     setDialog(message){
@@ -154,7 +153,7 @@ export class PaymentComponent {
         return;
       }
 
-      if(!this.isUploaded){
+      if(!this.isUploaded && this.payment.filename == '' ){
         this.setDialog('Please upload file!')
         return;
       }
@@ -169,11 +168,11 @@ export class PaymentComponent {
       {
         this._studService.uploadFile(this.enrolNo,this.formData).subscribe(event => {
         
-          this.setDialog('Payment sucessfuly saved! Payment now under for approval!')
+          this.setDialog('Payment sucessfuly saved! Payment is now under for approval!')
          }, error => {
           console.log(error);
         });
-      
+        this.initData(this.enrolNo);
       });
     }
 

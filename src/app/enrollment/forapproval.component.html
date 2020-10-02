@@ -214,6 +214,51 @@
                                         </form>
                                     </div>
                                 </div>
+
+                                <div class="col-md-3" style="padding: 1px;">
+                                    <form >
+                                        <label style="font-size: 13px;margin-bottom: 0px;">School Year From </label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select name="filter"  [(ngModel)]= "enrollment.schoolyearfrom"    class="form-control inputText">
+                                                    <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                                        {{o.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                
+                                <div class="col-md-3" style="padding: 1px;">
+                                    <form >
+                                        <label style="font-size: 13px;margin-bottom: 0px;">School Year To </label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select name="filter"  [(ngModel)]=  "enrollment.schoolyearto"   class="form-control inputText">
+                                                    <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                                        {{o.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                
+                                <div class="col-md-3" style="padding: 1px;">
+                                    <form >
+                                        <label style="font-size: 13px;margin-bottom: 0px;">Semester </label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select name="filter"  [(ngModel)]= "enrollment.semester"  class="form-control inputText">
+                                                    <option name="o" *ngFor = "let o of schoolsemesterList"  [ngValue]="o.id">
+                                                        {{o.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                              
                                 <div class="row" style="margin-right: 0px;margin-left: 0px;">
                                     <div class="col-md-3" style="padding: 1px;">

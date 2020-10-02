@@ -5,16 +5,14 @@ import { map } from 'rxjs/operators'
 import { EnvService } from '../../core/env.service';
 
 @Injectable()
-export class UserService {
-    // api="http://127.0.0.1:8000/api/";
-
+export class BillingService {
     constructor(private _httpClient: HttpClient,public _env: EnvService,
          private _uploadHttpClient: HttpClient, private _uploadHandler: HttpBackend ) {
         this._uploadHttpClient = new HttpClient(_uploadHandler);
     }
 
-    login(data:any): Observable<any> {
-        return this._httpClient.post<any>(this._env.api +'login',data)
+    getBillingAllFee(): Observable<any> {
+        return this._httpClient.get<any>(this._env.api+'getBillingAllFee')
         .pipe(map((res: any) => res));
-    }
+    } 
 }

@@ -4,6 +4,7 @@ import { from, Observable} from 'rxjs';
 import { tap} from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { SpinnerService } from './loader/spinner.service';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
@@ -13,16 +14,21 @@ export class AuthInterceptorService implements HttpInterceptor {
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     this.spinnerService.show();
-    return next.handle(req).pipe(map(event => {
+
+    return next.handle(req).do(
+      (event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
           this.spinnerService.hide();
-        }    
-        return event;
-    }, error => {
-      var respError = error as HttpErrorResponse;
-      this.spinnerService.hide();
-      console.log(respError);
-    }));
+        }
+      },
+      (err: any) => {
+        this.spinnerService.hide();
+        console.log('onInterceptor handle ', err);
+
+
+      }
+    );
   }
 }

@@ -25,6 +25,7 @@ import { SpinnerService } from './core/loader/spinner.service';
 import { AuthInterceptorService } from './core/auth-interceptor.service';
 import { EnrollmentDialog } from './common/dialog/enrollmentdialog';
 import {MatDialogModule} from '@angular/material/dialog';
+import { EnvServiceProvider } from './core/env.service.provider';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -59,6 +60,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDialogModule
   ],
   providers: [
+    EnvServiceProvider, 
     SpinnerService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

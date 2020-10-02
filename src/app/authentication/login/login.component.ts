@@ -30,7 +30,7 @@ export class LoginComponent {
           if(data.username == 'registrar'){
             this._router.navigate(['/enrollment'],{ replaceUrl: true });
           }else{
-            this._router.navigate(['/myenrollment'],{ replaceUrl: true });
+            this._router.navigate(['/student/myenrollment'],{ replaceUrl: true });
           }
         }else{
           this.message = data[0].message;

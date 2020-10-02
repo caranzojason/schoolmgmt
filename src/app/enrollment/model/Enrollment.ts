@@ -40,12 +40,15 @@ export interface Enrollment{
     learning_modality:string;
     status:string;
     validated_by:string;
-    approved_by:Number;
+    approved_by:string;
     cancelled_by:Number;
     updated_by:string;
     remarks:string;
     created_at:string;
     school_year:Number;
+    schoolyearfrom: any,
+    schoolyearto: any,
+    semester: Number,
 }
 /*
 "id": 1,

@@ -5,7 +5,7 @@ import { FullComponent } from './layouts/full/full.component';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { AuthRouteGuard } from '../app/core/AuthRouteGuard';
 
-//jasonx: use this path for outside enrolment http://localhost:4200/studentenrollment/enrol
+//jasonx: use this path for outside enrolment http://localhost:4200/studentenrollment/newstudent
 export const Approutes: Routes = [
   {
     path: '',
@@ -24,6 +24,10 @@ export const Approutes: Routes = [
       {
 				path: 'student',
         loadChildren: 	() => import('./student/student.module').then(m => m.StudentModule)
+      },
+      {
+				path: 'billing',
+        loadChildren: 	() => import('./billing/billing.module').then(m => m.BillingModule)
       },
     ]
   },

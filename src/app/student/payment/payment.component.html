@@ -101,8 +101,8 @@
             </div>
         </div> 
         <div class="modal-footer att-modal-footer">
-            <button *ngIf="!alreadyMakePaymentB4 && enrolmentStatus == 'pending'" type="submit" (click)="save()"  class="btn btn-info btn-secondary btn-modal-footer-x">Pay</button>
-            <button *ngIf="alreadyMakePaymentB4 && enrolmentStatus == 'pending' " type="submit" (click)="save()"  class="btn btn-info btn-secondary btn-modal-footer-x">Update</button>
+            <button *ngIf="!alreadyMakePaymentB4 && (enrolmentStatus == 'ForPayment' || enrolmentStatus ==  'PaymentForApproval')" type="submit" (click)="save()"  class="btn btn-info btn-secondary btn-modal-footer-x">Pay</button>
+            <button *ngIf="alreadyMakePaymentB4 && (enrolmentStatus == 'ForPayment' || enrolmentStatus ==  'PaymentForApproval')" type="submit" (click)="save()"  class="btn btn-info btn-secondary btn-modal-footer-x">Update</button>
             <button type="submit" (click)="cancel()" class="btn btn-info btn-secondary btn-modal-footer-x">Cancel</button>
         </div>
     </div>

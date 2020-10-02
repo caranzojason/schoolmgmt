@@ -55,12 +55,15 @@ export class MyEnrollmentComponent implements AfterViewInit {
     "learning_modality": "",
     "status": "",
     "validated_by": "",
-    "approved_by": 0,
+    "approved_by": "",
     "cancelled_by": 0,
     "updated_by": "",
     "remarks": "",
     "created_at": "",
-    "school_year": 0
+    "school_year": 0,
+    "schoolyearfrom": "",
+    "schoolyearto": "",
+    "semester": 0,
 }
 
 public deparmentList:any;
@@ -82,13 +85,13 @@ constructor(private _enrollService:EnrollmentService,private _starterService:MyE
         const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
         this.enrollment.dob = obj;
         if(this.enrollment.status == "pending" || this.enrollment.status == undefined ){
-            this.status  = "FOR VERIFICATION"
-
-        }else if(this.enrollment.status == "verified"){
-            this.status  = "Verified"
-            this.message = "Please proceed now to payment click here"
-        }else if(this.enrollment.status == "paid"){
-            this.status  = "FOR APPROVAL"
+            this.status  = "pending"
+            this.message = "For Verification"
+        }else if(this.enrollment.status == "ForPayment"){
+            this.status  = "ForPayment"
+            this.message = "Your Enrollment is now verified and ready for payment! click payment on the left menu."
+        }else if(this.enrollment.status == "PaymentForApproval"){
+            this.status  = "PaymentForApproval"
             this.message = "Your payment is now for approva/process."
         }else if(this.enrollment.status == "approved"){
             this.status  = "APPROVED"
@@ -146,7 +149,7 @@ setDialog(message){
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
+        // console.log(`Dialog result: ${result}`);
     });
 }
 
@@ -301,12 +304,15 @@ public enrol(){
         "learning_modality": "",
         "status": "",
         "validated_by": "",
-        "approved_by": 0,
+        "approved_by": "",
         "cancelled_by": 0,
         "updated_by": "",
         "remarks": "",
         "created_at": "",
-        "school_year": 0
+        "school_year": 0,
+        "schoolyearfrom": "",
+        "schoolyearto": "",
+        "semester": 0,
     }
   }
 }

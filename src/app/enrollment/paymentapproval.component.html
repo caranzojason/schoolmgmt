@@ -5,13 +5,16 @@
               <mat-tab-group #tabs (selectedTabChange)="onTabChange($event)">
                 <mat-tab label="Payment List" style="margin-top: 30px;">
                   <ng-template matTabContent >
-                <mat-form-field style="width: 20%; margin-top: 20px;">
+                <mat-form-field style="width: 200px; margin-top: 20px;">
                   <mat-label>Filter</mat-label>
-                  <input matInput (keyup)="applyFilter($event)" ([ngModel]) = "filter" placeholder="Ex. Mia" #input>
+                  <input matInput matNativeControl  type="text"  (keyup)="applyFilter($event)" ([ngModel]) = "filter"  placeholder="Ex. Mia" #filterInput>
+          
                 </mat-form-field>
                 <button class="btn btn-info btn-secondary" (click)="search()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-search" aria-hidden="true"></i></button>
+             
+                <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                     <div class="mat-elevation-z8">
-                      <table mat-table [dataSource]="dataSource" matSort >
+                      <table  mat-table [dataSource]="dataSource" matSort >
                         <ng-container matColumnDef="enrollment_ref_no" >
                           <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Reference No. </th>
                           <td mat-cell *matCellDef="let row"> {{row.enrollment_ref_no}} </td>
@@ -39,7 +42,7 @@
                           
                           <ng-container matColumnDef="status">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Status </th>
-                            <td mat-cell *matCellDef="let row" [style.color]="row.amount"> {{row.approval_status}} </td>
+                            <td mat-cell *matCellDef="let row" [style.color]="row.status"> {{row.status}} </td>
                           </ng-container>
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -68,14 +71,18 @@
                         <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
                             <div style="box-shadow: 0px 1px 3px 0px #c8cec8;
                             border-radius: 10px;">
+                            <div *ngIf="this.enrolmentStatus == 'approved'" >
+                                <h3>Enrolment Status: {{this.enrolmentStatus}}</h3>
+                                <h4>You're payment is sucessfully processed!</h4>
+                            </div>
                                 <h4 style="padding: 10px;font-weight: 500;">Payment Form S.Y. 2020-2021</h4>
                             </div>
                             <div class="col-md-3" style="margin-bottom: 20px;">
                                 <form >
-                                    <label style="font-size: 13px;margin-bottom: 0px;">Enrollment Reference Number:</label>
+                                    <label style="font-size: 13px;margin-bottom: 0px;">Reference/Enrol Number:</label>
                                     <div class="form-group">
                                         <div class="input-group">
-                                        <input type="text"  name="ref"  [(ngModel)]= "enrolNo"  class="form-control" placeholder="Reference Number Here" style=" font-size: 11px;padding: 5px;border-radius: 5px 0px 0px 5px;">
+                                        <input type="text"  name="ref" disabled  [(ngModel)]= "enrolNo"  class="form-control" placeholder="Reference Number Here" style=" font-size: 11px;padding: 5px;border-radius: 5px 0px 0px 5px;">
                                              <button type="submit" (click)="onClickRefNo()" class="btn btn-info waves-effect waves-light" style="height: 30px;font-size: 12px;border-radius: 0px 5px 5px 0px;"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
@@ -87,10 +94,17 @@
                                                 <h4 style="padding: 5px;font-weight: 400;">Information</h4>
                                             <hr style="margin-top: 0px;"/>
                                             <form >
-                                                <label style="font-size: 13px;margin-bottom: 0px;">Name</label>
+                                                <label style="font-size: 13px;margin-bottom: 0px;">Firstname</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <input id="idfname" type="text" disabled [(ngModel)] = "listpayment.student_name"   name="fName" class="form-control" style=" font-size: 11px;padding: 5px;border-radius: 5px;">
+                                                        <input id="idfname" type="text" disabled [(ngModel)] = "firstName"   name="fName" class="form-control" style=" font-size: 11px;padding: 5px;border-radius: 5px;">
+                                                    </div>
+                                                </div>
+                                                <label style="font-size: 13px;margin-bottom: 0px;">Lastname</label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <input id="idfname" type="text" disabled [(ngModel)] = "lastName"  name="lName" class="form-control" style=" font-size: 11px;
+                                                        padding: 5px;border-radius: 5px;">
                                                     </div>
                                                 </div>
                                             </form>
@@ -102,7 +116,7 @@
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Payment Method</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <select  name="pOptions1" [(ngModel)]="listpayment.method"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
+                                                        <select  name="pOptions2" [(ngModel)]="payment.paymentMethod"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
                                                             <option  name="o" *ngFor="let o of paymentOptions">
                                                                {{o.name}}
                                                             </option>
@@ -112,14 +126,14 @@
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Amount to Pay</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                         <input type="text"  [(ngModel)]="listpayment.amount" name="amtPay" class="form-control" id="inputEmail3" placeholder="amount" style=" font-size: 11px;
+                                                         <input type="text"  [(ngModel)]="payment.amountToPay" name="amtPay" class="form-control" id="inputEmail3" placeholder="amount" style=" font-size: 11px;
                                                          padding: 5px;border-radius: 5px;">
                                                     </div>
                                                 </div>
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Payment Description</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <select  name="pOptions1" [(ngModel)]="listpayment.description"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
+                                                        <select  name="pOptions1" [(ngModel)]="payment.paymentDescription"  class="form-control" style=" font-size: 11px; padding: 5px;border-radius: 5px;">
                                                             <option  name="o" *ngFor="let o of paymentType">
                                                                {{o.name}}
                                                             </option>
@@ -129,27 +143,35 @@
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Proof of Payment</label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">Upload</span>
-                                                        </div>
+                                            
                                                         <div class="custom-file">
                                                             <input type="file" class="custom-file-input"   name="f"  (change)="handleFileInput($event.target.files)">
                                                      
                                                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                                         </div>
-                                                        <br>
-                                                        <div>
-                                                            <label class="custom-file-label" for="inputGroupFile01">{{fileName}}</label>
-                                                        </div>
                                                     </div>
                                                 </div>
+                    
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <label> {{fileName}}</label>
+                                                    </div>
+                                                </div>
+                    
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <label>Previous Attachment:</label><br>
+                                                        <label>  <a  target="_blank" href="http://127.0.0.1:8000/{{payment.attachmentpath}}">{{payment.filename}}</a> </label>
+                                                    </div>
+                                                </div>
+                    
                                             </form>
                                     </div>
                                 </div>
                             </div> 
                             <div class="modal-footer att-modal-footer">
-                                <button type="submit" (click)="approvepayment()"  class="btn btn-info btn-secondary btn-modal-footer-x">Approve</button>
-                                <button type="submit" (click)="disaprovepayment()" class="btn btn-info btn-secondary btn-modal-footer-x">Disaprove</button>
+                                <button  type="submit" (click)="approvepayment()"  class="btn btn-info btn-secondary btn-modal-footer-x">Approve</button>
+                               <button type="submit" (click)="cancel()" class="btn btn-info btn-secondary btn-modal-footer-x">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -270,7 +292,7 @@
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Department </label>
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <select name="filter"  [(ngModel)]= "enrollment.department" (change)="selectDepartment()" class="form-control inputText">
+                                                        <select name="filter"  [(ngModel)]= "enrollment.department"  class="form-control inputText">
                                                             <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
                                                                 {{o.name}}
                                                             </option>
@@ -307,8 +329,55 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <div class="col-md-3" style="padding: 1px;">
+                                            <form >
+                                                <label style="font-size: 13px;margin-bottom: 0px;">School Year From </label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <select name="filter"  [(ngModel)]= "enrollment.schoolyearfrom"    class="form-control inputText">
+                                                            <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                                                {{o.name}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                        
+                                        <div class="col-md-3" style="padding: 1px;">
+                                            <form >
+                                                <label style="font-size: 13px;margin-bottom: 0px;">School Year To </label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <select name="filter"  [(ngModel)]=  "enrollment.schoolyearto"   class="form-control inputText">
+                                                            <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                                                {{o.name}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                        
+                                        <div class="col-md-3" style="padding: 1px;">
+                                            <form >
+                                                <label style="font-size: 13px;margin-bottom: 0px;">Semester </label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <select name="filter"  [(ngModel)]= "enrollment.semester"  class="form-control inputText">
+                                                            <option name="o" *ngFor = "let o of schoolsemesterList"  [ngValue]="o.id">
+                                                                {{o.name}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                     
                                     </div>
-                                 
+
+  
                                     <div class="row" style="margin-right: 0px;margin-left: 0px;">
                                         <div class="col-md-3" style="padding: 1px;">
                                             <form >
@@ -610,13 +679,13 @@
                                             </form>
                                         </div>
                                     </div> 
-                                <div class="modal-footer att-modal-footer">
+                                <!-- <div class="modal-footer att-modal-footer">
                                     <div>
                                         <p >By clicking Enroll, you agree to our Terms & Conditions.</p>
                                     </div>
                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="enrol()" type="button">Enroll</button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </ng-template>

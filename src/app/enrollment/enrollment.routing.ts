@@ -66,7 +66,7 @@ export const EnrollmentRoutes: Routes = [
 				}
 			},
 			{
-				path: 'enrol',
+				path: 'newstudent',
 				component: EnrollmentComponent,
 				data: {
 					title: 'Enrollment',

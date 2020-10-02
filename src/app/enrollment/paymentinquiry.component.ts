@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input} from '@angular/core';
+import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input,ChangeDetectorRef,ElementRef } from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
 import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
@@ -10,13 +10,16 @@ import { Enrollment } from './model/Enrollment';
 import { ThemePalette } from '@angular/material/core';
 import { ActivatedRoute,Router} from '@angular/router';
 import { Payment } from './model/Payment';
+import { MatTableModule } from '@angular/material/table';
+import {MatTable} from '@angular/material';
 
 @Component({
-  templateUrl: './paymentinquiry.component.html',
-  styleUrls: ['./paymentinquiry.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class PaymentInquiryComponent implements AfterViewInit {
+    templateUrl: './paymentinquiry.component.html',
+    styleUrls: ['./paymentinquiry.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
+  })
+  export class PaymentInquiryComponent implements AfterViewInit {
+  refNo:string = "";
   enrolmentList:Array<Enrollment>;
   paymentList:Array<Payment>;
   subtitle: string;
@@ -27,6 +30,9 @@ export class PaymentInquiryComponent implements AfterViewInit {
   activeLink = this.links[0];
   background: ThemePalette = undefined;
   public payment:any = {paymentMethod:"",amountToPay:"",paymentDescription:""}
+  public firstName:any;
+  public lastName:any;
+  public alreadyMakePaymentB4:boolean = false;
   public enrollment:Enrollment = {
     "id": 0,
     "ref_no": "",
@@ -67,12 +73,15 @@ export class PaymentInquiryComponent implements AfterViewInit {
     "learning_modality": "",
     "status": "",
     "validated_by": "",
-    "approved_by": 0,
+    "approved_by": "",
     "cancelled_by": 0,
     "updated_by": "",
     "remarks": "",
     "created_at": "",
-    "school_year": 0
+    "school_year": 0,
+    "schoolyearfrom": "",
+    "schoolyearto": "",
+    "semester": 0
   }
   public listpayment:Payment = {
     "id": 0,
@@ -101,15 +110,20 @@ export class PaymentInquiryComponent implements AfterViewInit {
   pageSizeOptions = [5, 10, 25, 100];
   pageIndex = 0;
   filter="";
+  filter1="";
   pageNo = 0;
   // MatPaginator Output
   pageEvent: PageEvent;
+  public enrolmentStatus:string = "pending";
 
-  @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
+  @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
+  // @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
   @ViewChild('tabs',{static:false}) tabGroup: MatTabGroup;
+  @ViewChild(MatTable,{static:false}) table: MatTable<any>;
+  constructor(private _enrollService:EnrollmentService,public dialog: MatDialog, private _route: ActivatedRoute, private changeDetectorRefs: ChangeDetectorRef) {
+    this.subtitle = 'for verification';
 
-  constructor(private _enrollService:EnrollmentService,public dialog: MatDialog, private _route: ActivatedRoute) {
   }
   
   ngAfterViewInit() {
@@ -119,14 +133,30 @@ export class PaymentInquiryComponent implements AfterViewInit {
     })
     this._enrollService.getInquiryPaymentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
     {
-      console.log(data.NoOfRecords);
       this.paymentList = data.EnrollmentPayment;
-      console.log(this.paymentList);
       this.dataSource = new MatTableDataSource( this.paymentList);
-      this.dataSource.paginator = this.paginator;
+     // this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.dataSource.paginator.length = data.NoOfRecords;
+      // this.dataSource.paginator.length = data.NoOfRecords;
       this.length = data.NoOfRecords;
+      console.log(this.dataSource);
+    });
+  }
+
+  initData(){
+    this._enrollService.getAllDepartment().subscribe((data:any) => 
+    {
+        this.deparmentList = data;
+    })
+    this._enrollService.getInquiryPaymentList(0,this.pageSize,"").subscribe((data:any) => 
+    {
+      this.paymentList = data.EnrollmentPayment;
+      this.dataSource = new MatTableDataSource( this.paymentList);
+      // this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      // this.dataSource.paginator.length = data.NoOfRecords;
+      this.length = data.NoOfRecords;
+      
     });
   }
 
@@ -138,9 +168,10 @@ export class PaymentInquiryComponent implements AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.filter = filterValue;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
+
   }
 
   public selectDepartment()
@@ -205,16 +236,37 @@ export class PaymentInquiryComponent implements AfterViewInit {
   ];
   public editPayment(row)
   {
-    let ref = row.enrollment_ref_no
-    this._enrollService.getPaymentByEnrollRefNo(ref).subscribe((data:any) => 
-    {
-        console.log(data);
-        this.listpayment = data;
-        console.log(this.listpayment);
-      
-    });
+    this.refNo = row.enrollment_ref_no;
+    this.initPayment(this.refNo);
     this.tabGroup.selectedIndex = 1
   }
+
+  public initPayment(enrolNo){
+  //  this.enrolNo = enrolNo;
+    this._enrollService.getEnrollRefNo(enrolNo).subscribe((data:any) => 
+    {
+      console.log(data);
+      this.enrolmentStatus = data.status;
+      if(data.firstname === undefined){
+        this.setDialog('Reference No/Enrol no not Found!')
+        return;
+      }
+        this.firstName = data.firstname;
+        this.lastName = data.lastname
+
+        this._enrollService.getPayment(enrolNo).subscribe((data:any) => 
+        {
+          if(data.method !== undefined){
+            this.payment.paymentMethod = data.method;
+            this.payment.amountToPay = data.amount;
+            this.payment.paymentDescription = data.description;
+            this.payment.attachmentpath = data.attachmentpath;
+            this.payment.filename =data.filename;
+            this.alreadyMakePaymentB4 = true;
+          }
+        })
+    });
+}
 
   getSelectedIndex(): number {
     return this.currentTabIndex;
@@ -223,9 +275,13 @@ export class PaymentInquiryComponent implements AfterViewInit {
   onTabChange(event: MatTabChangeEvent) {
     this.currentTabIndex = event.index
     if(event.index == 0){
-      this.dataSource = new MatTableDataSource( this.paymentList);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+
+      this._enrollService.getInquiryPaymentList(0,this.pageSize,"").subscribe((data:any) => 
+      {
+        this.paymentList = data.EnrollmentPayment;
+        this.dataSource = new MatTableDataSource( this.paymentList);
+        this.changeDetectorRefs.detectChanges();
+      });
     }
   }
 
@@ -252,16 +308,82 @@ export class PaymentInquiryComponent implements AfterViewInit {
     {
       this.paymentList = data.EnrollmentPayment;
       this.dataSource = new MatTableDataSource( this.paymentList);
+      this.changeDetectorRefs.detectChanges();
     });
  }
 
  search(){
-   console.log(this.filter);
    this._enrollService.getInquiryPaymentList(0,this.pageSize,this.filter).subscribe((data:any) => 
    {
-     this.paymentList = data.EnrollmentPayment;
-     this.dataSource = new MatTableDataSource( this.paymentList);
+    this.paymentList = data.EnrollmentPayment;
+    this.dataSource = new MatTableDataSource( this.paymentList);
+    this.changeDetectorRefs.detectChanges();
+    console.log(this.length);
    });
  }
 
+ setDialog(message){
+  const dialogRef = this.dialog.open(EnrollmentDialog, {
+      width: '300px',
+      data: {  message: message}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+}
+
+ approvepayment(){
+  var scope = this;
+  scope.tabGroup.selectedIndex = 0;
+    this._enrollService.approvePayment(this.refNo ).subscribe((data:any) => 
+    {
+      if(data.ref_no !== undefined){
+     
+        this._enrollService.getInquiryPaymentList(0,this.pageSize,"").subscribe((data:any) => 
+        {
+          console.log(data);
+          this.paymentList = data.EnrollmentPayment;
+
+          this.dataSource.data = this.paymentList;
+           this.changeDetectorRefs.detectChanges();
+          // this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          // this.dataSource.paginator.length = data.NoOfRecords;
+          this.length = data.NoOfRecords;
+         
+          this.setDialog("Successfully Approved!");
+        });
+      }
+    });
+ }
+
+ disaprovepayment(){
+  var scope = this;
+  scope.tabGroup.selectedIndex = 0;
+  this._enrollService.approvePayment(this.refNo ).subscribe((data:any) => 
+  {
+    //todo add are you sure
+    if(data.ref_no !== undefined){
+      this.setDialog("Successfully DisApproved!");
+      this.initData();
+      return;
+    }
+
+  });
+ }
+
+ refresh(){
+  this.filterInput.nativeElement.value = "";
+  this.dataSource.filter = "";
+  this.filter = "";
+  this._enrollService.getInquiryPaymentList(0,this.pageSize,"").subscribe((data:any) => 
+  {
+    console.log( data.NoOfRecords);
+    this.paymentList = data.EnrollmentPayment;
+    this.length = data.NoOfRecords;
+    this.dataSource = new MatTableDataSource( this.paymentList);
+    this.changeDetectorRefs.detectChanges();
+  });
+ }
 }

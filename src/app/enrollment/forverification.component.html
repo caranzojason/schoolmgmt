@@ -10,6 +10,8 @@
                   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
                 </mat-form-field>
                 <button class="btn btn-info btn-secondary" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                  
                     <div class="mat-elevation-z8">
                       <table mat-table [dataSource]="dataSource" matSort >
                     
@@ -81,11 +83,11 @@
                                     <label style="font-size: 13px;">Are you an old student??</label>
                                     <div class="form-group">
                                         <div class="input-group">
-                                        <input type="radio" id="yes" name="type" value="yes">
-                                        <label for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
-                                        <input type="radio" id="no" name="type" value="no">
-                                        <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
-                                        </div>
+                                            <input [(ngModel)]="enrollment.type"  type="radio" id="yes" name="type" value="yes">
+                                            <label  for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
+                                            <input [(ngModel)]="enrollment.type" type="radio" id="no" name="type" value="no">
+                                            <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
+                                            </div>
                                     </div>
                                 </form>
                             </div>
@@ -219,6 +221,51 @@
                                             </div>
                                         </form>
                                     </div>
+                                </div>
+
+                                <div class="col-md-3" style="padding: 1px;">
+                                    <form >
+                                        <label style="font-size: 13px;margin-bottom: 0px;">School Year From </label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select name="filter"  [(ngModel)]= "enrollment.schoolyearfrom"    class="form-control inputText">
+                                                    <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                                        {{o.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                
+                                <div class="col-md-3" style="padding: 1px;">
+                                    <form >
+                                        <label style="font-size: 13px;margin-bottom: 0px;">School Year To </label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select name="filter"  [(ngModel)]=  "enrollment.schoolyearto"   class="form-control inputText">
+                                                    <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                                        {{o.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                
+                                <div class="col-md-3" style="padding: 1px;">
+                                    <form >
+                                        <label style="font-size: 13px;margin-bottom: 0px;">Semester </label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select name="filter"  [(ngModel)]= "enrollment.semester"  class="form-control inputText">
+                                                    <option name="o" *ngFor = "let o of schoolsemesterList"  [ngValue]="o.id">
+                                                        {{o.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                              
                                 <div class="row" style="margin-right: 0px;margin-left: 0px;">
@@ -527,7 +574,7 @@
                                     <p >By clicking Enroll, you agree to our Terms & Conditions.</p>
                                 </div>
                                 <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
-                                <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="enrol()" type="button">Enroll</button>
+                                <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="verify()" type="button">Verify</button>
                             </div>
                         </div>
                     </div>
