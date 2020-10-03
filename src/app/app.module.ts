@@ -63,6 +63,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatTableFilterModule } from 'mat-table-filter';
+import { EnrollmentDialogMsBox } from './common/dialog/enrollDialogMsgBox';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -82,7 +83,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BreadcrumbComponent,
     SidebarComponent,
     EnrollmentDialog,
-    StudentDialog
+    StudentDialog,
+    EnrollmentDialogMsBox,
+  
   ],
   imports: [
     CommonModule,
@@ -146,6 +149,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     StudentService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EnrollmentDialog,StudentDialog]
+  entryComponents: [EnrollmentDialog,StudentDialog,EnrollmentDialogMsBox]
 })
 export class AppModule {}
