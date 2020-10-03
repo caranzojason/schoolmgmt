@@ -2,13 +2,27 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+              
               <mat-tab-group #tabs (selectedTabChange)="onTabChange($event)">
                 <mat-tab label="Billing" style="margin-top: 30px;">
                     <ng-template matTabContent>
                         <div >
                             <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
-                                <label>Student:</label><input disabled type="text"/>
-                                <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                              
+                                <label>Last Name:</label><input  type="text" [(ngModel)] = "student.lastname"  name="lname" disabled > 
+                                <label>First Name:</label><input  type="text" [(ngModel)] = "student.firstname"  name="fname" disabled > 
+                                <button class="btn btn-info btn-secondary" (click)="getStudentList()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                <div *ngIf="student.Id !=0">
+                                  <label>Department:</label>
+                                  <select name="filter"  [(ngModel)]= "student.department" disabled>
+                                    <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
+                                        {{o.name}}
+                                    </option>
+                                </select>
+
+                                </div>
+  
+                               
                                 <div class="mat-elevation-z8">
                                     <table mat-table [dataSource]="dataSourceForm" matSort >
 

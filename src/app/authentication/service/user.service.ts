@@ -17,4 +17,9 @@ export class UserService {
         return this._httpClient.post<any>(this._env.api +'login',data)
         .pipe(map((res: any) => res));
     }
+
+    getActiveSchoolYear(): Observable<any> {
+        return this._httpClient.get<any>(this._env.api +'getActiveSchoolYear')
+        .pipe(map((res: any) => res));
+    }
 }

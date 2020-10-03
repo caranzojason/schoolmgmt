@@ -1,12 +1,4 @@
-import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { ForVerificationComponent } from './forverification.component';
-import { ForApprovalComponent } from './forapproval.component';
-import { Inquiry } from './inquiry.component';
-import { EnrollmentRoutes } from './enrollment.routing';
+
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -41,12 +33,22 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { MatTableFilterModule } from 'mat-table-filter';
+
+import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+import { ForVerificationComponent } from './forverification.component';
+import { ForApprovalComponent } from './forapproval.component';
+import { Inquiry } from './inquiry.component';
+import { EnrollmentRoutes } from './enrollment.routing';
 import { EnrollmentComponent } from './enrolment.component';
-// import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
 import {EnrollmentService} from './service/enrollment.service';
 import { PaymentApprovalComponent } from './paymentapproval.component';
 import { PaymentInquiryComponent } from './paymentinquiry.component';
-import { MatTableFilterModule } from 'mat-table-filter';
+
 
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(EnrollmentRoutes),ReactiveFormsModule,
@@ -90,7 +92,6 @@ import { MatTableFilterModule } from 'mat-table-filter';
   declarations: [ForVerificationComponent  ,ForApprovalComponent,EnrollmentComponent,Inquiry,PaymentApprovalComponent,PaymentInquiryComponent],
   providers: [
     EnrollmentService
-  ],
-  // entryComponents: [EnrollmentDialog]
+  ]
 })
 export class EnrollmentModule {}

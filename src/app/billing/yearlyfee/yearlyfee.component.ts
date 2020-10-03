@@ -9,6 +9,9 @@ import {MatDialog} from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie';
 import {Fee} from '../model/Fee';
 import {YearlyFeeService} from './services/yearlyfee.service';
+import { Yearlyfee } from '../model/Yearlyfee';
+import { YearlyfeeDetail } from '../model/YearlyfeeDetail';
+
 
 @Component({
   selector: 'app-payment',
@@ -18,21 +21,25 @@ styleUrls: ['./yearlyfee.scss'],
 export class YearlyFeeComponent {
 
   billFormColumns: string[] = ['Fee', 'Amount'];
-  displayedColumns: string[] = ['Code', 'Description','Status','Actions'];
-  feeList:Array<Fee>;
-  dataSource: MatTableDataSource<Fee>;
-  dataSourceForm: MatTableDataSource<Fee>;
+  displayedColumns: string[] = ['Description','Status','Actions'];
+  feeList:Array<YearlyfeeDetail>;
+  dataSource: MatTableDataSource<YearlyfeeDetail>;
+  dataSourceForm: MatTableDataSource<YearlyfeeDetail>;
   public currentTabIndex = 1;
   filter="";
-  billingFee:Array<Fee>;
+  billingFee:Array<YearlyfeeDetail>=[];
   public deparmentList:any;
   public gradesList:any;
   public trackStandardCourse:any = [{id:0,name:""}];
   public schoolsemesterList:any = [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}]; //3 is summer
+  public yearlyFee:Yearlyfee = {"schoolyearfrom":0,"schoolyearto":0,"Id":0,"departmentId":0,"gradeId":0,"strandId":0,"semester":0};
+  public yearlyFeeDetails:YearlyfeeDetail;
+
   public department:number;
   public grade:number;
   public strand:number;
   public semester:number;
+  public schoolyearList:any = [{id:2020,name:"2020"},{id:2021,name:"2021"},{id:2022,name:"2022"}];
 
   @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
@@ -45,7 +52,11 @@ export class YearlyFeeComponent {
     ngAfterViewInit() {
       this._yearlyFeeService.getBillingAllFee().subscribe((data:any) => 
       {
-          this.billingFee = data;
+          data.forEach(element => {
+            let temp= { Id:0, description:element.Description,amount:0 } as YearlyfeeDetail;
+              this.billingFee.push(temp);
+          });
+         // this.billingFee = data;
           this.dataSourceForm = new MatTableDataSource( this.billingFee);
           console.log(this.billingFee);
       })
@@ -74,8 +85,8 @@ export class YearlyFeeComponent {
     public selectDepartment()
     {
         this.schoolsemesterList= [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}];
-        if(this.department != 5){//not equal to colege
-            this._yearlyFeeService.getGrades(this.department).subscribe((data:any) => 
+        if(this.yearlyFee.departmentId != 5){//not equal to colege
+            this._yearlyFeeService.getGrades(this.yearlyFee.departmentId).subscribe((data:any) => 
             {
                 this.gradesList = data;
             });
@@ -83,39 +94,75 @@ export class YearlyFeeComponent {
             this.gradesList = [{id:0,name:"N/A"}];
         }
 
-        if(this.department == 1 || this.department == 2){ //elem,junio
+        if(this.yearlyFee.departmentId == 1 || this.yearlyFee.departmentId == 2){ //elem,junio
             this.trackStandardCourse =  [{id:0,name:"N/A"}];
             //asign to default value
-            if(this.department == 1){
-                this.grade = 1;
+            if(this.yearlyFee.departmentId == 1){
+                this.yearlyFee.gradeId = 1;
             }else{
-                this.grade = 9;
+                this.yearlyFee.gradeId = 9;
             }
             this.gradesList = [{id:0,name:"N/A"}];
             this.schoolsemesterList = [{id:0,name:"N/A"}];
             
         }
 
-        if(this.department == 3 ) //senior
+        if(this.yearlyFee.departmentId == 3 ) //senior
         {
             //set default selected value
-            this.grade = 13;
-            this.strand = 1;
-            this.semester = 1;
+            this.yearlyFee.gradeId = 13;
+            this.yearlyFee.strandId = 1;
+            this.yearlyFee.semester = 1;
             this._yearlyFeeService.getStrand().subscribe((data:any) => 
             {
                 this.trackStandardCourse = data;
             });
         }
-        if(this.department == 4 || this.department == 5 ){//,colege, master grad
-            this.grade = 15;
-            this.strand = 1;
-            this.semester = 1;
-            this._yearlyFeeService.getCoursesByDeptId(this.department).subscribe((data:any) => 
+        if(this.yearlyFee.departmentId == 4 || this.yearlyFee.departmentId == 5 ){//,colege, master grad
+            this.yearlyFee.gradeId = 15;
+            this.yearlyFee.strandId = 1;
+            this.yearlyFee.semester = 1;
+            this._yearlyFeeService.getCoursesByDeptId(this.yearlyFee.departmentId).subscribe((data:any) => 
             {
                 this.trackStandardCourse = data;
             });
         }
+    }
+
+    addNew(){
+        console.log("add new");
+        let temp= { Id:0, description:"sampleDesc",amount:0 } as YearlyfeeDetail;
+        this.billingFee.push(temp);
+        this.dataSourceForm = new MatTableDataSource( this.billingFee);
+        // ELEMENT_DATA.push(this.employee)
+        // this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        // this.employee = {
+        //   id :"",
+        //   name :""
+        // };   /// This could refactor
+     }
+
+
+    public save(){
+
+
+        this._yearlyFeeService.saveYearlyFee(this.yearlyFee).subscribe((data:any) => 
+        {
+            this.billingFee.forEach(element => {
+                element.yearlyFeesId = data[0].Id;
+            });
+            console.log(this.billingFee);
+            this._yearlyFeeService.saveYearlyFeeDetail(this.billingFee).subscribe((data:any) => 
+            {
+                console.log(data);
+            });
+
+        });
+
+        
+        // console.log(this.yearlyFee);
+        // console.log(this.dataSourceForm.data);
+        // console.log(this.billingFee);
     }
 }
 

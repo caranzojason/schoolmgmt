@@ -25,13 +25,25 @@ export class LoginComponent {
     this._userService.login(this.user).subscribe((data:any) => 
     {
         if(data.found === true){
-          this._cookieService.put("username",data.username);
-          this._cookieService.put("usersession",data.session);
-          if(data.username == 'registrar'){
-            this._router.navigate(['/enrollment'],{ replaceUrl: true });
-          }else{
-            this._router.navigate(['/student/myenrollment'],{ replaceUrl: true });
-          }
+
+
+          let temp = data;
+          this._userService.getActiveSchoolYear().subscribe((data:any) => 
+          {
+            this._cookieService.put("username",temp.username);
+            this._cookieService.put("usersession",temp.session);
+            this._cookieService.put("yearFrom",data.yearfrom);
+            this._cookieService.put("yearTo",data.yearto);
+
+            if(temp.username == 'registrar'){
+              this._router.navigate(['/enrollment'],{ replaceUrl: true });
+            }else{
+              this._router.navigate(['/student/myenrollment'],{ replaceUrl: true });
+            }
+
+          });
+
+
         }else{
           this.message = data[0].message;
           console.log(data[0].message);

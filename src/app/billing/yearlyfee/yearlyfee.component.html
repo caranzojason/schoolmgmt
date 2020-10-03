@@ -8,18 +8,29 @@
                         <div >
                             <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
                                 <div class="col-md-2" style="padding: 1px;">
+                                  <button  (click)="addNew()" >Add new</button>
+                              
                                   <form >
                                       <label style="font-size: 13px;margin-bottom: 0px;">School Year From  </label>
-                                      <input type="text"/>
+                                      <select name="filter"  [(ngModel)]= "yearlyFee.schoolyearfrom"    class="form-control inputText">
+                                        <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                            {{o.name}}
+                                        </option>
+                                    </select>
+
                                       <label style="font-size: 13px;margin-bottom: 0px;">School Year To  </label>
-                                      <input type="text"/>
+                                      <select name="filter"  [(ngModel)]= "yearlyFee.schoolyearto"    class="form-control inputText">
+                                        <option name="o" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
+                                            {{o.name}}
+                                        </option>
+                                    </select>
                                   </form>
 
                                   <form >
                                     <label style="font-size: 13px;margin-bottom: 0px;">Department </label>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <select name="filter"  [(ngModel)]= "department" (change)="selectDepartment()" class="form-control inputText">
+                                            <select name="filter"  [(ngModel)]= "yearlyFee.departmentId" (change)="selectDepartment()" class="form-control inputText">
                                                 <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
                                                     {{o.name}}
                                                 </option>
@@ -32,7 +43,7 @@
                                   <label style="font-size: 13px;margin-bottom: 0px;">Grade </label>
                                   <div class="form-group">
                                       <div class="input-group">
-                                          <select name="gradex"  [(ngModel)]= "grade"  class="form-control inputText" >
+                                          <select name="gradex"  [(ngModel)]= "yearlyFee.gradeId"  class="form-control inputText" >
                                               <option name="x" *ngFor = "let o of gradesList"  [ngValue]="o.id">
                                                   {{o.name}}
                                               </option>
@@ -46,7 +57,7 @@
                                     <label style="font-size: 13px;margin-bottom: 0px;">Track & Strand/Course </label>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <select name="strand"  [(ngModel)]= "strand"   class="form-control inputText">
+                                            <select name="strand"  [(ngModel)]= "yearlyFee.strandId"   class="form-control inputText">
                                                 <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
                                                     {{o.name}}
                                                 </option>
@@ -61,7 +72,7 @@
                                   <label style="font-size: 13px;margin-bottom: 0px;">Semester </label>
                                   <div class="form-group">
                                       <div class="input-group">
-                                          <select name="filter"  [(ngModel)]= "semester"  class="form-control inputText">
+                                          <select name="filter"  [(ngModel)]= "yearlyFee.courseId"  class="form-control inputText">
                                               <option name="o" *ngFor = "let o of schoolsemesterList"  [ngValue]="o.id">
                                                   {{o.name}}
                                               </option>
@@ -76,13 +87,13 @@
                                     <table mat-table [dataSource]="dataSourceForm" matSort >
                                       <ng-container matColumnDef="Fee" >
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Fees </th>
-                                        <td mat-cell *matCellDef="let row"> {{row.Description}} </td>
+                                        <td mat-cell *matCellDef="let row"> {{row.description}} </td>
                                       </ng-container>
                                  
                                       <ng-container matColumnDef="Amount">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Amount </th>
                                         <td mat-cell *matCellDef="let row"> 
-                                             <input matInput [id]="row.Amount" > 
+                                             <input matInput [id]="row.amount" [(ngModel)]="row.amount"  > 
                                         </td>
                                       </ng-container>
               
@@ -93,6 +104,7 @@
                                  </div>
                             </div>
                         </div>
+                        <button class="btn btn-info btn-secondary" (click)="save()" >Save</button>
                       </ng-template>
                 </mat-tab>
                 <mat-tab label="Yearly Fee List" >
