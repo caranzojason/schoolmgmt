@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie';
-import {Fee} from '../model/Fee';
+import {FeeDTO} from '../model/FeeDTO';
 
 @Component({
   selector: 'app-fee',
@@ -14,8 +14,8 @@ import {Fee} from '../model/Fee';
 export class FeeComponent {
 
   displayedColumns: string[] = ['Code', 'Description','Status','Actions'];
-  feeList:Array<Fee>;
-  dataSource: MatTableDataSource<Fee>;
+  feeList:Array<FeeDTO>;
+  dataSource: MatTableDataSource<FeeDTO>;
   public currentTabIndex = 1;
   filter="";
 

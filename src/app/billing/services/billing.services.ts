@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable  } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { EnvService } from '../../core/env.service';
+import { Studentfee } from '../model/Studentfee';
+import { StudentfeeDetails } from '../model/StudentfeeDetails';
 
 @Injectable()
 export class BillingService {
@@ -34,6 +36,16 @@ export class BillingService {
 
     getYearlyFeeAccordingtoStudent(departmentId:Number,gradeId:Number,strandId:Number,semester:Number,schoolyearfrom:Number,schoolyearto:Number){
         return this._httpClient.get<any>(this._env.api+'getYearlyFeeAccordingtoStudent/'+departmentId+'/'+gradeId+'/'+strandId+'/'+semester+'/'+schoolyearfrom+'/'+schoolyearto)
+        .pipe(map((res: any) => res));
+    }
+
+    saveStudentFee(data:Studentfee): Observable<Studentfee> {
+        return this._httpClient.post<Studentfee>(this._env.api +'saveStudentFee',data)
+        .pipe(map((res: Studentfee) => res));
+    }
+
+    saveStudentFeeDetail(data:Array<StudentfeeDetails>): Observable<any> {
+        return this._httpClient.post<any>(this._env.api +'saveStudentFeeDetail',data)
         .pipe(map((res: any) => res));
     }
 }

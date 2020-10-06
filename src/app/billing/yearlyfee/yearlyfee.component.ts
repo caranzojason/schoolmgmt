@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie';
-import {Fee} from '../model/Fee';
+import {FeeDTO} from '../model/FeeDTO';
 import {YearlyFeeService} from './services/yearlyfee.service';
 import { Yearlyfee } from '../model/Yearlyfee';
 import { YearlyfeeDetail } from '../model/YearlyfeeDetail';
