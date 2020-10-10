@@ -1,36 +1,16 @@
 import { Routes } from '@angular/router';
-import {BillingComponent} from './billing.component'
+import {SetupIndividualComponent} from './setupindividual/setupindividual.component'
 import {FeeComponent} from './fee/fee.component'
-import {YearlyFeeComponent} from './yearlyfee/yearlyfee.component'
+import {StandardFeeComponent} from './standardfee/standardfee.component'
+import {TransactionComponent} from './transaction/transaction.component';
+
 export const BillingRoutes: Routes = [
     {
         path: '',
         children: [
           {
-            path: 'bill',
-            component: BillingComponent,
-            data: {
-              title: 'Billing',
-              urls: [
-                            { title: 'Billing', url: '/billing/bill' },
-                { title: 'Billing' }
-              ]
-            }
-          },
-          {
-            path: 'fee',
-            component: FeeComponent,
-            data: {
-              title: "Student Fee",
-              urls: [
-                { title: "Fee's", url: 'maintenance/billing/fee' },
-                { title: "Student Fee" }
-              ]
-            }
-          },
-          {
             path: 'yearlyfee',
-            component: YearlyFeeComponent,
+            component: StandardFeeComponent,
             data: {
               title: "Yearly Fee",
               urls: [
@@ -38,7 +18,30 @@ export const BillingRoutes: Routes = [
                 { title: "Yearly Fee" }
               ]
             }
-          }
+          },
+          {
+            path: 'bill',
+            component: SetupIndividualComponent,
+            data: {
+              title: 'Set up Individual',
+              urls: [
+                { title: 'Set up Individual', url: '/billing/bill' },
+                { title: 'Set up Individual' }
+              ]
+            }
+          },
+          {
+            path: 'transaction',
+            component: TransactionComponent,
+            data: {
+              title: "Transaction",
+              urls: [
+                { title: "Fee's", url: 'maintenance/billing/transaction' },
+                { title: "Transaction" }
+              ]
+            }
+          },
+          
         ]
       }
   ];

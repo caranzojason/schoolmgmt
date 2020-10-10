@@ -8,17 +8,17 @@ import { MatSort } from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie';
 import {FeeDTO} from '../model/FeeDTO';
-import {YearlyFeeService} from './services/yearlyfee.service';
+import {StandardFeeService} from './services/standard.service';
 import { Yearlyfee } from '../model/Yearlyfee';
 import { YearlyfeeDetail } from '../model/YearlyfeeDetail';
 
 
 @Component({
   selector: 'app-payment',
-  templateUrl: './yearlyfee.component.html',
-styleUrls: ['./yearlyfee.scss'],
+  templateUrl: './standardfee.component.html',
+styleUrls: ['./standardfee.scss'],
 })
-export class YearlyFeeComponent {
+export class StandardFeeComponent {
 
   billFormColumns: string[] = ['Fee', 'Amount'];
   displayedColumns: string[] = ['Description','Status','Actions'];
@@ -45,7 +45,7 @@ export class YearlyFeeComponent {
   @ViewChild(MatSort,{static:false}) sort: MatSort;
   @ViewChild('tabs',{static:false}) tabGroup: MatTabGroup;
 
-    constructor(private _yearlyFeeService:YearlyFeeService) {
+    constructor(private _yearlyFeeService:StandardFeeService) {
 
     }
 

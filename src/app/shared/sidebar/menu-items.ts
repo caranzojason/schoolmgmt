@@ -69,39 +69,40 @@ export const ROUTES: RouteInfo[] = [
     class: 'has-arrow',
     extralink: false,
     submenu: [
-      {
-        path: '',
-        title: 'Maintenance',
-        icon: 'mdi mdi-gauge',
-        class: 'has-arrow',
-        extralink: false,
-        submenu: [
+
           {
             path: '/billing/yearlyfee',
-            title: 'Yearly Fee',
+            title: 'Standard Fee',
+            icon: 'mdi mdi-gauge',
+            class: '',
+            extralink: false,
+            submenu: []
+          },
+
+          {
+            path: '/billing/bill',
+            title: 'Set up Individual Fees',
             icon: 'mdi mdi-gauge',
             class: '',
             extralink: false,
             submenu: []
           },
           {
-            path: '/billing/fee',
-            title: 'Student Fee',
+            path: '/billing/transaction',
+            title: 'Transaction',
             icon: 'mdi mdi-gauge',
             class: '',
             extralink: false,
             submenu: []
-          },
-        ]
-      },
-      {
-        path: '/billing/bill',
-        title: 'Bill Student',
-        icon: 'mdi mdi-gauge',
-        class: '',
-        extralink: false,
-        submenu: []
-      },
+          }
+          // {
+          //   path: '/billing/fee',
+          //   title: 'Student Fee',
+          //   icon: 'mdi mdi-gauge',
+          //   class: '',
+          //   extralink: false,
+          //   submenu: []
+          // },
     ]
   }
 

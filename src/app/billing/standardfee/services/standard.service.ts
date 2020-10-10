@@ -7,7 +7,7 @@ import { Yearlyfee } from '../../model/Yearlyfee';
 import { YearlyfeeDetail } from '../../model/YearlyfeeDetail';
 
 @Injectable()
-export class YearlyFeeService {
+export class StandardFeeService {
     constructor(private _httpClient: HttpClient,public _env: EnvService,
          private _uploadHttpClient: HttpClient, private _uploadHandler: HttpBackend ) {
         this._uploadHttpClient = new HttpClient(_uploadHandler);

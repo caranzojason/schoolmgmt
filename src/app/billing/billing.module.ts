@@ -68,11 +68,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatTableFilterModule } from 'mat-table-filter';
 import { BillingRoutes } from './billing.routing';
-import {BillingComponent} from './billing.component';
+import {SetupIndividualComponent} from './setupindividual/setupindividual.component';
 import {BillingService} from './services/billing.services';
-import {FeeComponent} from './fee/fee.component'
-import {YearlyFeeComponent} from './yearlyfee/yearlyfee.component'
-import {YearlyFeeService} from './yearlyfee/services/yearlyfee.service';
+import {FeeComponent} from './fee/fee.component';
+import {StandardFeeComponent} from './standardfee/standardfee.component';
+import {StandardFeeService} from './standardfee/services/standard.service';
+import {TransactionComponent} from './transaction/transaction.component';
+
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(BillingRoutes),ReactiveFormsModule,
     MatAutocompleteModule,
@@ -112,10 +114,10 @@ import {YearlyFeeService} from './yearlyfee/services/yearlyfee.service';
     MatTreeModule,
     NgbModule,
     MatTableFilterModule],
-  declarations: [FeeComponent, BillingComponent,YearlyFeeComponent],
+  declarations: [FeeComponent, SetupIndividualComponent,StandardFeeComponent,TransactionComponent],
   providers: [
     BillingService,
-    YearlyFeeService
+    StandardFeeService
   ]
 })
 export class BillingModule {}

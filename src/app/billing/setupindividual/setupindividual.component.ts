@@ -7,20 +7,20 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie';
-import {FeeDTO} from './model/FeeDTO';
-import {BillingService} from './services/billing.services';
-import { StudentDialog } from '../common/studentdialog/studentdialog';
-import {Student} from '../commonmodel/Student';
-import { YearlyfeeDetail } from './model/YearlyfeeDetail';
-import { Studentfee } from './model/Studentfee';
-import { StudentfeeDetails } from './model/StudentfeeDetails';
+import {FeeDTO} from '../model/FeeDTO';
+import {BillingService} from '../services/billing.services';
+import { StudentDialog } from '../../common/studentdialog/studentdialog';
+import {Student} from '../../commonmodel/Student';
+import { YearlyfeeDetail } from '../model/YearlyfeeDetail';
+import { Studentfee } from '../model/Studentfee';
+import { StudentfeeDetails } from '../model/StudentfeeDetails';
 
 @Component({
   selector: 'app-payment',
-  templateUrl: './billing.component.html',
-styleUrls: ['./billing.scss'],
+  templateUrl: './setupindividual.component.html',
+  styleUrls: ['./setupindividual.scss'],
 })
-export class BillingComponent {
+export class SetupIndividualComponent {
   studentList:Array<Student> = [];
   public deparmentList:any;
   student:Student = {
