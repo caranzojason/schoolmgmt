@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                    <div class="col-md-6" style="padding: 1px;">
+                            <form >
+                                <label style="font-size: 13px;margin-bottom: 0px;">School Year:</label>
+                                <div class="input-group">
+                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
+                                    <input class="form-control form-control-date" placeholder="From..." name="Fr" ngbDatepicker #FrDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light btn-filter-date" (click)="FrDate.toggle()" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </div>
+                                    <input class="form-control form-control-date" placeholder="To.." name="To" ngbDatepicker #ToDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light btn-filter-date" (click)="ToDate.toggle()" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    <div class="col-md-2" style="padding: 1px;">
+                        <form >
+                            <label style="font-size: 13px;margin-bottom: 0px;">Department: </label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
+                                    <select name="filter" class="form-control inputText">
+                                        <option></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2" style="padding: 1px;">
+                        <form >
+                            <label style="font-size: 13px;margin-bottom: 0px;">Grade: </label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
+                                    <select name="filter"class="form-control inputText">
+                                        <option></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2" style="padding: 1px;">
+                        <form >
+                            <label style="font-size: 13px;margin-bottom: 0px;">Course: </label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
+                                    <select name="filter"class="form-control inputText">
+                                        <option></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2" style="padding: 1px;">
+                        <form >
+                            <label style="font-size: 13px;margin-bottom: 0px;">Track & Strand: </label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
+                                    <select name="filter"  class="form-control inputText">
+                                        <option></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2" style="padding: 1px;">
+                        <form >
+                            <label style="font-size: 13px;margin-bottom: 0px;">Semester: </label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
+                                    <select name="filter"  class="form-control inputText">
+                                        <option></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-2" style="padding: 1px;">
+                        <form >
+                            <label style="font-size: 13px;margin-bottom: 0px;">Gender </label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
+                                    <select name="filter"  class="form-control inputText">
+                                        <option></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div style="padding:5px;float: right;">
+                    <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button" style="font-size: 12px;"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table >
+                          <thead >
+                            <tr>
+                              <th > <h6 >Ref_no</h6></th>
+                              <th > <h6 >First Name</h6></th>
+                              <th > <h6 >Department</h6></th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                              <tr *ngFor="let enrol of enrolmentList; let i =index" >
+                                  <td ><h5 >{{enrol.ref_no}}</h5></td>
+                                  <td ><h5 >{{enrol.firstname}}</h5></td>
+                                  <td ><h5 >{{enrol.department}}</h5></td>
+                              </tr> 
+                          </tbody>
+                    </table>
+                  </div>
+                </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="shadow-sm card action-buttons">
+                    <button (click)="generatePdf('open')"
+                      class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
+                      <i class="material-icons" style="font-size: 13px;">
+                        picture_as_pdf
+                      </i> <span>Open PDF</span></button>
+                    <button (click)="generatePdf('download')"
+                      class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
+                      <i class="material-icons" style="font-size: 13px;">
+                        cloud_download
+                      </i><span>Download PDF</span></button>
+                    <button (click)="generatePdf('print')"
+                      class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
+                      <i class="material-icons" style="font-size: 13px;">
+                        print
+                      </i><span>Print PDF</span></button>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

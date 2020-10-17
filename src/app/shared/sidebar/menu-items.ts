@@ -104,6 +104,22 @@ export const ROUTES: RouteInfo[] = [
           //   submenu: []
           // },
     ]
+  },
+  {
+    path: '',
+    title: 'Reports',
+    icon: 'mdi mdi-bullseye',
+    class: 'has-arrow',
+    extralink: false,
+    submenu: [
+      {
+        path: '/report/reports',
+        title: 'Reports',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
+      }
+    ]
   }
-
 ];
