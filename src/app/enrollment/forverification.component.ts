@@ -8,6 +8,9 @@ import {ThemePalette} from '@angular/material/core';
 import { MatTabChangeEvent,MatTabGroup } from '@angular/material/tabs';
 import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../common/dialog/enrollmentdialog';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   templateUrl: './forverification.component.html',
@@ -103,7 +106,11 @@ public currentTabIndex = 1
         this.dataSource.sort = this.sort;
     });
   }
-
+  generatePdf(){
+    console.log('pdf')
+    const documentDefinition = { content:this.dataSource};
+    pdfMake.createPdf(documentDefinition).open();
+   }
   toggleBackground() {
     this.background = this.background ? undefined : 'primary';
   }

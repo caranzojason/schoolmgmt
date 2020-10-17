@@ -20,6 +20,11 @@ export const Approutes: Routes = [
         canActivate: [AuthRouteGuard]
       },
       {
+        path: 'report',
+        loadChildren: () => import('./report/reports.module').then(m => m.ReportsModule),
+        canActivate: [AuthRouteGuard]
+      },
+      {
 				path: 'student',
         loadChildren: 	() => import('./student/student.module').then(m => m.StudentModule)
       },
