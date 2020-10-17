@@ -28,53 +28,7 @@ export class ReportsComponent implements OnInit {
     enrolmentList:Enrollment;
     public deparmentList:any;
     public enrol: Array<any>
-    public enrollment:Enrollment = {
-      "id": 0,
-      "ref_no": "",
-      "type": null,
-      "studentno": "",
-      "firstname": "",
-      "middlename": "",
-      "lastname": "",
-      "email": "",
-      "grade": 0,
-      "department": 1,
-      "strand": 0,
-      "dob": "",
-      "place_of_birth": "",
-      "contactno": "",
-      "address": "",
-      "nationality": "Filipino",
-      "age": 0,
-      "gender": "",
-      "religion": "",
-      "fathername": "",
-      "fatherocc": "",
-      "fathercontact":"",
-      "fatherplace": "",
-      "mothername": "",
-      "motherocc": "",
-      "mothercontact": "",
-      "motherplace": "",
-      "guardian_name": "",
-      "guardian_contactno": "",
-      "guardian_relation": "",
-      "last_school_attended": "",
-      "last_school_grade_level": "",
-      "last_school_date_of_attendance": "",
-      "last_school_address": "",
-      "last_school_year": "",
-      "indigenous": "no",
-      "learning_modality": "",
-      "status": "",
-      "validated_by": "",
-      "approved_by": 0,
-      "cancelled_by": 0,
-      "updated_by": "",
-      "remarks": "",
-      "created_at": "",
-      "school_year": 0
-  }
+ 
   constructor(private _enrollService:EnrollmentService) {
     //this.enrolmentList = <Enrollment>{};
   }
