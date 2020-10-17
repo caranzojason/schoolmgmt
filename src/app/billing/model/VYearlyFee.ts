@@ -1,4 +1,4 @@
-export interface Yearlyfee{
+export interface VYearlyfee{
     Id:number;
     schoolyearfrom: number;
     schoolyearto:number;
@@ -7,4 +7,9 @@ export interface Yearlyfee{
     strandId:number;
     semester:number;
     courseId:number;
+    departmentName:string;
+    courseName:string;
+    gradeName:string;
+    strandName:string;
+    
 }

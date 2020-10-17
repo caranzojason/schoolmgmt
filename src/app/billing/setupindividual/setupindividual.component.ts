@@ -14,6 +14,7 @@ import {Student} from '../../commonmodel/Student';
 import { YearlyfeeDetail } from '../model/YearlyfeeDetail';
 import { Studentfee } from '../model/Studentfee';
 import { StudentfeeDetails } from '../model/StudentfeeDetails';
+import { VStudentfee } from '../model/VStudentfee';
 
 @Component({
   selector: 'app-payment',
@@ -21,7 +22,18 @@ import { StudentfeeDetails } from '../model/StudentfeeDetails';
   styleUrls: ['./setupindividual.scss'],
 })
 export class SetupIndividualComponent {
-  studentList:Array<Student> = [];
+  studentList:Array<VStudentfee> = [];
+  vstudentFee:VStudentfee = {
+    "id":0,
+    "studentId":0,
+    "remarks":"",
+    "status":"O",
+    "schoolyearfrom":0,
+    "schoolyearto":0,
+    "lastname":"",
+    "firstname":"",
+    "departmentname":"",
+  };
   public deparmentList:any;
   student:Student = {
     "id": 0,
@@ -34,6 +46,7 @@ export class SetupIndividualComponent {
     "email": "",
     "grade": 0,
     "department": 1,
+    "departmentname":"",
     "strand": 0,
     "dob": "",
     "place_of_birth": "",
@@ -71,13 +84,13 @@ export class SetupIndividualComponent {
     "school_year": 0,
     "schoolyearfrom": 0,
     "schoolyearto": 0,
-    "semester": 0,
+    "semester": 0
   }
 
   billFormColumns: string[] = ['Description','Amount','Actions'];
-  displayedColumns: string[] = ['Code', 'Description','Status','Actions'];
-  feeList:Array<FeeDTO>;
-  dataSource: MatTableDataSource<FeeDTO>;
+  displayedColumns: string[] = ['LastName', 'FirstName','Department','Remarks','Actions'];
+  feeList:Array<StudentfeeDetails>;
+  dataSource: MatTableDataSource<VStudentfee>;
   dataSourceForm: MatTableDataSource<StudentfeeDetails>;
   public currentTabIndex = 1;
   filter="";
@@ -85,31 +98,59 @@ export class SetupIndividualComponent {
   feeDescription:string = "";
   feeAmount:number = 0;
   remarks:string;
+  private yearFrom:any;
+  private yearTo:any;
+  length = 0;
+  pageSize = 10;
+  pageSizeOptions = [5, 10, 25, 100];
+  pageIndex = 0;
+  pageNo = 0;
 
   @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
   @ViewChild('tabs',{static:false}) tabGroup: MatTabGroup;
 
-    constructor(private _billingService:BillingService,public dialog: MatDialog, ) {
-    
+    constructor(private _billingService:BillingService,private _cookieService:CookieService,public dialog: MatDialog,private changeDetectorRefs: ChangeDetectorRef ) {
+      this.yearFrom = this._cookieService.get("yearFrom");
+      this.yearTo = this._cookieService.get("yearTo");
     }
 
     ngAfterViewInit() {
-      // this._billingService.getBillingAllFee().subscribe((data:any) => 
-      // {
-      //     this.billingFee = data;
-      //     this.dataSourceForm = new MatTableDataSource( this.billingFee);
-      //     console.log(this.billingFee);
-      // })
+      this._billingService.getIndividualListStudentFee(this.yearFrom,this.yearTo,this.pageIndex,this.pageSize,"").subscribe((data:any) => 
+      {
+          this.studentList = data.studentFee;
+          this.dataSource = new MatTableDataSource(this.studentList);
+          this.dataSource.sort = this.sort;
+          this.length = data.NoOfRecords;
+      });
     }
 
     onTabChange(event: MatTabChangeEvent) {
       this.currentTabIndex = event.index
       if(event.index == 0){
-        this.dataSource = new MatTableDataSource( this.feeList);
+        this.dataSource = new MatTableDataSource( this.studentList);
         this.dataSource.sort = this.sort;
       }
     }
+
+    search(){
+      this._billingService.getIndividualListStudentFee(this.yearFrom,this.yearTo,this.pageIndex,this.pageSize,this.filter).subscribe((data:any) => 
+      {
+          this.dataSource = new MatTableDataSource(data.studentFee);
+          this.changeDetectorRefs.detectChanges();
+      });
+    }
+
+    refresh(){
+      this.filterInput.nativeElement.value = "";
+      this.dataSource.filter = "";
+      this.filter = "";
+      this._billingService.getIndividualListStudentFee(this.yearFrom,this.yearTo,this.pageIndex,this.pageSize,"").subscribe((data:any) => 
+      {
+        this.dataSource = new MatTableDataSource(data.studentFee);
+        this.changeDetectorRefs.detectChanges();
+      });
+     }
 
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
@@ -126,7 +167,12 @@ export class SetupIndividualComponent {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-          this.student = result;
+        console.log(result);
+          this.vstudentFee.studentId = result.id;
+          this.vstudentFee.firstname = result.firstname;
+          this.vstudentFee.lastname = result.lastname;
+          this.vstudentFee.departmentname = result.departmentname;
+          console.log(this.vstudentFee);
           this._billingService.getAllDepartment().subscribe((data:any) => 
           {
               this.deparmentList = data;
@@ -145,69 +191,72 @@ export class SetupIndividualComponent {
   }
 
   addNewFee(){
-    console.log("add new");
-    let temp=  { id:0, description:this.feeDescription,amount:this.feeAmount,studentFeeId:0} as StudentfeeDetails;
-    this.studentFee.push(temp);
+      console.log("add new");
+      let temp=  { id:0, description:this.feeDescription,amount:this.feeAmount,studentFeeId:0} as StudentfeeDetails;
+      this.studentFee.push(temp);
+      this.dataSourceForm = new MatTableDataSource( this.studentFee);
+  }
+  removeFee(row){
+
+    this.studentFee.forEach(function(item, index, object) {
+      if(item.description == row.description){
+        object.splice(index, 1);
+      }
+    });
+    console.log(this.studentFee);
     this.dataSourceForm = new MatTableDataSource( this.studentFee);
- }
+  }
 
- removeFee(row){
-
-  this.studentFee.forEach(function(item, index, object) {
-    if(item.description == row.description){
-      object.splice(index, 1);
-    }
-  });
-  console.log(this.studentFee);
-  this.dataSourceForm = new MatTableDataSource( this.studentFee);
-  // this.studentFee.forEach(function (value, i) {
-  //   if(value.description == row.description){
-      
-  //   }
-  //   console.log('%d: %s', i, value);
-  // });
-
-
-  // this.studentFee.forEach(element => {
-  //   if(element.description == row.description){
-  //     this.
-  //   }
-  // });
-  //  console.log(row);
- }
-
+  public edit(row)
+  {
+    console.log(row)
+      this._billingService.getStudentFeeById(row.id).subscribe((data:any) => 
+      {
+          this.vstudentFee = data;
+          this._billingService.getStudentFeeDetailByMastereId(this.vstudentFee.id).subscribe((data:any) => 
+          {
+              this.studentFee = data;
+              this.dataSourceForm = new MatTableDataSource( this.studentFee);
+              this.tabGroup.selectedIndex = 1
+          });
+      });
+  }
 
   getStudentList(){
     this.setStudentDialog();
   }
 
-  /*
-              this.billingFee.forEach(element => {
-                element.yearlyFeesId = data[0].Id;
-            });
-            console.log(this.billingFee);
-            this._yearlyFeeService.saveYearlyFeeDetail(this.billingFee).subscribe((data:any) => 
-            {
-                console.log(data);
-            });
-  */
 
   save(){
-    let studFee = {studentId: this.student.id, remarks:this.remarks,status:"O",schoolyearfrom:this.student.schoolyearfrom,schoolyearto:this.student.schoolyearto } as Studentfee
+    let studFee = {id: this.vstudentFee.id,studentId: this.vstudentFee.studentId, remarks:this.remarks,status:"O",schoolyearfrom:this.vstudentFee.schoolyearfrom,schoolyearto:this.vstudentFee.schoolyearto } as VStudentfee
 
-    this._billingService.saveStudentFee(studFee).subscribe((data:any) => 
-    {
-      this.studentFee.forEach(element => {
-        element.studentFeeId = data[0].id;
-      });
-      
-      this._billingService.saveStudentFeeDetail(this.studentFee).subscribe((data:any) => 
+    console.log(this.vstudentFee);
+    if(this.vstudentFee.id ==0){
+      this._billingService.saveStudentFee(this.vstudentFee).subscribe((data:any) => 
+      {
+        this.studentFee.forEach(element => {
+          element.studentFeeId = data[0].id;
+        });
+        
+        this._billingService.saveStudentFeeDetail(this.studentFee).subscribe((data:any) => 
+        {
+          console.log(data);
+        })
+      })
+    }else{
+      this._billingService.updateStudentFee(studFee).subscribe((data:any) => 
       {
         console.log(data);
+        this.studentFee.forEach(element => {
+          element.studentFeeId = data[0].id;
+        });
+        
+        this._billingService.updateStudentFeeDetail(this.studentFee).subscribe((data:any) => 
+        {
+          console.log(data);
+        })
       })
-    })
-
-    
+    }
   }
 }
 

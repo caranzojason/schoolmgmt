@@ -9,6 +9,7 @@ export interface Student{
     email:string;
     grade:Number;
     department:Number;
+    departmentname:string,
     strand:Number;
     dob:any;
     place_of_birth:string;
@@ -46,5 +47,5 @@ export interface Student{
     school_year:Number;
     schoolyearfrom: any,
     schoolyearto: any,
-    semester: Number,
+    semester: Number
 }

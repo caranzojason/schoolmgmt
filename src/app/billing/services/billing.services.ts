@@ -44,8 +44,38 @@ export class BillingService {
         .pipe(map((res: Studentfee) => res));
     }
 
+    updateStudentFee(data:Studentfee): Observable<Studentfee> {
+        return this._httpClient.post<Studentfee>(this._env.api +'updateStudentFee',data)
+        .pipe(map((res: Studentfee) => res));
+    }
+
     saveStudentFeeDetail(data:Array<StudentfeeDetails>): Observable<any> {
         return this._httpClient.post<any>(this._env.api +'saveStudentFeeDetail',data)
         .pipe(map((res: any) => res));
+    }
+
+    updateStudentFeeDetail(data:Array<StudentfeeDetails>): Observable<any> {
+        return this._httpClient.post<any>(this._env.api +'updateStudentFeeDetail',data)
+        .pipe(map((res: any) => res));
+    }
+
+    getIndividualListStudentFee(schoolYearFrom:Number,schoolYearTo:Number,page:Number,pageSize:Number,searchField:string){
+        if(searchField == ''){
+            return this._httpClient.get<any>(this._env.api+'getIndividualListStudentFee/'+schoolYearFrom+'/'+schoolYearTo+'/'+page+'/'+pageSize)
+            .pipe(map((res: any) => res));    
+        }else{
+            return this._httpClient.get<any>(this._env.api+'getIndividualListStudentFee/'+schoolYearFrom+'/'+schoolYearTo+'/'+page+'/'+pageSize+'/'+searchField)
+            .pipe(map((res: any) => res));
+        }
+    }
+
+    getStudentFeeById(id:Number){
+        return this._httpClient.get<any>(this._env.api+'getStudentFeeById/'+id)
+        .pipe(map((res: any) => res)); 
+    }
+
+    getStudentFeeDetailByMastereId(id:Number){
+        return this._httpClient.get<any>(this._env.api+'getStudentFeeDetailByMastereId/'+id)
+        .pipe(map((res: any) => res)); 
     }
 }

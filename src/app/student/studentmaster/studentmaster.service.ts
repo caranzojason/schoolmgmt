@@ -125,9 +125,10 @@ export class StudentMasterService {
         .pipe(map((res: any) => res));
     }
 
+    
+
     //student here
     getStudentList(page:Number,pageSize:Number,searchField:string){
-        console.log(searchField)
         if(searchField == ''){
             return this._httpClient.get<any>(this._env.api+'studentlist/'+page+'/'+pageSize)
             .pipe(map((res: any) => res));   

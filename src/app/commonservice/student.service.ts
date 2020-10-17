@@ -18,10 +18,10 @@ export class StudentService {
     getStudentList(page:Number,pageSize:Number,searchField:string){
         console.log(searchField)
         if(searchField == ''){
-            return this._httpClient.get<any>(this._env.api+'studentlist/'+page+'/'+pageSize)
+            return this._httpClient.get<any>(this._env.api+'studentViewlist/'+page+'/'+pageSize)
             .pipe(map((res: any) => res));   
         }else{
-            return this._httpClient.get<any>(this._env.api+'studentlist/'+page+'/'+pageSize+'/'+searchField)
+            return this._httpClient.get<any>(this._env.api+'studentViewlist/'+page+'/'+pageSize+'/'+searchField)
             .pipe(map((res: any) => res));
         }
     }

@@ -38,9 +38,41 @@ export class StandardFeeService {
         .pipe(map((res: any) => res));
     }
 
+    
+    yearlyfee(schoolYearFrom:Number,schoolYearTo:Number,page:Number,pageSize:Number,searchField:string){
+        if(searchField == ''){
+            return this._httpClient.get<any>(this._env.api+'yearlyfee/'+schoolYearFrom+'/'+schoolYearTo+'/'+page+'/'+pageSize)
+            .pipe(map((res: any) => res));    
+        }else{
+            return this._httpClient.get<any>(this._env.api+'yearlyfee/'+schoolYearFrom+'/'+schoolYearTo+'/'+page+'/'+pageSize+'/'+searchField)
+            .pipe(map((res: any) => res));
+        }
+    }
+
+    getYearlyFeeById(id:Number){
+        return this._httpClient.get<any>(this._env.api+'getYearlyFeeById/'+id)
+        .pipe(map((res: any) => res)); 
+    }
+
+    getYearlyFeeDetailByMastereId(id:Number){
+        return this._httpClient.get<any>(this._env.api+'getYearlyFeeDetailByMastereId/'+id)
+        .pipe(map((res: any) => res)); 
+    }
+
     saveYearlyFee(data:Yearlyfee): Observable<Yearlyfee> {
         return this._httpClient.post<Yearlyfee>(this._env.api +'saveYearlyFee',data)
         .pipe(map((res: Yearlyfee) => res));
+    }
+
+    updateYearlyFee(data:Yearlyfee): Observable<Yearlyfee> {
+        return this._httpClient.post<Yearlyfee>(this._env.api +'updateYearlyFee',data)
+        .pipe(map((res: Yearlyfee) => res));
+    }
+
+    
+    updateYearlyFeeDetail(data:Array<YearlyfeeDetail>): Observable<Array<YearlyfeeDetail>> {
+        return this._httpClient.post<Array<YearlyfeeDetail>>(this._env.api +'updateYearlyFeeDetail',data)
+        .pipe(map((res: Array<YearlyfeeDetail>) => res));
     }
 
     saveYearlyFeeDetail(data:Array<YearlyfeeDetail>): Observable<Array<YearlyfeeDetail>> {

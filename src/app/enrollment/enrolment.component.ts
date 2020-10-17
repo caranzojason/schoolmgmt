@@ -180,11 +180,6 @@ export class EnrollmentComponent implements AfterViewInit {
             return;
         }
 
-        // if(this.enrollment.strand == 0 && (this.enrollment.department > 2)){
-        //     this.setDialog("Track & Strand is required!");
-        //     return;
-        // }
-
         if(this.enrollment.address == ''){
             this.setDialog("Address is required!");
             return;

@@ -111,7 +111,6 @@ export class StudentComponent implements AfterViewInit {
 
     this._enrollService.getStudentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
     {
-        console.log(data);
       this.enrolmentList = data.Student;
       this.dataSource = new MatTableDataSource( this.enrolmentList);
       // this.dataSource.paginator = this.paginator;

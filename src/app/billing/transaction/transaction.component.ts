@@ -34,6 +34,7 @@ export class TransactionComponent {
     "email": "",
     "grade": 0,
     "department": 1,
+    "departmentname":"",
     "strand": 0,
     "dob": "",
     "place_of_birth": "",
