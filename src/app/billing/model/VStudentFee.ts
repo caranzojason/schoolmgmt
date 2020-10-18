@@ -3,8 +3,8 @@ export interface VStudentfee{
     studentId:number;
     remarks:string;
     status:string;
-    schoolyearfrom:number;
-    schoolyearto:number;
+    schoolyearfrom:any;
+    schoolyearto:any;
     lastname:string;
     firstname:string;
     departmentname:string;

@@ -3,6 +3,7 @@ import {SetupIndividualComponent} from './setupindividual/setupindividual.compon
 import {FeeComponent} from './fee/fee.component'
 import {StandardFeeComponent} from './standardfee/standardfee.component'
 import {TransactionComponent} from './transaction/transaction.component';
+import { GenerateBillComponent } from './generatebill/generatebill.component';
 
 export const BillingRoutes: Routes = [
     {
@@ -41,7 +42,17 @@ export const BillingRoutes: Routes = [
               ]
             }
           },
-          
+          {
+            path: 'generatebill',
+            component: GenerateBillComponent,
+            data: {
+              title: "Generate Bill",
+              urls: [
+                { title: "Fee's", url: 'billing/generatebill' },
+                { title: "Generate Bill" }
+              ]
+            }
+          },
         ]
       }
   ];

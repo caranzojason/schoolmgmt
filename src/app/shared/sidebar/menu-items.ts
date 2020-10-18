@@ -94,7 +94,16 @@ export const ROUTES: RouteInfo[] = [
             class: '',
             extralink: false,
             submenu: []
+          },
+          {
+            path: '/billing/generatebill',
+            title: 'Generate Bill',
+            icon: 'mdi mdi-gauge',
+            class: '',
+            extralink: false,
+            submenu: []
           }
+          
           // {
           //   path: '/billing/fee',
           //   title: 'Student Fee',

@@ -15,6 +15,7 @@ import { YearlyfeeDetail } from '../model/YearlyfeeDetail';
 import { Studentfee } from '../model/Studentfee';
 import { StudentfeeDetails } from '../model/StudentfeeDetails';
 import { VStudentfee } from '../model/VStudentfee';
+import {EnrollmentDialog} from '../../common/dialog/enrollmentdialog';
 
 @Component({
   selector: 'app-payment',
@@ -113,6 +114,7 @@ export class SetupIndividualComponent {
     constructor(private _billingService:BillingService,private _cookieService:CookieService,public dialog: MatDialog,private changeDetectorRefs: ChangeDetectorRef ) {
       this.yearFrom = this._cookieService.get("yearFrom");
       this.yearTo = this._cookieService.get("yearTo");
+      console.log(this.yearFrom);
     }
 
     ngAfterViewInit() {
@@ -226,21 +228,35 @@ export class SetupIndividualComponent {
     this.setStudentDialog();
   }
 
+  setDialog(message){
+    const dialogRef = this.dialog.open(EnrollmentDialog, {
+        width: '300px',
+        data: {  message: message}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+}
+
 
   save(){
-    let studFee = {id: this.vstudentFee.id,studentId: this.vstudentFee.studentId, remarks:this.remarks,status:"O",schoolyearfrom:this.vstudentFee.schoolyearfrom,schoolyearto:this.vstudentFee.schoolyearto } as VStudentfee
+    let studFee = {id: this.vstudentFee.id,studentId: this.vstudentFee.studentId, remarks:this.remarks,status:"O",schoolyearfrom:this.yearFrom,schoolyearto:this.yearTo } as VStudentfee
+   
 
-    console.log(this.vstudentFee);
     if(this.vstudentFee.id ==0){
+      this.vstudentFee.schoolyearfrom = this.yearFrom;
+      this.vstudentFee.schoolyearto = this.yearTo;
       this._billingService.saveStudentFee(this.vstudentFee).subscribe((data:any) => 
       {
+        this.vstudentFee.id =  data[0].id;
         this.studentFee.forEach(element => {
           element.studentFeeId = data[0].id;
         });
         
         this._billingService.saveStudentFeeDetail(this.studentFee).subscribe((data:any) => 
         {
-          console.log(data);
+          this.setDialog("Sucessfully Save!");
         })
       })
     }else{
@@ -253,7 +269,7 @@ export class SetupIndividualComponent {
         
         this._billingService.updateStudentFeeDetail(this.studentFee).subscribe((data:any) => 
         {
-          console.log(data);
+          this.setDialog("Sucessfully Updated!");
         })
       })
     }

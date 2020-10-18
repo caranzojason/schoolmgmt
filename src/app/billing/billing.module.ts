@@ -74,7 +74,8 @@ import {FeeComponent} from './fee/fee.component';
 import {StandardFeeComponent} from './standardfee/standardfee.component';
 import {StandardFeeService} from './standardfee/services/standard.service';
 import {TransactionComponent} from './transaction/transaction.component';
-
+import {GenerateBillComponent} from './generatebill/generatebill.component';
+import { GenerateService } from './generatebill/service/generate.service';
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(BillingRoutes),ReactiveFormsModule,
     MatAutocompleteModule,
@@ -114,10 +115,11 @@ import {TransactionComponent} from './transaction/transaction.component';
     MatTreeModule,
     NgbModule,
     MatTableFilterModule],
-  declarations: [FeeComponent, SetupIndividualComponent,StandardFeeComponent,TransactionComponent],
+  declarations: [FeeComponent, SetupIndividualComponent,StandardFeeComponent,TransactionComponent,GenerateBillComponent],
   providers: [
     BillingService,
-    StandardFeeService
+    StandardFeeService,
+    GenerateService
   ]
 })
 export class BillingModule {}
