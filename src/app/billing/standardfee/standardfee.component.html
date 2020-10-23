@@ -12,8 +12,8 @@
                     </mat-form-field>
                     
                     <button class="btn btn-info btn-secondary" (click)="search()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>                           
-                    <button  (click)="addNewForm()" >Add new</button>
+                    <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px; float: right;margin-top: 34px;margin-right: 1px;"><i class="fas fa-sync-alt"></i></button>
+                    <button class="btn btn-info btn-secondary" (click)="addNewForm()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px; float: right;margin-top: 34px;margin-right: 1px;"><i class="fas fa-plus"></i></button> 
                     <div class="mat-elevation-z8">
                           <table mat-table [dataSource]="dataSource" matSort >
                             <ng-container matColumnDef="departmentName" >
@@ -81,17 +81,20 @@
                 </mat-tab>
                 <mat-tab label="Yearly Fee" >
                   <ng-template matTabContent>
-                    <div >
-                        <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
-                            <div class="col-md-2" style="padding: 1px;">
-                              <form >
+                        <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;">
+                            <div class="row" style="padding: 1px;">
+                              <div class="col-md-3" style="padding: 1px;">
+                                <form >
                                   <label style="font-size: 13px;margin-bottom: 0px;">School Year From  </label>
                                   <select name="filterx"    [(ngModel)]= "yearlyFee.schoolyearfrom"    class="form-control inputText">
                                     <option name="ox" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
                                         {{o.name}}
                                     </option>
-                                </select>
-
+                                  </select>
+                                </form>
+                              </div>
+                              <div class="col-md-3" style="padding: 1px;">
+                                <form >
                                   <label style="font-size: 13px;margin-bottom: 0px;">School Year To  </label>
                                   <select name="filtery"  [(ngModel)]= "yearlyFee.schoolyearto"    class="form-control inputText">
                                     <option name="yo" *ngFor = "let o of schoolyearList"  [ngValue]="o.id">
@@ -99,109 +102,115 @@
                                     </option>
                                 </select>
                               </form>
-
-                              <form >
-                                <label style="font-size: 13px;margin-bottom: 0px;">Department </label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select name="filter"  [(ngModel)]= "yearlyFee.departmentId" (change)="selectDepartment()" class="form-control inputText">
-                                            <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
-                                                {{o.name}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <form >
-                              <label style="font-size: 13px;margin-bottom: 0px;">Grade/Year Level </label>
-                              <div class="form-group">
-                                  <div class="input-group">
-                                      <select name="gradex"  [(ngModel)]= "yearlyFee.gradeId"  class="form-control inputText" >
-                                          <option name="x" *ngFor = "let o of gradesList"  [ngValue]="o.id">
-                                              {{o.name}}
-                                          </option>
-                                      </select>
-                                  </div>
                               </div>
-                          </form>
-
-                          <div class="col-md-3" style="padding: 1px;">
-                            <form >
-                                <label style="font-size: 13px;margin-bottom: 0px;">Strand </label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select name="strand"  [(ngModel)]= "yearlyFee.strandId"   class="form-control inputText">
-                                            <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
-                                                {{o.name}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                          </div>
-
-                          <div class="col-md-3" style="padding: 1px;">
-                            <form >
-                                <label style="font-size: 13px;margin-bottom: 0px;">Course </label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select name="course"  [(ngModel)]= "yearlyFee.courseId"   class="form-control inputText">
-                                            <option  name="o" *ngFor = "let o of courseList"   [ngValue]="o.id">
-                                                {{o.name}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                          </div>
-                          
-                      <div class="col-md-3" style="padding: 1px;">
-                          <form >
-                              <label style="font-size: 13px;margin-bottom: 0px;">Semester </label>
-                              <div class="form-group">
-                                  <div class="input-group">
-                                      <select name="filter"  [(ngModel)]= "yearlyFee.semester"  class="form-control inputText">
-                                          <option name="o" *ngFor = "let o of schoolsemesterList"  [ngValue]="o.id">
-                                              {{o.name}}
-                                          </option>
-                                      </select>
+                              <div class="col-md-3" style="padding: 1px;">
+                                <form >
+                                  <label style="font-size: 13px;margin-bottom: 0px;">Department </label>
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                          <select name="filter"  [(ngModel)]= "yearlyFee.departmentId" (change)="selectDepartment()" class="form-control inputText">
+                                              <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
+                                                  {{o.name}}
+                                              </option>
+                                          </select>
+                                      </div>
                                   </div>
+                              </form>
                               </div>
-                          </form>
-                      </div>
 
-                      
-                    <button  (click)="addNew()" >Add new</button>
+                              <div class="col-md-3" style="padding: 1px;">
+                                  <form >
+                                    <label style="font-size: 13px;margin-bottom: 0px;">Grade/Year Level </label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <select name="gradex"  [(ngModel)]= "yearlyFee.gradeId"  class="form-control inputText" >
+                                                <option name="x" *ngFor = "let o of gradesList"  [ngValue]="o.id">
+                                                    {{o.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3" style="padding: 1px;">
+                                  <form >
+                                      <label style="font-size: 13px;margin-bottom: 0px;">Strand </label>
+                                      <div class="form-group">
+                                          <div class="input-group">
+                                              <select name="strand"  [(ngModel)]= "yearlyFee.strandId"   class="form-control inputText">
+                                                  <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
+                                                      {{o.name}}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </form>
+                                </div>
+      
+                                <div class="col-md-3" style="padding: 1px;">
+                                  <form >
+                                      <label style="font-size: 13px;margin-bottom: 0px;">Course </label>
+                                      <div class="form-group">
+                                          <div class="input-group">
+                                              <select name="course"  [(ngModel)]= "yearlyFee.courseId"   class="form-control inputText">
+                                                  <option  name="o" *ngFor = "let o of courseList"   [ngValue]="o.id">
+                                                      {{o.name}}
+                                                  </option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </form>
+                                </div>
+                                
+                                  <div class="col-md-3" style="padding: 1px;">
+                                      <form >
+                                          <label style="font-size: 13px;margin-bottom: 0px;">Semester </label>
+                                          <div class="form-group">
+                                              <div class="input-group">
+                                                  <select name="filter"  [(ngModel)]= "yearlyFee.semester"  class="form-control inputText">
+                                                      <option name="o" *ngFor = "let o of schoolsemesterList"  [ngValue]="o.id">
+                                                          {{o.name}}
+                                                      </option>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
                           </div>
-                            <div class="mat-elevation-z8">
-                                <table mat-table [dataSource]="dataSourceForm" matSort >
-                                  <ng-container matColumnDef="Fee" >
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Fees </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
-                                  </ng-container>
-                             
-                                  <ng-container matColumnDef="Amount">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Amount </th>
-                                    <td mat-cell *matCellDef="let row"> 
-                                         <input matInput [id]="row.amount" [(ngModel)]="row.amount"  > 
-                                    </td>
-                                  </ng-container>
-
-                                  <ng-container matColumnDef="actions">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Actions </th>
-                                  <mat-cell *matCellDef="let row" style="padding: 5px;" >
-                                       <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="removeFee(row)" mat-button >Remove</button>
-                                  </mat-cell>
-                                </ng-container>
-          
-                                  <tr mat-header-row *matHeaderRowDef="billFormColumns"></tr>
-                                  <tr mat-row *matRowDef="let row; columns: billFormColumns;"></tr>
-                                </table> 
-                              
-                             </div>
+                          <div  style="padding-bottom: 10px;">
+                            <button class="btn btn-info btn-secondary" (click)="addNew()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;float: right;" ><i class="fas fa-plus"></i></button>
+                          </div>
                         </div>
-                    </div>
+                          <div class="card-body">
+                            <div class="mat-elevation-z8">
+                              <table mat-table [dataSource]="dataSourceForm" matSort >
+                                <ng-container matColumnDef="Fee" >
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Fees </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                                </ng-container>
+                           
+                                <ng-container matColumnDef="Amount">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Amount </th>
+                                  <td mat-cell *matCellDef="let row"> 
+                                       <input matInput [id]="row.amount" [(ngModel)]="row.amount"  > 
+                                  </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="actions">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Actions </th>
+                                <mat-cell *matCellDef="let row" style="padding: 5px;" >
+                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="removeFee(row)" mat-button >Remove</button>
+                                </mat-cell>
+                              </ng-container>
+        
+                                <tr mat-header-row *matHeaderRowDef="billFormColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: billFormColumns;"></tr>
+                              </table> 
+                           </div>
+                          </div>
+                      
                     <button class="btn btn-info btn-secondary" (click)="save()" >Save</button>
                   </ng-template>
               

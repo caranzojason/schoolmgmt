@@ -6,7 +6,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '',
     title: 'Enrollment',
-    icon: 'mdi mdi-bullseye',
+    icon: 'mdi mdi-library',
     class: 'has-arrow',
     extralink: false,
     submenu: [
@@ -47,7 +47,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '',
     title: 'School Management',
-    icon: 'mdi mdi-bullseye',
+    icon: 'mdi mdi-home-variant',
     class: 'has-arrow',
     extralink: false,
     submenu: [
@@ -65,7 +65,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '',
     title: 'Billing',
-    icon: 'mdi mdi-bullseye',
+    icon: 'mdi mdi-note-text',
     class: 'has-arrow',
     extralink: false,
     submenu: [
@@ -117,7 +117,7 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '',
     title: 'Reports',
-    icon: 'mdi mdi-bullseye',
+    icon: 'mdi mdi-file-pdf',
     class: 'has-arrow',
     extralink: false,
     submenu: [

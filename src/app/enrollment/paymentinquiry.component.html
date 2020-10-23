@@ -11,8 +11,7 @@
           
                 </mat-form-field>
                 <button class="btn btn-info btn-secondary" (click)="search()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-search" aria-hidden="true"></i></button>
-             
-                <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px; float: right;margin-top: 34px;"><i class="fas fa-sync-alt"></i></button>
                     <div class="mat-elevation-z8">
                       <table  mat-table [dataSource]="dataSource" matSort >
                         <ng-container matColumnDef="enrollment_ref_no" >
