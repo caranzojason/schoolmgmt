@@ -25,8 +25,10 @@ import { SpinnerService } from './core/loader/spinner.service';
 import { AuthInterceptorService } from './core/auth-interceptor.service';
 import { EnrollmentDialog } from './common/dialog/enrollmentdialog';
 import { StudentDialog } from './common/studentdialog/studentdialog';
+import { PaymentDialog } from './common/paymentdialog/paymentlistdialog';
 import { EnvServiceProvider } from './core/env.service.provider';
 import {StudentService} from '../app/commonservice/student.service';
+import {BillingService} from '../app/commonservice/billing.service';
 //material here
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -84,6 +86,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarComponent,
     EnrollmentDialog,
     StudentDialog,
+    PaymentDialog,
     EnrollmentDialogMsBox,
   
   ],
@@ -146,9 +149,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-    StudentService
+    StudentService,
+    BillingService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EnrollmentDialog,StudentDialog,EnrollmentDialogMsBox]
+  entryComponents: [EnrollmentDialog,StudentDialog,EnrollmentDialogMsBox,PaymentDialog]
 })
 export class AppModule {}

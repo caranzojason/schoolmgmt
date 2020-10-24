@@ -114,7 +114,6 @@ export class SetupIndividualComponent {
     constructor(private _billingService:BillingService,private _cookieService:CookieService,public dialog: MatDialog,private changeDetectorRefs: ChangeDetectorRef ) {
       this.yearFrom = this._cookieService.get("yearFrom");
       this.yearTo = this._cookieService.get("yearTo");
-      console.log(this.yearFrom);
     }
 
     ngAfterViewInit() {

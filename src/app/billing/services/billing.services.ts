@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators'
 import { EnvService } from '../../core/env.service';
 import { Studentfee } from '../model/Studentfee';
 import { StudentfeeDetails } from '../model/StudentfeeDetails';
+import { TransactionDTO } from '../model/TransactionDTO';
+
 
 @Injectable()
 export class BillingService {
@@ -78,4 +80,20 @@ export class BillingService {
         return this._httpClient.get<any>(this._env.api+'getStudentFeeDetailByMastereId/'+id)
         .pipe(map((res: any) => res)); 
     }
+
+    getStudentForPaymentByBillId(billId:Number,detailNo:Number){
+        return this._httpClient.get<any>(this._env.api+'getStudentForPaymentByBillId/'+billId+'/'+detailNo)
+        .pipe(map((res: any) => res));
+    }
+
+
+
+    
+
+    saveTransaction(data:TransactionDTO): Observable<TransactionDTO> {
+        return this._httpClient.post<TransactionDTO>(this._env.api +'saveTransaction',data)
+        .pipe(map((res: TransactionDTO) => res));
+    }
+    
+
 }

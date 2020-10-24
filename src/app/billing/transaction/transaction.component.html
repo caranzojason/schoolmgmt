@@ -4,142 +4,156 @@
           <div class="card-body">
             
             <mat-tab-group #tabs (selectedTabChange)="onTabChange($event)">
-              <mat-tab label="Transaction" style="margin-top: 30px;">
-                  <ng-template matTabContent>
-                      <div >
-                          <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
-                              <div > 
-                                <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Last Name:</label>
-                                <input  type="text" [(ngModel)] = "student.lastname"  name="lname" disabled > 
-                                <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;margin-left: 5px;">First Name:</label>
-                                <input  type="text" [(ngModel)] = "student.firstname"  name="fname" disabled > 
-                                <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px; float: right;"><i class="fas fa-sync-alt"></i></button>
-                              </div>
-                            </div>
-                          <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
-                            <div>
-                              <button class="btn btn-info btn-secondary" (click)="addNewFee()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;float: right;" ><i class="fas fa-plus"></i></button>
-                              <div class="row">
-                                <div class="col-md-1">
-                                  <div *ngIf="student.Id !=0">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Fees:</label>
-                                          <select name="filter"  [(ngModel)]= "student.department" disabled>
-                                            <option name="o" *ngFor = "let o of deparmentList"  [ngValue]="o.id">
-                                                {{o.name}}
-                                            </option>
-                                          </select>
-                                        </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <form >
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                              <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Amount:</label>
-                                                <input type="text" [(ngModel)]="feeAmount" name="mName" class="form-control inputText" style="    text-align: right;border-radius: 5px;" min="0" max="10" step="0.25" value="0.00"  >
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-3">
+              <mat-tab label="Payment List" style="margin-top: 30px;">
+                <ng-template matTabContent >
+                  <mat-form-field style="width: 20%; margin-top: 20px;">
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" ([ngModel]) = "filter" placeholder="Ex. Mia" #filterInput>
+                  </mat-form-field>
+                  <button class="btn btn-info btn-secondary" (click)="search()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px; float: right;margin-top: 34px;margin-right: 1px;"><i class="fas fa-sync-alt"></i></button>                  
+                  <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort >
+                          <ng-container matColumnDef="LastName" >
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> LastName </th>
+                            <td mat-cell *matCellDef="let row"> {{row.lastname}} </td>
+                          </ng-container>
+                     
+                          <ng-container matColumnDef="FirstName">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> FirstName </th>
+                            <td mat-cell *matCellDef="let row"> {{row.firstname}} </td>
+                          </ng-container>
+  
+                          <ng-container matColumnDef="Department">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Department </th>
+                            <td mat-cell *matCellDef="let row"> {{row.departmentname}} </td>
+                          </ng-container>
+             
+                          <ng-container matColumnDef="Remarks">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Remarks </th>
+                            <td mat-cell *matCellDef="let row"> {{row.remarks}} </td>
+                          </ng-container>
+                      
+                          <ng-container matColumnDef="Actions">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Actions </th>
+                            <mat-cell *matCellDef="let row" style="padding: 5px;" >
+                                 <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="edit(row)" mat-button >Select</button>
+                            </mat-cell> 
+                          </ng-container>
+
+                          <ng-container matColumnDef="Status">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Status </th>
+                              <mat-cell *matCellDef="let row" style="padding: 5px;" >
+                                  <input matInput ([ngModel]) = "Status" >
+                              </mat-cell>
+                           
+                           </ng-container>
+    
+                          <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                          </tr>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table> 
+                      
+                          <mat-paginator  [length]="length" [pageSize]="pageSize" [pageIndex]="pageNo" [pageSizeOptions]="pageSizeOptions"  (page)="pageEvents($event)"></mat-paginator>
+                      </div>
+                    </ng-template>
+          
+              </mat-tab>
+              <mat-tab label="Payment" >
+                <ng-template matTabContent>
+                  <div >
+                    <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
+                      <div > 
+                        <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Last Name:</label>
+                        <input  type="text" [(ngModel)] = "vstudentFee.lastname" name="lname" disabled > 
+                        <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;margin-left: 5px;">First Name:</label>
+                        <input  type="text" [(ngModel)] = "vstudentFee.firstname"  name="fname" disabled > 
+                        <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;margin-left: 5px;">Department:</label>
+                        <input  type="text" [(ngModel)] = "vstudentFee.departmentname"  name="fname" disabled > 
+                        <button class="btn btn-info btn-secondary" (click)="getStudentList()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                        <!-- <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px; float: right;"><i class="fas fa-sync-alt"></i></button> -->
+                      </div>
+                    </div>
+                    
+                      <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
+                          <div>
+                            <button class="btn btn-info btn-secondary" (click)="addNewFee()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;float: right;" ><i class="fas fa-plus"></i></button>
+                            <div class="row">
+                              <div class="col-md-3">
                                   <form >
                                       <div class="form-group">
                                           <div class="input-group">
-                                            <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Remarks:</label>
-                                            <textarea [(ngModel)]="remarks" style="height: 31px;
-                                            border: 1px solid #b1b5b166;
-                                            border-radius: 5px;"></textarea>
+                                            <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Enter Amount:</label>
+                                              <input type="number" [(ngModel)]="transaction.totalDetailAmountPaid" (input)="onChangeAmountPaid($event.target.value)" name="mName" class="form-control inputText" style="    text-align: right;border-radius: 5px;" min="0" max="10" step="0.25" value="0.00" >
                                           </div>
                                       </div>
                                   </form>
                               </div>
-                            </div>
-                            </div>  
-                           
-                           
-                              <div class="mat-elevation-z8">
-                                  <table mat-table [dataSource]="dataSourceForm" matSort >
-
-                                    <ng-container matColumnDef="Description" >
-                                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Fees </th>
-                                      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
-                                    </ng-container>
-                               
-                                    <ng-container matColumnDef="Amount">
-                                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Amount </th>
-                                      <td mat-cell *matCellDef="let row"> 
-                                           <input matInput [id]="row.Amount"  [(ngModel)]="row.amount" > 
-                                      </td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="Actions">
-                                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Actions </th>
-                                    <mat-cell *matCellDef="let row" style="padding: 5px;" >
-                                         <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="removeFee(row)" mat-button >Remove</button>
-                                    </mat-cell>
-                                  </ng-container>
-            
-                                    <tr mat-header-row *matHeaderRowDef="billFormColumns"></tr>
-                                    <tr mat-row *matRowDef="let row; columns: billFormColumns;"></tr>
-                                  </table> 
-                                
-                               </div>
+                              <!-- <div class="col-md-3">
+                                <form >
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                          <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Remarks:</label>
+                                          <textarea [(ngModel)]="remarks" style="height: 31px;
+                                          border: 1px solid #b1b5b166;
+                                          border-radius: 5px;"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> -->
                           </div>
-                          <button class="btn btn-info btn-secondary" style="float: right; margin: 10px;" (click)="save()">Save</button>
-                      </div>
-                    </ng-template>
-              </mat-tab>
-              <mat-tab label="Transaction List" >
-                  <ng-template matTabContent >
-                      <mat-form-field style="width: 20%; margin-top: 20px;">
-                        <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" ([ngModel]) = "filter" placeholder="Ex. Mia" #filterInput>
-                      </mat-form-field>
-                      <button class="btn btn-info btn-secondary" (click)="search()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px;"><i class="fa fa-search" aria-hidden="true"></i></button>
-                      <button class="btn btn-info btn-secondary" (click)="refresh()" style="height: 25px;padding: 4px;font-size: 12px;width: 30px; float: right;margin-top: 34px;margin-right: 1px;"><i class="fas fa-sync-alt"></i></button>          
-                      <div class="mat-elevation-z8">
-                            <!-- <table mat-table [dataSource]="dataSource" matSort >
-                              <ng-container matColumnDef="Code" >
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Code. </th>
-                                <td mat-cell *matCellDef="let row"> {{row.Code}} </td>
-                              </ng-container>
-                         
-                              <ng-container matColumnDef="Description">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Description </th>
-                                <td mat-cell *matCellDef="let row"> {{row.Description}} </td>
-                              </ng-container>
-      
-                 
-                          
-                              <ng-container matColumnDef="Actions">
+                          </div>  
+                          <div class="mat-elevation-z8">
+                              <table mat-table [dataSource]="dataSourceForm" matSort >
+
+                                
+                                <ng-container matColumnDef="detailNo" >
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Payment No </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.detailNo}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="Description" >
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Fees </th>
+                                  <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                                </ng-container>
+                           
+                                <ng-container matColumnDef="Amount">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Payable Amount </th>
+                                  <td mat-cell *matCellDef="let row"> 
+                                       <input matInput [id]="row.Amount"  [(ngModel)]="row.amount" > 
+                                  </td>
+                                </ng-container>
+
+                                <!-- <ng-container matColumnDef="Actions">
                                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Actions </th>
                                 <mat-cell *matCellDef="let row" style="padding: 5px;" >
-                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="edit(row)" mat-button >View</button>
-                                </mat-cell> 
+                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" style="font-size: 12px;" (click)="removeFee(row)" mat-button >Remove</button>
+                                </mat-cell>
                               </ng-container>
+         -->
+                                <tr mat-header-row *matHeaderRowDef="billFormColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: billFormColumns;"></tr>
+                              </table> 
+  
 
-                              <ng-container matColumnDef="Status">
-                                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Status </th>
-                                  <mat-cell *matCellDef="let row" style="padding: 5px;" >
-                                      <input matInput ([ngModel]) = "Status" >
-                                  </mat-cell>
-                               
-                               </ng-container>
-        
-                              <tr class="mat-row" *matNoDataRow>
-                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                              </tr>
-      
-                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>  -->
-                          
-                              <mat-paginator  [length]="length" [pageSize]="pageSize" [pageIndex]="pageNo" [pageSizeOptions]="pageSizeOptions"  (page)="pageEvents($event)"></mat-paginator>
-                          </div>
-                        </ng-template>
+                           </div>
+                      </div>
+
+                      <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Total Payable Amount:</label>
+                      <input  type="text" [(ngModel)] = "totalPayable" name="amount" disabled > 
+                      <br>                    
+                      <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Amount:</label>
+                      <input  type="text" [(ngModel)] = "transaction.totalDetailAmountPaid" name="amount" disabled > 
+                    <br>
+                      <label style="font-size: 13px;margin-bottom: 0px;margin-right: 5px;">Change:</label>
+                      <input  type="text" [(ngModel)] = "transaction.amountchange" name="amount" disabled > 
+
+                      <button class="btn btn-info btn-secondary" style="float: right; margin: 10px;" (click)="save()">Save</button>
+                  </div>
+                </ng-template>
               </mat-tab>
             </mat-tab-group>
           </div>
