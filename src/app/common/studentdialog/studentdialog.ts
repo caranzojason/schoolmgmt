@@ -12,7 +12,7 @@ export interface DialogData {
 
 
   @Component({
-    styleUrls: ['studentdialog.scss'],
+    styleUrls: ['./studentdialog.scss'],
     selector: 'student-dialog',
     templateUrl: 'studentdialog.html',
   })

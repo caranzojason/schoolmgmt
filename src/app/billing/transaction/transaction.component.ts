@@ -175,7 +175,6 @@ export class TransactionComponent {
   setStudentDialog(){
     const dialogRef = this.dialog.open(StudentDialog, {
         width: '1000px',
-        height: '500px',
         data: {  message: ""}
       });
 
@@ -193,7 +192,6 @@ export class TransactionComponent {
   setPaymentDialog(studentId){
     const dialogRef = this.dialog.open(PaymentDialog, {
         width: '1000px',
-        height: '600px',
         data: {  studentId: studentId, type: 0}
       });
 
