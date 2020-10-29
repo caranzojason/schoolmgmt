@@ -89,7 +89,7 @@ table {
 
 .mat-form-field {
   font-size: 14px;
-  width: 100%;
+  width: 50% !important;
 }
 
 td, th {
@@ -187,4 +187,12 @@ table.mat-table {
 .modal-footer p
 {
   font-size: 13px;
+}
+.mat-dialog-content {
+  display: block;
+  /* margin: 0 -24px; */
+  padding: 0 24px;
+  max-height: 65vh;
+  overflow: unset;
+  -webkit-overflow-scrolling: touch;
 }
