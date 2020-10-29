@@ -228,6 +228,7 @@ export class TransactionComponent {
       dialogRef.afterClosed().subscribe(result => {
           
           console.log(result);
+          this.transaction.id = result.id;
           this.transaction.billMasterId = result.billMasterId;
           this.transaction.billDetailNo = result.detailNo;
           this.transaction.totalDetailAmountPaid = result.amount;
@@ -302,12 +303,26 @@ export class TransactionComponent {
 
   save(){
 
-    this.transaction.totalDetailAmountPaid = this.amountPaid;
-    this.transaction.amountchange = this.amountChange;
+
+    console.log(this.transaction);
+
+    if(this.transaction.id === 0 ){
       this._billingService.saveTransaction(this.transaction).subscribe((data:any) => 
       {
           console.log(data);
+          this.transaction.id = data[0].id;
+          this.setDialog("Sucessfully Save!");
+          
       })
+    }else{
+      this._billingService.updateTransaction(this.transaction).subscribe((data:any) => 
+      {
+          console.log(data);
+          this.setDialog("Sucessfully updated!");
+      })
+      //updateTransaction
+    }
+
     
     // let studFee = {id: this.vstudentFee.id,studentId: this.vstudentFee.studentId, remarks:this.remarks,status:"O",schoolyearfrom:this.yearFrom,schoolyearto:this.yearTo } as VStudentfee
    

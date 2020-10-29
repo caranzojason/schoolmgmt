@@ -95,5 +95,9 @@ export class BillingService {
         .pipe(map((res: TransactionDTO) => res));
     }
     
+    updateTransaction(data:TransactionDTO): Observable<TransactionDTO> {
+        return this._httpClient.post<TransactionDTO>(this._env.api +'updateTransaction',data)
+        .pipe(map((res: TransactionDTO) => res));
+    }
 
 }
