@@ -8,4 +8,5 @@ export interface VStudentfee{
     lastname:string;
     firstname:string;
     departmentname:string;
+    feeTypeId:number;
 }

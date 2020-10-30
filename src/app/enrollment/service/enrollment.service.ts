@@ -30,6 +30,11 @@ export class EnrollmentService {
         .pipe(map((res: any) => res));
     }
 
+    getCourses(): Observable<any> {
+        return this._httpClient.get<any>(this._env.api+'coursesgetAll')
+        .pipe(map((res: any) => res));
+    }
+
     getCoursesByDeptId(deptId:Number): Observable<any> {
         return this._httpClient.get<any>(this._env.api+'coursesgetByDeptId/'+deptId)
         .pipe(map((res: any) => res));

@@ -49,6 +49,7 @@ export class StandardFeeComponent {
   pageSizeOptions = [5, 10, 25, 100];
   pageIndex = 0;
   pageNo = 0;
+  feeType:any;
 
   @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
@@ -67,15 +68,24 @@ export class StandardFeeComponent {
             this.length = data.NoOfRecords;
             console.log(data.yearlyFee);
         });
+
+        this._yearlyFeeService.getFeeType().subscribe((data:any) => 
+        {
+          this.feeType = data;
+          console.log(this.feeType);
+        });
     }
 
     init(){
         this._yearlyFeeService.getBillingAllFee().subscribe((data:any) => 
         {
+            console.log("bilingallfee");
+            console.log(data);
             data.forEach(element => {
-              let temp= { Id:0, description:element.Description,amount:0 } as YearlyfeeDetail;
+              let temp= { Id:0, description:element.Description,amount:0,feeType:element.Id } as YearlyfeeDetail;
                 this.billingFee.push(temp);
             });
+            console.log(this.billingFee);
             this.dataSourceForm = new MatTableDataSource( this.billingFee);
         })
   
@@ -126,8 +136,9 @@ export class StandardFeeComponent {
             this._yearlyFeeService.getYearlyFeeDetailByMastereId(this.yearlyFee.Id).subscribe((data:any) => 
             {
                 this.billingFee = data;
+                console.log(this.billingFee);
                 this.dataSourceForm = new MatTableDataSource( this.billingFee);
-                this.selectDepartment();
+                // this.selectDepartment();
                 this.tabGroup.selectedIndex = 1
             });
         });
@@ -240,6 +251,7 @@ export class StandardFeeComponent {
 
 
     public save(){
+
         if(this.yearlyFee.Id == 0){
             this._yearlyFeeService.saveYearlyFee(this.yearlyFee).subscribe((data:any) => 
             {
@@ -247,6 +259,7 @@ export class StandardFeeComponent {
                     element.yearlyFeesId = data[0].Id;
                 });
                 console.log(this.billingFee);
+             
                 this._yearlyFeeService.saveYearlyFeeDetail(this.billingFee).subscribe((data:any) => 
                 {
                     this.setDialog("Successfully Save!");

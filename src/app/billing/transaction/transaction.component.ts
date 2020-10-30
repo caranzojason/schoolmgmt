@@ -34,6 +34,7 @@ export class TransactionComponent {
     "lastname":"",
     "firstname":"",
     "departmentname":"",
+    "feeTypeId":0
   };
   public deparmentList:any;
   student:Student = {

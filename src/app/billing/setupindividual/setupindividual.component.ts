@@ -34,6 +34,7 @@ export class SetupIndividualComponent {
     "lastname":"",
     "firstname":"",
     "departmentname":"",
+    "feeTypeId":0
   };
   public deparmentList:any;
   student:Student = {
@@ -106,6 +107,7 @@ export class SetupIndividualComponent {
   pageSizeOptions = [5, 10, 25, 100];
   pageIndex = 0;
   pageNo = 0;
+  feeType:any;
 
   @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
@@ -124,6 +126,13 @@ export class SetupIndividualComponent {
           this.dataSource.sort = this.sort;
           this.length = data.NoOfRecords;
       });
+
+      this._billingService.getFeeType().subscribe((data:any) => 
+      {
+        this.feeType = data;
+        console.log(this.feeType);
+      });
+
     }
 
     onTabChange(event: MatTabChangeEvent) {
@@ -140,6 +149,8 @@ export class SetupIndividualComponent {
           this.dataSource = new MatTableDataSource(data.studentFee);
           this.changeDetectorRefs.detectChanges();
       });
+
+
     }
 
     refresh(){
@@ -182,7 +193,7 @@ export class SetupIndividualComponent {
           this._billingService.getYearlyFeeAccordingtoStudent(1,1,0,0,2020,2021).subscribe((data:any) => 
           {
             data.forEach(element => {
-              let temp= { id:0, description:element.description,amount:element.amount,studentFeeId:0} as StudentfeeDetails;
+              let temp= { id:0, description:element.description,amount:element.amount,studentFeeId:0,feeType:element.feeType} as StudentfeeDetails;
               this.studentFee.push(temp);
             });
             console.log(this.studentFee);
@@ -193,7 +204,7 @@ export class SetupIndividualComponent {
 
   addNewFee(){
       console.log("add new");
-      let temp=  { id:0, description:this.feeDescription,amount:this.feeAmount,studentFeeId:0} as StudentfeeDetails;
+      let temp=  { id:0, description:this.feeDescription,amount:this.feeAmount,studentFeeId:0,feeType:0} as StudentfeeDetails;
       this.studentFee.push(temp);
       this.dataSourceForm = new MatTableDataSource( this.studentFee);
   }
@@ -210,7 +221,6 @@ export class SetupIndividualComponent {
 
   public edit(row)
   {
-    console.log(row)
       this._billingService.getStudentFeeById(row.id).subscribe((data:any) => 
       {
           this.vstudentFee = data;
@@ -240,9 +250,8 @@ export class SetupIndividualComponent {
 
 
   save(){
-    let studFee = {id: this.vstudentFee.id,studentId: this.vstudentFee.studentId, remarks:this.remarks,status:"O",schoolyearfrom:this.yearFrom,schoolyearto:this.yearTo } as VStudentfee
-   
-
+    let studFee = {id: this.vstudentFee.id,studentId: this.vstudentFee.studentId, remarks:this.remarks,status:"O",schoolyearfrom:this.yearFrom,schoolyearto:this.yearTo, feeTypeId:0 } as VStudentfee
+  
     if(this.vstudentFee.id ==0){
       this.vstudentFee.schoolyearfrom = this.yearFrom;
       this.vstudentFee.schoolyearto = this.yearTo;
