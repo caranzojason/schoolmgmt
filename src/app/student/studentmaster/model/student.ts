@@ -10,6 +10,7 @@ export interface Student{
     grade:Number;
     department:Number;
     strand:Number;
+    courseId:Number;
     dob:any;
     place_of_birth:string;
     contactno:string;

@@ -44,12 +44,15 @@ import { ForVerificationComponent } from './forverification.component';
 import { ForApprovalComponent } from './forapproval.component';
 import { Inquiry } from './inquiry.component';
 import { EnrollmentRoutes } from './enrollment.routing';
-import { EnrollmentComponent } from './enrolment.component';
+import { EnrollmentComponent } from './enrollment.component';
 import {EnrollmentService} from './service/enrollment.service';
 import { PaymentApprovalComponent } from './paymentapproval.component';
 import { PaymentInquiryComponent } from './paymentinquiry.component';
 import { EnrollmentDialogComponent } from './modal/enrolldialog.component';
-
+import { EnrollmentCollegeComponent } from './enrollmentcollege.component';
+import { EnrollmentHighSchoolComponent } from './enrollmenthighschool.component';
+import { EnrollmentElementaryComponent } from './enrollmentelementary.component';
+import { EnrollmentSeniorComponent } from './enrollmentseniorhigh.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(EnrollmentRoutes),ReactiveFormsModule,
@@ -89,7 +92,9 @@ import { EnrollmentDialogComponent } from './modal/enrolldialog.component';
     MatTooltipModule,
     MatTreeModule,
     NgbModule],
-  declarations: [ForVerificationComponent,ForApprovalComponent,EnrollmentComponent,Inquiry,PaymentApprovalComponent,PaymentInquiryComponent,EnrollmentDialogComponent],
+  declarations: [ForVerificationComponent,ForApprovalComponent,EnrollmentComponent,Inquiry,PaymentApprovalComponent,
+    PaymentInquiryComponent,EnrollmentDialogComponent,EnrollmentCollegeComponent,
+    EnrollmentHighSchoolComponent,EnrollmentElementaryComponent,EnrollmentSeniorComponent],
   entryComponents: [EnrollmentDialogComponent],
   providers: [
     EnrollmentService,

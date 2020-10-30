@@ -3,6 +3,7 @@ export interface YearlyfeeDetail{
     yearlyFeesId: number;
     description:string;
     amount:number;
+    feeType:number;
 }
 
 

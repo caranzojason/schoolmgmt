@@ -23,6 +23,7 @@ export class EnrollmentComponent implements AfterViewInit {
         "grade": 0,
         "department": 0,
         "strand": 0,
+        "courseId": 0,
         "dob": "",
         "place_of_birth": "",
         "contactno": "",
@@ -205,37 +206,6 @@ export class EnrollmentComponent implements AfterViewInit {
             return;
         }
 
-        if(this.enrollment.fathername == ''){
-            this.setDialog("Father's name is required!");
-            return;
-        }
-
-        if(this.enrollment.fathercontact == ''){
-            this.setDialog("Father's Contact No is required!");
-            return;
-        }
-
-        if(this.enrollment.mothername == ''){
-            this.setDialog("Mother's name is required!");
-            return;
-        }
-
-        if(this.enrollment.mothercontact == ''){
-            this.setDialog("Mother's Contact No required!");
-            return;
-        }
-
-        if((this.enrollment.fathername == '' && this.enrollment.mothername == '') && this.enrollment.guardian_name == '' ){
-            this.setDialog("Guardian Name required!");
-            return;
-        }
-
-        if(this.enrollment.guardian_name != '' && this.enrollment.guardian_contactno == '' ){
-            this.setDialog("Guardian Contact required!");
-            return;
-        }
-
-
         if(this.enrollment.learning_modality == ''){
             this.setDialog("Learnig modality is required!");
             return;
@@ -272,6 +242,7 @@ export class EnrollmentComponent implements AfterViewInit {
           "grade": 0,
           "department": 0,
           "strand": 0,
+          "courseId": 0,
           "dob": "",
           "place_of_birth": "",
           "contactno": "",

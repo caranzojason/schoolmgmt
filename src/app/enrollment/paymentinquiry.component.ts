@@ -45,6 +45,7 @@ import {MatTable} from '@angular/material';
     "grade": 0,
     "department": 1,
     "strand": 0,
+    "courseId": 0,
     "dob": "",
     "place_of_birth": "",
     "contactno": "",

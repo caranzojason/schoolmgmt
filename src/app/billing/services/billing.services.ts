@@ -86,10 +86,6 @@ export class BillingService {
         .pipe(map((res: any) => res));
     }
 
-
-
-    
-
     saveTransaction(data:TransactionDTO): Observable<TransactionDTO> {
         return this._httpClient.post<TransactionDTO>(this._env.api +'saveTransaction',data)
         .pipe(map((res: TransactionDTO) => res));
@@ -100,4 +96,8 @@ export class BillingService {
         .pipe(map((res: TransactionDTO) => res));
     }
 
+    getFeeType(){
+        return this._httpClient.get<any>(this._env.api+'getfeetype')
+        .pipe(map((res: any) => res));
+    }
 }

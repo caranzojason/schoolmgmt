@@ -3,7 +3,11 @@ import { Routes } from '@angular/router';
 import { ForVerificationComponent } from './forverification.component';
 import { ForApprovalComponent } from './forapproval.component';
 import { Inquiry } from './inquiry.component'
-import { EnrollmentComponent } from './enrolment.component';
+import { EnrollmentComponent } from './enrollment.component';
+import { EnrollmentCollegeComponent } from './enrollmentcollege.component';
+import { EnrollmentHighSchoolComponent } from './enrollmenthighschool.component';
+import { EnrollmentElementaryComponent } from './enrollmentelementary.component';
+import { EnrollmentSeniorComponent } from './enrollmentseniorhigh.component';
 import { PaymentApprovalComponent } from './paymentapproval.component';
 import { PaymentInquiryComponent } from './paymentinquiry.component';
 export const EnrollmentRoutes: Routes = [
@@ -75,7 +79,53 @@ export const EnrollmentRoutes: Routes = [
 						{ title: 'Enrollment' }
 					]
 				}
+			},
+			{
+				path: 'collegestudent',
+				component: EnrollmentCollegeComponent,
+				data: {
+					title: 'Enrollment',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment' },
+						{ title: 'Enrollment' }
+					]
+				}
+			},
+			{
+				path: 'highschoolstudent',
+				component: EnrollmentHighSchoolComponent,
+				data: {
+					title: 'Enrollment',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment' },
+						{ title: 'Enrollment' }
+					]
+				}
+			},
+			{
+				path: 'elementarystudent',
+				component: EnrollmentElementaryComponent,
+				data: {
+					title: 'Enrollment',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment' },
+						{ title: 'Enrollment' }
+					]
+				}
+			},
+			{
+				path: 'seniorstudent',
+				component: EnrollmentSeniorComponent,
+				data: {
+					title: 'Enrollment',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment' },
+						{ title: 'Enrollment' }
+					]
+				}
 			}
+
+			
 		]
 	}
 ];

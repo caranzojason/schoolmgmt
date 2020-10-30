@@ -185,6 +185,22 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <div class="col-md-3" style="padding: 1px;">
+                                            <form >
+                                                <label style="font-size: 13px;margin-bottom: 0px;">Course & Strand/Course </label>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <select name="strand"  [(ngModel)]= "enrollment.strand"   class="form-control inputText">
+                                                            <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
+                                                                {{o.name}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
                                        <div class="col-md-3" style="padding: 1px;">
                                             <form >
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Track & Strand/Course </label>

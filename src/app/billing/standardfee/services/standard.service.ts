@@ -79,4 +79,9 @@ export class StandardFeeService {
         return this._httpClient.post<Array<YearlyfeeDetail>>(this._env.api +'saveYearlyFeeDetail',data)
         .pipe(map((res: Array<YearlyfeeDetail>) => res));
     }
+
+    getFeeType(){
+        return this._httpClient.get<any>(this._env.api+'getfeetype')
+        .pipe(map((res: any) => res));
+    }
 }
