@@ -128,6 +128,14 @@ export const ROUTES: RouteInfo[] = [
         class: '',
         extralink: false,
         submenu: []
+      },
+      {
+        path: '/report/assessmentslip',
+        title: 'Assessment Slip',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
       }
     ]
   }
