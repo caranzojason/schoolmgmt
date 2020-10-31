@@ -44,6 +44,21 @@ export class ReportService {
     }
     getAssesmentReport(schoolyearfrom:any,schoolyearto:any,detailNo:any): Observable<any> {
         return this._httpClient.get<any>(this._env.api +'getAssesmentbydetailNo/'+schoolyearfrom+'/'+schoolyearto+'/'+detailNo)
+    }
+    getReportsCountElementary(from:Number,to:Number){
+            return this._httpClient.get<any>(this._env.api+'getEnrolElementary/'+from+'/'+to)
+            .pipe(map((res: any) => res));
+    }
+    getReportsCountJuniorHigh(from:Number,to:Number){
+        return this._httpClient.get<any>(this._env.api+'getEnroljuniorhigh/'+from+'/'+to)
+        .pipe(map((res: any) => res));
+    }
+    getReportsCountSeniorHigh(from:Number,to:Number){
+        return this._httpClient.get<any>(this._env.api+'getEnrolsenior/'+from+'/'+to)
+        .pipe(map((res: any) => res));
+    }
+    getReportsCountCollege(from:Number,to:Number){
+        return this._httpClient.get<any>(this._env.api+'getEnrolcollege/'+from+'/'+to)
         .pipe(map((res: any) => res));
     }
 }

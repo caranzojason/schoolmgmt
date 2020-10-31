@@ -136,6 +136,14 @@ export const ROUTES: RouteInfo[] = [
         class: '',
         extralink: false,
         submenu: []
+      },
+      {
+        path: '/report/countreport',
+        title: 'Count Reports',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
       }
     ]
   }

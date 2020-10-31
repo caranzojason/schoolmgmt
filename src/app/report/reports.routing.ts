@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AssessmentSlipComponent } from './assessmentslip.component';
+import { CounterReportsComponent } from './countreport.component';
 import { ReportsComponent } from './reports.component';
 
 export const ReportsRoute: Routes = [
@@ -25,6 +26,17 @@ export const ReportsRoute: Routes = [
 					urls: [
                         { title: 'Assessment Slip', url: '/report/assessmentslip' },
 						{ title: 'Assessment Slip' }
+					]
+				}
+            },
+			{
+				path: 'countreport',
+				component: CounterReportsComponent,
+				data: {
+					title: 'Count Report',
+					urls: [
+                        { title: 'Count Report', url: '/report/countreport' },
+						{ title: 'Count Report' }
 					]
 				}
             }

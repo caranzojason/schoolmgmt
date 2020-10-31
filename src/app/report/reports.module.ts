@@ -43,6 +43,7 @@ import { EnrollmentService } from '../enrollment/service/enrollment.service';
 import { AssessmentSlipComponent } from './assessmentslip.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ReportService } from './service/service.report';
+import { CounterReportsComponent } from './countreport.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule,ReactiveFormsModule,RouterModule.forChild(ReportsRoute),
@@ -82,7 +83,7 @@ import { ReportService } from './service/service.report';
     MatTooltipModule,
     MatTreeModule,
     NgbModule, NgSelectModule],
-  declarations: [ReportsComponent,AssessmentSlipComponent],
+  declarations: [ReportsComponent,AssessmentSlipComponent,CounterReportsComponent],
   entryComponents: [],
   providers: [
     ReportService,
