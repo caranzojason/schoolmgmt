@@ -41,7 +41,14 @@ export class ReportsComponent implements OnInit {
       "strand":[],
       "semester":[],
       "gender":[],
-      "IsCheckedReport":false
+      "IsCheckedReportSchool":false,
+      "IsCheckedReportDept":false,
+      "IsCheckedReportGender":false,
+      "IsCheckedReportGrade":false,
+      "IsCheckedReportCourse":false,
+      "IsCheckedReportStrand":false,
+      "IsCheckedReportSem":false,
+
     };
     public deparmentList:any =[];
     public gradeList: any = [];
@@ -146,17 +153,22 @@ onSearch()
     {
         this.enrollReportList = data;
         console.log(JSON.stringify(this.enrollReportList));
+        this.generatePdf();
     });
+   
 }
-  generatePdf(action = 'open'){
+  generatePdf(){
     var tempArr = [];
     let en = JSON.parse(JSON.stringify(this.enrollReportList));
     for(var i=0; i<en.length; i++){
        tempArr.push(
          { 
-          SCHOOLYEARFROM: en[i].SCHOOLYEARFROM, 
-          SCHOOLYEARTO: en[i].SCHOOLYEARTO,
-          NAME: en[i].NAME,
+          NAME: en[i].NAME, 
+          DEPARTMENT: en[i].DEPARTMENT,
+          STRAND: en[i].STRAND, 
+          COURSE: en[i].COURSE,
+          SEMESTER: en[i].SEMESTER,
+          GENDER: en[i].GENDER,
           }
         );
       var report = {
@@ -169,7 +181,32 @@ onSearch()
               alignment: 'center',
               margin: [0, 0, 0, 20]
             },
-            this.table(tempArr, ['SCHOOLYEARFROM', 'SCHOOLYEARTO', 'NAME'])
+            {
+              columns: [
+                [{
+                  text: ' School Year From ' + ' : ' + en[i].SCHOOLYEARFROM,
+                  style: 'name'
+                },
+                {
+                  text: ' School Year to ' + ' : ' + en[i].SCHOOLYEARTO,
+                  style: 'name'
+                },
+                
+              ]
+            ]
+            },
+            {
+              columns:
+              [
+                {
+                  text:' '
+                },
+                {
+                  text:' '
+                }
+              ]
+            },
+            this.table(tempArr, ['NAME','DEPARTMENT','STRAND','COURSE','SEMESTER','GENDER'])
           ],
           styles: {
             header: {
@@ -179,21 +216,18 @@ onSearch()
               decoration: 'underline'
             },
             name: {
-              fontSize: 16,
+              fontSize: 12,
               bold: true
             },
             tableHeader: {
               bold: true,
+            
             }
           }
         };
       }
-      switch (action) {
-      case 'open': pdfMake.createPdf(report).open(); break;
-      case 'print': pdfMake.createPdf(report).print(); break;
-      case 'download': pdfMake.createPdf(report).download(); break;
-      default: pdfMake.createPdf(report).open(); break;
-    }
+      pdfMake.createPdf(report).open();
+    
   }
   buildTableBody(data, columns) {
     var body = [];
@@ -211,9 +245,29 @@ onSearch()
   }
   table(data, columns) {
     return {
+      fontSize: 12,
       table: {
-        headerRows: 1,
+        widths: ['26.6%', '16.6%', '12.6%', '15.6%', '14.6%', '12.6%'],
+        fillColor: '#555555',
+        headerRows: 2,
+        fontSize: 12,
+        
         body: this.buildTableBody(data, columns)
+      },
+      layout: {
+        fillColor: function(rowIndex, node, columnIndex) {
+          if (rowIndex === 0) {
+            return '#ABABAA' ;
+          } 
+          return (rowIndex > 0 && rowIndex % 2  ? '#E9E9E9' : '#FBFBFB' ); 
+          },
+        hLineColor: function (i, node) {
+          return (i === 0 || i === node.table.body.length) ? 'white' : 'white';
+        },
+        vLineColor: function(i, node) {
+          return (i === 0 || i === node.table.widths.length) ? 'white' : 'white';
+        }
+    
       }
     };
   }

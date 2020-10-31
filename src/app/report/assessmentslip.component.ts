@@ -29,7 +29,45 @@ export class AssessmentSlipComponent implements OnInit {
     enrolmentList:Enrollment;
     public deparmentList:any;
     public enrol: Array<any>
- 
+    dataAssessment = 
+    [
+      {
+      "schoolyearfrom": 2020,
+      "studentId": 2021,
+      "studentName": "ABAO-AN TRISTAN JOHN",
+      "detailNo": 1,
+      "feeType": 1,
+      "Fee": "Tution Fee",
+      "amount": "20"
+      },
+      {
+      "schoolyearfrom": 2020,
+      "studentId": 2021,
+      "studentName": "ABAO-AN TRISTAN JOHN",
+      "detailNo": 1,
+      "feeType": 2,
+      "Fee": "Misc. Fees",
+      "amount": "30"
+      },
+      {
+      "schoolyearfrom": 2020,
+      "studentId": 2021,
+      "studentName": "ABAO-AN TRISTAN JOHN",
+      "detailNo": 1,
+      "feeType": 3,
+      "Fee": "Other Fees",
+      "amount": "40"
+      },
+      {
+      "schoolyearfrom": 2020,
+      "studentId": 2021,
+      "studentName": "ABAO-AN TRISTAN JOHN",
+      "detailNo": 1,
+      "feeType": 4,
+      "Fee": "LMS",
+      "amount": "50"
+      }
+      ]
   constructor(private _reportService:ReportService) {
     //this.enrolmentList = <Enrollment>{};
   }
@@ -39,6 +77,21 @@ export class AssessmentSlipComponent implements OnInit {
   }
 
   getDocumentDefinition() {
+    var tempArr = [];
+    let en = JSON.parse(JSON.stringify(this.dataAssessment));
+    console.log(en);
+    for(var i=0; i<en.length; i++){
+      tempArr.push(
+        { 
+          schoolyearfrom: en[i].schoolyearfrom, 
+          studentId: en[i].studentId,
+          studentName: en[i].studentName, 
+          detailNo: en[i].detailNo,
+          feeType: en[i].feeType,
+          DESCRIPTION: en[i].Fee,
+          AMOUNT: en[i].amount,
+         }
+       );
     var document = {
       content: [
         {
@@ -53,7 +106,7 @@ export class AssessmentSlipComponent implements OnInit {
         {
           columns: [
             [{
-              text: "Jason Caranzo",
+              text: 'Name : ' + en[0].studentName,
               style: 'name'
             },
             {
@@ -76,34 +129,18 @@ export class AssessmentSlipComponent implements OnInit {
               }
           ]
         },
-        {
-            text: '-----------------------------------------------------------------------------------------------------------------------------------------------'
-        },
+        // {
+        //     text: '-----------------------------------------------------------------------------------------------------------------------------------------------'
+        // },
         {
           columns : [
-                        [{
-                            text: 'Discription',
-                            style: 'header'
-                        },
-                                {
-                                    text: 'Discription 1',
-                                },
-                                {
-                                    text: 'Discription 2',
-                                },
-                            
+                        [
+                        this.table(tempArr, ['DESCRIPTION','AMOUNT'])
                         ],
-                        [{
-                            text: 'Amount',
-                            style: 'header'
-                        },
-                                {
-                                    text: '5,445',
-                                },
-                                {
-                                    text: '12,343',
-                                },
-                        ],
+                        // [
+                        // this.table(tempArr, ['AMOUNT'])
+                              
+                        // ],
                     ]
         },
         {
@@ -122,6 +159,7 @@ export class AssessmentSlipComponent implements OnInit {
                           {
                             text: '12,434',
                             fontSize: 12,
+                            alignment:'center'
                           }
                       ]
           },
@@ -139,7 +177,7 @@ export class AssessmentSlipComponent implements OnInit {
             decoration: 'underline'
           },
           name: {
-            fontSize: 16,
+            fontSize: 12,
             bold: true
           },
           jobTitle: {
@@ -157,6 +195,50 @@ export class AssessmentSlipComponent implements OnInit {
           }
         }
     };
+  }
     pdfMake.createPdf(document).open();
+  }
+  buildTableBody(data, columns) {
+    var body = [];
+    body.push(columns);
+    data.forEach(function(row) {
+        var dataRow = [];
+
+        columns.forEach(function(column) {
+            dataRow.push(row[column]);
+        })
+
+        body.push(dataRow);
+    });
+    return body;
+  }
+  table(data, columns) {
+    return {
+      fontSize: 12,
+      table: {
+        widths: ['76.6%','16.6%'],
+        fillColor: '#555555',
+        headerRows: 2,
+        fontSize: 12,
+        
+        body: this.buildTableBody(data, columns)
+        
+      },
+      layout: {
+        fillColor: function(rowIndex, node, columnIndex) {
+          if (rowIndex === 0) {
+            return '#ABABAA' ;
+          } 
+          return (rowIndex > 0 && rowIndex % 2  ? '#E9E9E9' : '#FBFBFB' ); 
+          },
+        hLineColor: function (i, node) {
+          return (i === 0 || i === node.table.body.length) ? 'white' : 'white';
+        },
+        vLineColor: function(i, node) {
+          return (i === 0 || i === node.table.widths.length) ? 'white' : 'white';
+        }
+    
+      }
+    };
   }
 }

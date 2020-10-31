@@ -7,5 +7,11 @@ export class EnrollReport{
     strand:any;
     semester:any;
     gender:any;
-    IsCheckedReport:boolean;
+    IsCheckedReportSchool:boolean;
+    IsCheckedReportDept:boolean;
+    IsCheckedReportGender:boolean;
+    IsCheckedReportGrade:boolean;
+    IsCheckedReportCourse:boolean;
+    IsCheckedReportStrand:boolean;
+    IsCheckedReportSem:boolean;
 }

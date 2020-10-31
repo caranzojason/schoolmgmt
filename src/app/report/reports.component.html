@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                 <div class="row" style="margin-right: 0px;margin-left: 0px;">
                     <div class="col-md-6" style="padding: 1px;">
                                 <label style="font-size: 13px;margin-bottom: 0px;">
-                                    <input type="checkbox" name="Report" [(ngModel)]="enrollReport.IsCheckedReport" style="margin: 5px;" />School Year:
+                                    <input type="checkbox" id="1"  name="School" [(ngModel)]="enrollReport.IsCheckedReportSchool" style="margin: 5px;" />School Year:
                                 </label>
                                 <div class="input-group">
                                     <label style="font-size: 13px;margin-bottom: 0px;">
@@ -19,6 +19,8 @@
                                             [(ngModel)]="enrollReport.schoolyearfrom">
                                         </ng-select>
                                     </div>
+                                </div>
+                                <div class="input-group">
                                     <label style="font-size: 13px;margin-bottom: 0px;">
                                         School Year From:
                                     </label>
@@ -36,7 +38,7 @@
                 <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
                     <div class="col-md-4">
                         <label style="font-size: 13px;margin-bottom: 0px;">
-                            <input type="checkbox" name="Report"[(ngModel)]="enrollReport.IsCheckedReport" style="margin: 5px;" />Department: 
+                            <input type="checkbox" id="2" name="Department"[(ngModel)]="enrollReport.IsCheckedReportDept" style="margin: 5px;" />Department: 
                         </label>
                         <div>
                             <ng-select [items]="deparmentList"
@@ -50,7 +52,7 @@
                  </div>
                 <div class="col-md-4" >
                         <label style="font-size: 13px;margin-bottom: 0px;">
-                            <input type="checkbox" name="Report"[(ngModel)]="enrollReport.IsCheckedReport" style="margin: 5px;" />Grade: 
+                            <input type="checkbox" id="3" name="Grade"[(ngModel)]="enrollReport.IsCheckedReportGrade" style="margin: 5px;" />Grade: 
                         </label>
                         <div>
                             <ng-select [items]="gradeList"
@@ -63,7 +65,7 @@
                 </div>
                 <div class="col-md-4" >
                         <label style="font-size: 13px;margin-bottom: 0px;">
-                            <input type="checkbox" name="Report" [(ngModel)]="enrollReport.IsCheckedReport" style="margin: 5px;" />Course: 
+                            <input type="checkbox" id="4" name="Course" [(ngModel)]="enrollReport.IsCheckedReportCourse" style="margin: 5px;" />Course: 
                         </label>
                        <div>
                             <ng-select [items]="coursetList"
@@ -79,7 +81,7 @@
                     
                     <div class="col-md-4" >
                             <label style="font-size: 13px;margin-bottom: 0px;">
-                                <input type="checkbox" name="Report" [(ngModel)]="enrollReport.IsCheckedReport" style="margin: 5px;" />Track & Strand: 
+                                <input type="checkbox" id="5" name="Strand" [(ngModel)]="enrollReport.IsCheckedReportStrand" style="margin: 5px;" />Track & Strand: 
                             </label>
                             <div>
                                 <ng-select [items]="strandList"
@@ -92,7 +94,7 @@
                     </div>
                     <div class="col-md-4" >
                             <label style="font-size: 13px;margin-bottom: 0px;">
-                                <input type="checkbox" name="Report" [(ngModel)]="enrollReport.IsCheckedReport" style="margin: 5px;" />Semester: 
+                                <input type="checkbox" id="6" name="Semester" [(ngModel)]="enrollReport.IsCheckedReportSem" style="margin: 5px;" />Semester: 
                             </label>
                             <div>
                                 <ng-select [items]="semesterList"
@@ -105,7 +107,7 @@
                     </div>
                     <div class="col-md-4" >
                             <label style="font-size: 13px;margin-bottom: 0px;">
-                                <input type="checkbox" name="Report" [(ngModel)]="enrollReport.IsCheckedReport" style="margin: 5px;" />Gender 
+                                <input type="checkbox" id="7" name="Gender" [(ngModel)]="enrollReport.IsCheckedReportGender" style="margin: 5px;" />Gender 
                             </label>
                             <div>
                                 <ng-select [items]="genderList"
@@ -122,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
                     <table >
@@ -147,9 +149,9 @@
                     </table>
                   </div>
                 </div>
-        </div>
+        </div> -->
     </div>
-    <div class="col-md-3">
+    <!-- <div class="col-md-3">
         <div class="card">
             <div class="card-body">
                 <div class="shadow-sm card action-buttons">
@@ -171,5 +173,5 @@
                   </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
