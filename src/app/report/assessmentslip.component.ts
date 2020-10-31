@@ -108,25 +108,8 @@ export class AssessmentSlipComponent implements OnInit {
             [{
               text: 'Name : ' + en[0].studentName,
               style: 'name'
-            },
-            {
-              text: "Balamban"
-            },
-            {
-              text: 'Email : ' + "jason.caranzo@gmail.com",
-            },
-            {
-              text: 'Contant No : ' + "0908979898",
             }
-            ],
-            {
-                columns: [
-                  {
-                   
-                   text: 'Logo Here ....'
-                  },
-                ]
-              }
+            ]
           ]
         },
         // {

@@ -42,4 +42,20 @@ export class ReportService {
         return this._httpClient.post<EnrollReport>(this._env.api +'getEnrolment',data)
         .pipe(map((res: EnrollReport) => res));
     }
+    getReportsCountElementary(from:Number,to:Number){
+            return this._httpClient.get<any>(this._env.api+'getEnrolElementary/'+from+'/'+to)
+            .pipe(map((res: any) => res));
+    }
+    getReportsCountJuniorHigh(from:Number,to:Number){
+        return this._httpClient.get<any>(this._env.api+'getEnroljuniorhigh/'+from+'/'+to)
+        .pipe(map((res: any) => res));
+    }
+    getReportsCountSeniorHigh(from:Number,to:Number){
+        return this._httpClient.get<any>(this._env.api+'getEnrolsenior/'+from+'/'+to)
+        .pipe(map((res: any) => res));
+    }
+    getReportsCountCollege(from:Number,to:Number){
+        return this._httpClient.get<any>(this._env.api+'getEnrolcollege/'+from+'/'+to)
+        .pipe(map((res: any) => res));
+    }
 }
