@@ -42,4 +42,8 @@ export class ReportService {
         return this._httpClient.post<EnrollReport>(this._env.api +'getEnrolment',data)
         .pipe(map((res: EnrollReport) => res));
     }
+    getAssesmentReport(schoolyearfrom:any,schoolyearto:any,detailNo:any): Observable<any> {
+        return this._httpClient.get<any>(this._env.api +'getAssesmentbydetailNo/'+schoolyearfrom+'/'+schoolyearto+'/'+detailNo)
+        .pipe(map((res: any) => res));
+    }
 }

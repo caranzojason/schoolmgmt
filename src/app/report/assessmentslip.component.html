@@ -1,8 +1,58 @@
 <div>
-    Assessment Slip here....
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                    <div class="col-md-6" style="padding: 1px;">
+                          
+                                <div class="input-group">
+                                    <label style="font-size: 13px;margin-bottom: 0px;">
+                                        School Year From:
+                                    </label>
+                                    <div>
+                                        <ng-select [items]="schoolyearList"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [multiple]="true"
+                                            [(ngModel)]="schoolyearfrom">
+                                        </ng-select>
+                                    </div>
+                             
+                                    <label style="font-size: 13px;margin-bottom: 0px;">
+                                        School Year From:
+                                    </label>
+                                    <div>
+                                        <ng-select [items]="schoolyearList"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [multiple]="true"
+                                            [(ngModel)]="schoolyearto">
+                                        </ng-select>
+                                    </div>
+
+                                    <label style="font-size: 13px;margin-bottom: 0px;">
+                                      Payment Number:
+                                  </label>
+                                    <div>
+                                      <ng-select [items]="detailNoList"
+                                          bindLabel="name"
+                                          bindValue="id"
+                                          [multiple]="true"
+                                          [(ngModel)]="detailNo">
+                                      </ng-select>
+                                  </div>
+                                    
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
     <button (click)="getDocumentDefinition()"
     class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
     <i class="material-icons" style="font-size: 13px;">
       picture_as_pdf
     </i> <span>Open PDF</span></button>
-</div>
