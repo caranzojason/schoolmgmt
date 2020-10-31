@@ -40,6 +40,9 @@ import {MatTreeModule} from '@angular/material/tree';
 import { ReportsComponent } from './reports.component';
 import { ReportsRoute } from './reports.routing';
 import { EnrollmentService } from '../enrollment/service/enrollment.service';
+import { AssessmentSlipComponent } from './assessmentslip.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ReportService } from './service/service.report';
 
 @NgModule({
   imports: [FormsModule, CommonModule,ReactiveFormsModule,RouterModule.forChild(ReportsRoute),
@@ -78,11 +81,11 @@ import { EnrollmentService } from '../enrollment/service/enrollment.service';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    NgbModule],
-  declarations: [ReportsComponent],
+    NgbModule, NgSelectModule],
+  declarations: [ReportsComponent,AssessmentSlipComponent],
   entryComponents: [],
   providers: [
-    EnrollmentService,
+    ReportService,
     //EnrollmentDialogBox
   ],
   

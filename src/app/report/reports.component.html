@@ -1,150 +1,157 @@
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                 <div class="row" style="margin-right: 0px;margin-left: 0px;">
                     <div class="col-md-6" style="padding: 1px;">
-                            <form >
-                                <label style="font-size: 13px;margin-bottom: 0px;">School Year:</label>
+                                <label style="font-size: 13px;margin-bottom: 0px;">
+                                    <input type="checkbox" id="1"  name="School" [(ngModel)]="enrollReport.IsCheckedReportSchool" style="margin: 5px;" />School Year:
+                                </label>
                                 <div class="input-group">
-                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
-                                    <input class="form-control form-control-date" placeholder="From..." name="Fr" ngbDatepicker #FrDate="ngbDatepicker">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-light btn-filter-date" (click)="FrDate.toggle()" type="button">
-                                            <i class="fa fa-calendar"></i>
-                                        </button>
-                                    </div>
-                                    <input class="form-control form-control-date" placeholder="To.." name="To" ngbDatepicker #ToDate="ngbDatepicker">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-light btn-filter-date" (click)="ToDate.toggle()" type="button">
-                                            <i class="fa fa-calendar"></i>
-                                        </button>
+                                    <label style="font-size: 13px;margin-bottom: 0px;">
+                                        School Year From:
+                                    </label>
+                                    <div>
+                                        <ng-select [items]="schoolyearList"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [multiple]="true"
+                                            [(ngModel)]="enrollReport.schoolyearfrom">
+                                        </ng-select>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="input-group">
+                                    <label style="font-size: 13px;margin-bottom: 0px;">
+                                        School Year From:
+                                    </label>
+                                    <div>
+                                        <ng-select [items]="schoolyearList"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [multiple]="true"
+                                            [(ngModel)]="enrollReport.schoolyearto">
+                                        </ng-select>
+                                    </div>
+                                </div>
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
-                    <div class="col-md-2" style="padding: 1px;">
-                        <form >
-                            <label style="font-size: 13px;margin-bottom: 0px;">Department: </label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
-                                    <select name="filter" class="form-control inputText">
-                                        <option></option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
+                    <div class="col-md-4">
+                        <label style="font-size: 13px;margin-bottom: 0px;">
+                            <input type="checkbox" id="2" name="Department"[(ngModel)]="enrollReport.IsCheckedReportDept" style="margin: 5px;" />Department: 
+                        </label>
+                        <div>
+                            <ng-select [items]="deparmentList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.department">
+                            </ng-select>
+                        </div>
+                        
+                 </div>
+                <div class="col-md-4" >
+                        <label style="font-size: 13px;margin-bottom: 0px;">
+                            <input type="checkbox" id="3" name="Grade"[(ngModel)]="enrollReport.IsCheckedReportGrade" style="margin: 5px;" />Grade: 
+                        </label>
+                        <div>
+                            <ng-select [items]="gradeList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.grade">
+                            </ng-select>
+                        </div>
+                </div>
+                <div class="col-md-4" >
+                        <label style="font-size: 13px;margin-bottom: 0px;">
+                            <input type="checkbox" id="4" name="Course" [(ngModel)]="enrollReport.IsCheckedReportCourse" style="margin: 5px;" />Course: 
+                        </label>
+                       <div>
+                            <ng-select [items]="coursetList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.course">
+                            </ng-select>
+                        </div>
+                </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <input type="checkbox" id="5" name="Strand" [(ngModel)]="enrollReport.IsCheckedReportStrand" style="margin: 5px;" />Track & Strand: 
+                            </label>
+                            <div>
+                                <ng-select [items]="strandList"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.strand">
+                                </ng-select>
                             </div>
-                        </form>
                     </div>
-                    <div class="col-md-2" style="padding: 1px;">
-                        <form >
-                            <label style="font-size: 13px;margin-bottom: 0px;">Grade: </label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
-                                    <select name="filter"class="form-control inputText">
-                                        <option></option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <input type="checkbox" id="6" name="Semester" [(ngModel)]="enrollReport.IsCheckedReportSem" style="margin: 5px;" />Semester: 
+                            </label>
+                            <div>
+                                <ng-select [items]="semesterList"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.semester">
+                                </ng-select>
                             </div>
-                        </form>
                     </div>
-                    <div class="col-md-2" style="padding: 1px;">
-                        <form >
-                            <label style="font-size: 13px;margin-bottom: 0px;">Course: </label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
-                                    <select name="filter"class="form-control inputText">
-                                        <option></option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <input type="checkbox" id="7" name="Gender" [(ngModel)]="enrollReport.IsCheckedReportGender" style="margin: 5px;" />Gender 
+                            </label>
+                            <div>
+                                <ng-select [items]="genderList"
+                                    bindLabel="name"
+                                    bindValue="name"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.gender">
+                                </ng-select>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-md-2" style="padding: 1px;">
-                        <form >
-                            <label style="font-size: 13px;margin-bottom: 0px;">Track & Strand: </label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
-                                    <select name="filter"  class="form-control inputText">
-                                        <option></option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-2" style="padding: 1px;">
-                        <form >
-                            <label style="font-size: 13px;margin-bottom: 0px;">Semester: </label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
-                                    <select name="filter"  class="form-control inputText">
-                                        <option></option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-2" style="padding: 1px;">
-                        <form >
-                            <label style="font-size: 13px;margin-bottom: 0px;">Gender </label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="checkbox" name="Ischeckd" style="margin: 5px;" />
-                                    <select name="filter"  class="form-control inputText">
-                                        <option></option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div style="padding:5px;float: right;">
-                    <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button" style="font-size: 12px;"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                    <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="onSearch()" type="button" style="font-size: 12px;"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
                 </div>
             </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
                     <table >
                           <thead >
                             <tr>
-                              <th > <h6 >Ref_no</h6></th>
-                              <th > <h6 >First Name</h6></th>
+                              <th > <h6 >Name</h6></th>
+                              <th > <h6 >Gender</h6></th>
                               <th > <h6 >Department</h6></th>
+                              <th > <h6 >Strand & Course</h6></th>
+                              <th > <h6 >Semester</h6></th>
                             </tr>
                           </thead>
                             <tbody>
-                              <tr *ngFor="let enrol of enrolmentList; let i =index" >
-                                  <td ><h5 >{{enrol.ref_no}}</h5></td>
-                                  <td ><h5 >{{enrol.firstname}}</h5></td>
-                                  <td ><h5 >{{enrol.department}}</h5></td>
+                              <tr *ngFor="let enrol of enrollReportList; let i =index" >
+                                  <td ><h5 >{{enrol.NAME}}</h5></td>
+                                  <td ><h5 >{{enrol.GENDER}}</h5></td>
+                                  <td ><h5 >{{enrol.DEPARTMENT}}</h5></td>
+                                  <td ><h5 >{{enrol.STRAND}}</h5></td>
+                                  <td ><h5 >{{enrol.SEMESTER}}</h5></td>
                               </tr> 
                           </tbody>
                     </table>
                   </div>
                 </div>
-        </div>
+        </div> -->
     </div>
-    <div class="col-md-3">
+    <!-- <div class="col-md-3">
         <div class="card">
             <div class="card-body">
                 <div class="shadow-sm card action-buttons">
@@ -166,5 +173,5 @@
                   </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
