@@ -36,8 +36,8 @@ export class BillingService {
         .pipe(map((res: any) => res));
     }
 
-    getYearlyFeeAccordingtoStudent(departmentId:Number,gradeId:Number,strandId:Number,semester:Number,schoolyearfrom:Number,schoolyearto:Number){
-        return this._httpClient.get<any>(this._env.api+'getYearlyFeeAccordingtoStudent/'+departmentId+'/'+gradeId+'/'+strandId+'/'+semester+'/'+schoolyearfrom+'/'+schoolyearto)
+    getYearlyFeeAccordingtoStudent(departmentId:Number,gradeId:Number,strandId:Number,courseId:Number,semester:Number,schoolyearfrom:Number,schoolyearto:Number){
+        return this._httpClient.get<any>(this._env.api+'getYearlyFeeAccordingtoStudent/'+departmentId+'/'+gradeId+'/'+strandId+'/'+courseId+'/'+semester+'/'+schoolyearfrom+'/'+schoolyearto)
         .pipe(map((res: any) => res));
     }
 

@@ -190,14 +190,19 @@ export class SetupIndividualComponent {
               this.deparmentList = data;
           })
 
-          this._billingService.getYearlyFeeAccordingtoStudent(1,1,0,0,2020,2021).subscribe((data:any) => 
+          this._billingService.getYearlyFeeAccordingtoStudent(result.department,result.grade,result.strand,result.courseId,result.semester,2020,2021).subscribe((data:any) => 
           {
-            data.forEach(element => {
-              let temp= { id:0, description:element.description,amount:element.amount,studentFeeId:0,feeType:element.feeType} as StudentfeeDetails;
-              this.studentFee.push(temp);
-            });
-            console.log(this.studentFee);
-            this.dataSourceForm = new MatTableDataSource( this.studentFee);
+            if(data.length > 0 ){
+              data.forEach(element => {
+                let temp= { id:0, description:element.description,amount:element.amount,studentFeeId:0,feeType:element.feeType} as StudentfeeDetails;
+                this.studentFee.push(temp);
+              });
+              console.log(this.studentFee);
+              this.dataSourceForm = new MatTableDataSource( this.studentFee);
+            }else{
+              this.setDialog("no set up found!");
+            }
+
           })
       });
   }

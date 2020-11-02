@@ -160,11 +160,13 @@ onSearch()
   generatePdf(){
     var tempArr = [];
     let en = JSON.parse(JSON.stringify(this.enrollReportList));
+    console.log(this.enrollReportList);
     for(var i=0; i<en.length; i++){
        tempArr.push(
          { 
           NAME: en[i].NAME, 
           DEPARTMENT: en[i].DEPARTMENT,
+          GRADE: en[i].Grade, 
           STRAND: en[i].STRAND, 
           COURSE: en[i].COURSE,
           SEMESTER: en[i].SEMESTER,
@@ -206,7 +208,7 @@ onSearch()
                 }
               ]
             },
-            this.table(tempArr, ['NAME','DEPARTMENT','STRAND','COURSE','SEMESTER','GENDER'])
+            this.table(tempArr, ['NAME','DEPARTMENT','GRADE','STRAND','COURSE','SEMESTER','GENDER'])
           ],
           styles: {
             header: {
@@ -247,7 +249,7 @@ onSearch()
     return {
       fontSize: 12,
       table: {
-        widths: ['26.6%', '16.6%', '12.6%', '15.6%', '14.6%', '12.6%'],
+        widths: ['20.6%', '16.6%', '16.6%', '12.6%', '15.6%', '10.6%', '5.6%'],
         fillColor: '#555555',
         headerRows: 2,
         fontSize: 12,

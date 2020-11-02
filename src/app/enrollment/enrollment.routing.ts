@@ -69,17 +69,17 @@ export const EnrollmentRoutes: Routes = [
 					]
 				}
 			},
-			{
-				path: 'newstudent',
-				component: EnrollmentComponent,
-				data: {
-					title: 'Enrollment',
-					urls: [
-						{ title: 'Enrollment', url: '/enrollment' },
-						{ title: 'Enrollment' }
-					]
-				}
-			},
+			// {
+			// 	path: 'newstudent',
+			// 	component: EnrollmentComponent,
+			// 	data: {
+			// 		title: 'Enrollment',
+			// 		urls: [
+			// 			{ title: 'Enrollment', url: '/enrollment' },
+			// 			{ title: 'Enrollment' }
+			// 		]
+			// 	}
+			// },
 			{
 				path: 'collegestudent',
 				component: EnrollmentCollegeComponent,

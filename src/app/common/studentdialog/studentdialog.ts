@@ -35,7 +35,6 @@ export class StudentDialog {
     
       this._studentService.getStudentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
       {
-          console.log(data);
         this.studentList = data.Student;
         this.dataSource = new MatTableDataSource( this.studentList);
         // this.dataSource.paginator = this.paginator;
@@ -63,5 +62,21 @@ export class StudentDialog {
       this.dialogRef.close(row);
     }
 
+    pageEvents(event: any) {
+      this._studentService.getStudentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
+      {
+        this.studentList = data.Student;
+        this.dataSource = new MatTableDataSource( this.studentList);
+      });
+    }
+
+   search(){
+    this._studentService.getStudentList(0,this.pageSize,this.filter).subscribe((data:any) => 
+    {
+      this.studentList = data.Student;
+      this.dataSource = new MatTableDataSource( this.studentList);
+      // this.changeDetectorRefs.detectChanges();
+    });
+    }
     
 }
