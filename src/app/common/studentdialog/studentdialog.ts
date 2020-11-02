@@ -1,5 +1,5 @@
 
-import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input,Inject,ElementRef} from '@angular/core';
+import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input,Inject,ElementRef,ChangeDetectorRef} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Student} from '../../commonmodel/Student'
 import { MatTableDataSource } from '@angular/material/table';
@@ -30,7 +30,8 @@ export class StudentDialog {
 
   @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
-    constructor(private _studentService:StudentService,public dialogRef: MatDialogRef<StudentDialog>,@Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    constructor(private _studentService:StudentService,public dialogRef: MatDialogRef<StudentDialog>,
+      @Inject(MAT_DIALOG_DATA) public data: DialogData,private changeDetectorRefs: ChangeDetectorRef) {
       dialogRef.disableClose = true;
     
       this._studentService.getStudentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
@@ -75,8 +76,20 @@ export class StudentDialog {
     {
       this.studentList = data.Student;
       this.dataSource = new MatTableDataSource( this.studentList);
-      // this.changeDetectorRefs.detectChanges();
+      this.changeDetectorRefs.detectChanges();
     });
-    }
+  }
+
+  refresh(){
+    this.filterInput.nativeElement.value = "";
+    this.dataSource.filter = "";
+    this.filter = "";
+    this._studentService.getStudentList(0,this.pageSize,"").subscribe((data:any) => 
+    {
+      this.studentList = data.Student;
+      this.dataSource = new MatTableDataSource( this.studentList);
+      this.changeDetectorRefs.detectChanges();
+    });
+   }
     
 }
