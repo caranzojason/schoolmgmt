@@ -174,7 +174,6 @@ export class SetupIndividualComponent {
   setStudentDialog(){
     const dialogRef = this.dialog.open(StudentDialog, {
         width: '1000px',
-        height: '500px',
         data: {  message: "test"}
       });
 
