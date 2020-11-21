@@ -20,7 +20,7 @@ import { ActivatedRoute,Router} from '@angular/router';
 export class StudentComponent implements AfterViewInit {
   enrolmentList:Array<Student>;
   subtitle: string;
-  displayedColumns: string[] = [ 'lastname','firstname', 'email','status','actions'];
+  displayedColumns: string[] = ['studentno', 'lastname','firstname', 'email','strandnane','coursename','status','actions'];
   dataSource: MatTableDataSource<Student>;
   links = ['First', 'Second', 'Third'];
   activeLink = this.links[0];
@@ -75,6 +75,9 @@ export class StudentComponent implements AfterViewInit {
     "schoolyearfrom": 0,
     "schoolyearto": 0,
     "semester": 0,
+    "gradename":"",
+    "strandname":"",
+    "coursename":""
   }
 
   public deparmentList:any;
@@ -183,6 +186,9 @@ export class StudentComponent implements AfterViewInit {
       "schoolyearfrom": 0,
       "schoolyearto": 0,
       "semester": 0,
+      "gradename":"",
+      "strandname":"",
+      "coursename":""
     }
 
     this.tabGroup.selectedIndex = 1
@@ -339,18 +345,18 @@ export class StudentComponent implements AfterViewInit {
 
 
   pageEvents(event: any) {
-    this._enrollService.getEnrollmentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
+    this._enrollService.getStudentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
     {
-      this.enrolmentList = data.Enrollment;
+      this.enrolmentList = data.Student;
       this.dataSource = new MatTableDataSource( this.enrolmentList);
     });
  }
 
  search(){
-   this._enrollService.getEnrollmentList(0,this.pageSize,this.filter).subscribe((data:any) => 
+   this._enrollService.getStudentList(0,this.pageSize,this.filter).subscribe((data:any) => 
    {
-     this.enrolmentList = data.Enrollment;
-     this.dataSource = new MatTableDataSource( this.enrolmentList);
+    this.enrolmentList = data.Student;
+    this.dataSource = new MatTableDataSource( this.enrolmentList);
      this.changeDetectorRefs.detectChanges();
    });
  }
@@ -367,7 +373,5 @@ export class StudentComponent implements AfterViewInit {
     this.changeDetectorRefs.detectChanges();
   });
  }
-
-
 }
 

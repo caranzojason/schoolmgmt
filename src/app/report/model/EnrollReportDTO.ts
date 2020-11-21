@@ -1,6 +1,7 @@
 export class EnrollReport{
     schoolyearfrom:number;
     schoolyearto:number;
+    type:any;
     department:any;
     grade:any;
     course:any;

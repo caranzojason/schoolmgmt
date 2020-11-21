@@ -36,6 +36,7 @@ export class CounterReportsComponent implements OnInit {
       "schoolyearfrom":0,
       "schoolyearto":0,
       "department":[],
+      "type":[],
       "grade":[],
       "course":[],
       "strand":[],
