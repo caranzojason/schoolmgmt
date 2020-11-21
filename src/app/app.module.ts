@@ -66,7 +66,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatTableFilterModule } from 'mat-table-filter';
 import { EnrollmentDialogMsBox } from './common/dialog/enrollDialogMsgBox';
-
+import { TermsAndConditionDialog } from './common/dialog/termscondition';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,
@@ -88,6 +88,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     StudentDialog,
     PaymentDialog,
     EnrollmentDialogMsBox,
+    TermsAndConditionDialog
   
   ],
   imports: [
@@ -153,6 +154,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BillingService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EnrollmentDialog,StudentDialog,EnrollmentDialogMsBox,PaymentDialog]
+  entryComponents: [EnrollmentDialog,StudentDialog,EnrollmentDialogMsBox,PaymentDialog,TermsAndConditionDialog]
 })
 export class AppModule {}

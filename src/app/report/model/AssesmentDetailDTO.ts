@@ -1,4 +1,5 @@
 export class AssesmentDetailDTO{
-    studentId:any;
-    studentDetail:Array<any>;
+    student:any;
+    studentIds:any;
+    studentDetail:any;
 }

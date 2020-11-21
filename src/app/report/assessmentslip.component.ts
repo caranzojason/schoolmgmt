@@ -58,88 +58,94 @@ export class AssessmentSlipComponent implements OnInit {
       {id:11,name:'11'},
       {id:12,name:'12'},
     ];
-    dataAssessment:Array<AssesmentDetailDTO> = 
+    dataAssessment:any = 
     [
-      {"studentId":2021,
-       "studentDetail":[
-        {
-        "schoolyearfrom": 2020,
-        "studentId": 2021,
-        "studentName": "ABAO-AN TRISTAN JOHN",
-        "detailNo": 1,
-        "feeType": 1,
-        "Fee": "Tution Fee",
-        "amount": "20"
+      {
+        "student":
+        [
+          {"studentIds":2020,
+          "studentDetail":[
+           {
+           "schoolyearfrom": 2020,
+           "studentId": 2021,
+           "studentName": "ABAO-AN TRISTAN JOHN",
+           "detailNo": 1,
+           "feeType": 1,
+           "Fee": "Tution Fee",
+           "amount": "20"
+           },
+           {
+           "schoolyearfrom": 2020,
+           "studentId": 2021,
+           "studentName": "ABAO-AN TRISTAN JOHN",
+           "detailNo": 1,
+           "feeType": 2,
+           "Fee": "Misc. Fees",
+           "amount": "30"
+           },
+           {
+           "schoolyearfrom": 2020,
+           "studentId": 2021,
+           "studentName": "ABAO-AN TRISTAN JOHN",
+           "detailNo": 1,
+           "feeType": 3,
+           "Fee": "Other Fees",
+           "amount": "40"
+           },
+           {
+           "schoolyearfrom": 2020,
+           "studentId": 2021,
+           "studentName": "ABAO-AN TRISTAN JOHN",
+           "detailNo": 1,
+           "feeType": 4,
+           "Fee": "LMS",
+           "amount": "50"
+           }
+         ]
         },
-        {
-        "schoolyearfrom": 2020,
-        "studentId": 2021,
-        "studentName": "ABAO-AN TRISTAN JOHN",
-        "detailNo": 1,
-        "feeType": 2,
-        "Fee": "Misc. Fees",
-        "amount": "30"
-        },
-        {
-        "schoolyearfrom": 2020,
-        "studentId": 2021,
-        "studentName": "ABAO-AN TRISTAN JOHN",
-        "detailNo": 1,
-        "feeType": 3,
-        "Fee": "Other Fees",
-        "amount": "40"
-        },
-        {
-        "schoolyearfrom": 2020,
-        "studentId": 2021,
-        "studentName": "ABAO-AN TRISTAN JOHN",
-        "detailNo": 1,
-        "feeType": 4,
-        "Fee": "LMS",
-        "amount": "50"
-        }
-      ]
-     },
-     {"studentId":2021,
-     "studentDetail":[
-      {
-      "schoolyearfrom": 2020,
-      "studentId": 2021,
-      "studentName": "ABAO-AN TRISTAN JOHN",
-      "detailNo": 1,
-      "feeType": 1,
-      "Fee": "Tution Fee",
-      "amount": "20"
-      },
-      {
-      "schoolyearfrom": 2020,
-      "studentId": 2021,
-      "studentName": "ABAO-AN TRISTAN JOHN",
-      "detailNo": 1,
-      "feeType": 2,
-      "Fee": "Misc. Fees",
-      "amount": "30"
-      },
-      {
-      "schoolyearfrom": 2020,
-      "studentId": 2021,
-      "studentName": "ABAO-AN TRISTAN JOHN",
-      "detailNo": 1,
-      "feeType": 3,
-      "Fee": "Other Fees",
-      "amount": "40"
-      },
-      {
-      "schoolyearfrom": 2020,
-      "studentId": 2021,
-      "studentName": "ABAO-AN TRISTAN JOHN",
-      "detailNo": 1,
-      "feeType": 4,
-      "Fee": "LMS",
-      "amount": "50"
+        {"studentIds":2021,
+        "studentDetail":[
+         {
+         "schoolyearfrom": 2020,
+         "studentId": 2021,
+         "studentName": "ABAO-AN TRISTAN JOHN",
+         "detailNo": 1,
+         "feeType": 1,
+         "Fee": "Tution Fee",
+         "amount": "20"
+         },
+         {
+         "schoolyearfrom": 2020,
+         "studentId": 2021,
+         "studentName": "ABAO-AN TRISTAN JOHN",
+         "detailNo": 1,
+         "feeType": 2,
+         "Fee": "Misc. Fees",
+         "amount": "30"
+         },
+         {
+         "schoolyearfrom": 2020,
+         "studentId": 2021,
+         "studentName": "ABAO-AN TRISTAN JOHN",
+         "detailNo": 1,
+         "feeType": 3,
+         "Fee": "Other Fees",
+         "amount": "40"
+         },
+         {
+         "schoolyearfrom": 2020,
+         "studentId": 2021,
+         "studentName": "ABAO-AN TRISTAN JOHN",
+         "detailNo": 1,
+         "feeType": 4,
+         "Fee": "LMS",
+         "amount": "50"
+         }
+       ]
       }
-    ]
-   }
+        ]
+      }
+   
      
     ]
   constructor(private _reportService:ReportService) {
@@ -166,21 +172,51 @@ export class AssessmentSlipComponent implements OnInit {
     var tempArr = [];
     let en = this.dataAssessment;//JSON.parse(JSON.stringify(this.dataAssessment));
     //array1.forEach(element => console.log(element));
+     console.log(en);
     this.dataAssessment.forEach(en => {
-      for(var i=0;i<en.studentDetail.length;i++){
-        tempArr.push(
-          { 
-            schoolyearfrom: en.studentDetail[i].schoolyearfrom, 
-            studentId: en.studentDetail[i].studentId,
-            studentName: en.studentDetail[i].studentName, 
-            detailNo: en.studentDetail[i].detailNo,
-            feeType: en.studentDetail[i].feeType,
-            DESCRIPTION: en.studentDetail[i].Fee,
-            AMOUNT: en.studentDetail[i].amount,
-          }
-        );
-  
-      }
+    var xx = [];
+    xx = en.student;
+    console.log(xx);
+    xx.forEach(e => {
+      console.log(e.studentIds);
+      var xxx = [];
+      xxx = e.studentIds;
+      console.log(xxx);
+      xxx.forEach(e => {
+        for(var i =0; i< e.studentDetail.length; i++)
+        {
+          tempArr.push(
+            { 
+              schoolyearfrom: e.studentDetail[i].schoolyearfrom, 
+              studentId: e.studentDetail[i].studentId,
+              studentName: e.studentDetail[i].studentName, 
+              detailNo: e.studentDetail[i].detailNo,
+              feeType: e.studentDetail[i].feeType,
+              DESCRIPTION: en.studentDetail[i].Fee,
+              AMOUNT: e.studentDetail[i].amount,
+            }
+          );
+        }
+      });
+
+    });
+
+      // for(var i=0;i<en.studentId.length;i++){
+      //   for(var i =0; i< en.studentDetail.length; i++)
+      //   {
+      //     tempArr.push(
+      //       { 
+      //         schoolyearfrom: en.studentDetail[i].schoolyearfrom, 
+      //         studentId: en.studentDetail[i].studentId,
+      //         studentName: en.studentDetail[i].studentName, 
+      //         detailNo: en.studentDetail[i].detailNo,
+      //         feeType: en.studentDetail[i].feeType,
+      //         DESCRIPTION: en.studentDetail[i].Fee,
+      //         AMOUNT: en.studentDetail[i].amount,
+      //       }
+      //     );
+      //   }
+      // }
       var document = {
         content: [
           {
