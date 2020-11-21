@@ -48,4 +48,7 @@ export interface Student{
     schoolyearfrom: any,
     schoolyearto: any,
     semester: Number,
+    gradename:string,
+    strandname:string,
+    coursename:string
 }

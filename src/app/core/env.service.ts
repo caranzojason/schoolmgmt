@@ -6,7 +6,7 @@ export class EnvService {
         //for dev
         public  api = 'http://127.0.0.1:8000/api/';
 
-     // public api = 'https://schoomanagementapi.sjcc.edu.ph/public/api/';
+   //   public api = 'https://schoomanagementapi.sjcc.edu.ph/public/api/';
  
  
  

@@ -10,6 +10,8 @@ import { EnrollmentElementaryComponent } from './enrollmentelementary.component'
 import { EnrollmentSeniorComponent } from './enrollmentseniorhigh.component';
 import { PaymentApprovalComponent } from './paymentapproval.component';
 import { PaymentInquiryComponent } from './paymentinquiry.component';
+import { EnrollmentGraduateComponent } from './enrollmentgraduate.component';
+
 export const EnrollmentRoutes: Routes = [
 	{
 		path: '',
@@ -69,17 +71,17 @@ export const EnrollmentRoutes: Routes = [
 					]
 				}
 			},
-			// {
-			// 	path: 'newstudent',
-			// 	component: EnrollmentComponent,
-			// 	data: {
-			// 		title: 'Enrollment',
-			// 		urls: [
-			// 			{ title: 'Enrollment', url: '/enrollment' },
-			// 			{ title: 'Enrollment' }
-			// 		]
-			// 	}
-			// },
+			{
+				path: 'graduate',
+				component: EnrollmentGraduateComponent,
+				data: {
+					title: 'Enrollment',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment' },
+						{ title: 'Enrollment' }
+					]
+				}
+			},
 			{
 				path: 'collegestudent',
 				component: EnrollmentCollegeComponent,

@@ -36,6 +36,22 @@
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    <div class="input-group">
+                        <label style="font-size: 13px;margin-bottom: 0px;">
+                            Student Type:
+                        </label>
+
+                        <div>
+                            <ng-select [items]="studentTypeList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.type">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
                     <div class="col-md-4">
                         <label style="font-size: 13px;margin-bottom: 0px;">
                             <input type="checkbox" id="2" name="Department"[(ngModel)]="enrollReport.IsCheckedReportDept" style="margin: 5px;" />Department: 

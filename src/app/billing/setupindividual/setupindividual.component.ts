@@ -132,7 +132,6 @@ export class SetupIndividualComponent {
         this.feeType = data;
         console.log(this.feeType);
       });
-
     }
 
     onTabChange(event: MatTabChangeEvent) {
@@ -149,8 +148,6 @@ export class SetupIndividualComponent {
           this.dataSource = new MatTableDataSource(data.studentFee);
           this.changeDetectorRefs.detectChanges();
       });
-
-
     }
 
     refresh(){
@@ -178,7 +175,6 @@ export class SetupIndividualComponent {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
           this.vstudentFee.studentId = result.id;
           this.vstudentFee.firstname = result.firstname;
           this.vstudentFee.lastname = result.lastname;
@@ -206,6 +202,25 @@ export class SetupIndividualComponent {
       });
   }
 
+  addNewForm(){
+    console.log("add new");
+    this.vstudentFee = {
+      "id":0,
+      "studentId":0,
+      "remarks":"",
+      "status":"O",
+      "schoolyearfrom":0,
+      "schoolyearto":0,
+      "lastname":"",
+      "firstname":"",
+      "departmentname":"",
+      "feeTypeId":0
+    };
+
+
+    this.tabGroup.selectedIndex = 1
+  }
+
   addNewFee(){
       console.log("add new");
       let temp=  { id:0, description:this.feeDescription,amount:this.feeAmount,studentFeeId:0,feeType:0} as StudentfeeDetails;
@@ -213,13 +228,11 @@ export class SetupIndividualComponent {
       this.dataSourceForm = new MatTableDataSource( this.studentFee);
   }
   removeFee(row){
-
     this.studentFee.forEach(function(item, index, object) {
       if(item.description == row.description){
         object.splice(index, 1);
       }
     });
-    console.log(this.studentFee);
     this.dataSourceForm = new MatTableDataSource( this.studentFee);
   }
 
@@ -250,8 +263,7 @@ export class SetupIndividualComponent {
       dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog result: ${result}`);
       });
-}
-
+  }
 
   save(){
     let studFee = {id: this.vstudentFee.id,studentId: this.vstudentFee.studentId, remarks:this.remarks,status:"O",schoolyearfrom:this.yearFrom,schoolyearto:this.yearTo, feeTypeId:0 } as VStudentfee

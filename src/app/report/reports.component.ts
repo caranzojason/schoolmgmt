@@ -35,6 +35,7 @@ export class ReportsComponent implements OnInit {
     {
       "schoolyearfrom":0,
       "schoolyearto":0,
+      "type":[],
       "department":[],
       "grade":[],
       "course":[],
@@ -70,18 +71,18 @@ export class ReportsComponent implements OnInit {
     {id:2021,name:'2021'},
     {id:2022,name:'2022'}
   ];
+
+  public studentTypeList:any = [
+    {id:'yes',name:'Old Student'},
+    {id:'no',name:'New Student'}
+  ];
+
   enrollReportList: EnrollReport;
   constructor(private _reportService:ReportService) {
-    //this.enrolmentList = <Enrollment>{};
   }
 
    ngOnInit() { }
   ngAfterViewInit() {
-    //this.enrolmentList = <Enrollment>{};
-    // this._enrollService.getAllDepartment().subscribe((data:any) => 
-    // {
-    //     this.deparmentList = data;
-    // })
     this._reportService.getEnrollmentForVerification().subscribe((data) => 
     {
         this.enrolmentList = data;
@@ -147,7 +148,7 @@ onSearch()
   {
     this.enrollReport.semester = [];
   }
-  // console.log(JSON.stringify(this.enrollReport));
+  console.log(JSON.stringify(this.enrollReport));
   // return;
   this._reportService.getEnrollmentReport(this.enrollReport).subscribe((data) => 
     {
@@ -170,7 +171,7 @@ onSearch()
           STRAND: en[i].STRAND, 
           COURSE: en[i].COURSE,
           SEMESTER: en[i].SEMESTER,
-          GENDER: en[i].GENDER,
+          // GENDER: en[i].GENDER,
           }
         );
       var report = {
@@ -208,7 +209,7 @@ onSearch()
                 }
               ]
             },
-            this.table(tempArr, ['NAME','DEPARTMENT','GRADE','STRAND','COURSE','SEMESTER','GENDER'])
+            this.table(tempArr, ['NAME','DEPARTMENT','GRADE','STRAND','COURSE','SEMESTER'])
           ],
           styles: {
             header: {
@@ -249,7 +250,7 @@ onSearch()
     return {
       fontSize: 12,
       table: {
-        widths: ['20.6%', '16.6%', '16.6%', '12.6%', '15.6%', '10.6%', '5.6%'],
+        widths: ['20.6%', '16.6%', '16.6%', '12.6%', '15.6%', '10.6%'],
         fillColor: '#555555',
         headerRows: 2,
         fontSize: 12,
