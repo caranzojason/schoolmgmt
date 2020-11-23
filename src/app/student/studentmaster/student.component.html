@@ -90,9 +90,10 @@
 
                 <mat-tab label="Student" style="margin-top: 30px;">
                     <ng-template matTabContent>
-                        <div >
-                            <div class="card-body" style="box-shadow: 2px 0px 5px 0px #ddddde;border-radius: 10px;">
-                                <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
+                        <div id="content" #content >
+                            <div class="card-body" style="border-radius: 10px; margin-right: 20px;">
+                                <div style="margin: -10px;padding: 10px;margin-bottom: 20px;border: 1px solid #c0c1c0;
+                                border-radius: 10px;">
                                     <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
                                         <div class="col-md-2" style="padding: 1px;">
                                             <form >
@@ -323,7 +324,8 @@
                                     </div>
                                 </div> 
                                
-                                <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
+                                <div style="margin: -10px;padding: 10px;margin-bottom: 20px;border: 1px solid #c0c1c0;
+                                border-radius: 10px;">
                                     <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
                                         <div class="col-md-3" style="padding: 1px;">
                                             <form >
@@ -455,9 +457,10 @@
                                         </div>
                                     </div>
                                 </div>      
-                                <div style="margin: -10px;padding: 10px;box-shadow: 1px 1px 6px 2px #6575;margin-bottom: 20px;">
+                                <div style="margin: -10px;padding: 10px;margin-bottom: 20px;border: 1px solid #c0c1c0;
+                                border-radius: 10px;">
                                     <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                        <div class="col-md-4" style="padding: 1px;">
+                                        <div class="col-md-3" style="padding: 1px;">
                                             <form >
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Last Grade Level</label>
                                                     <div class="form-group">
@@ -468,7 +471,7 @@
                                             </form>
                                         </div>
               
-                                        <div class="col-md-4" style="padding: 1px;">
+                                        <div class="col-md-3" style="padding: 1px;">
                                             <form >
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Last School Year</label>
                                                     <div class="form-group">
@@ -478,9 +481,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                    </div>
-                                    <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
-                                        <div class="col-md-6" style="padding: 1px;">
+                                        <div class="col-md-3" style="padding: 1px;">
                                             <form >
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Last School Attend</label>
                                                 <div class="form-group">
@@ -497,7 +498,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="col-md-6" style="padding: 1px;">
+                                        <div class="col-md-3" style="padding: 1px;">
                                             <form >
                                                 <label style="font-size: 13px;margin-bottom: 0px;">Last School Address</label>
                                                 <div class="form-group">
@@ -516,7 +517,6 @@
                                         </div>
                                     </div>
                                 </div>   
-    
                                     <div class="col-md-1" style="padding: 1px;">
                                         <form >
                                             <label style="font-size: 13px;margin-bottom: 0px;">Update Status </label>
@@ -534,6 +534,12 @@
                                 <div class="modal-footer att-modal-footer">
                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="save()" type="button">Save</button>
+                                    <!-- <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="downloadPDF()"type="button">Save</button> -->
+                                    <button (click)="downloadPDF()"
+                                    class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
+                                    <i class="material-icons" style="font-size: 13px;">
+                                      print
+                                    </i><span>Print PDF</span></button>
                                 </div>
                             </div>
                         </div>

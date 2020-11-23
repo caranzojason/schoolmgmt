@@ -102,6 +102,7 @@ public currentTabIndex = 1
     this._enrollService.getEnrollmentForVerification().subscribe((data:Array<Enrollment>) => 
     {
         this.enrolmentList = data;
+        console.log(this.enrolmentList);
         this.dataSource = new MatTableDataSource( this.enrolmentList);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

@@ -16,6 +16,7 @@ import { ActivatedRoute,Router} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Inquiry implements AfterViewInit {
+
   enrolmentList:Array<Enrollment>;
   subtitle: string;
   displayedColumns: string[] = ['ref_no', 'lastname', 'email','schoolyearfrom','schoolyearto','status','actions'];
@@ -120,7 +121,7 @@ export class Inquiry implements AfterViewInit {
       this.length = data.NoOfRecords;
     });
   }
-
+ 
   toggleBackground() {
     this.background = this.background ? undefined : 'primary';
   }
@@ -183,6 +184,7 @@ export class Inquiry implements AfterViewInit {
 
   public edit(row)
   {
+    console.log(row);
     this.enrollment = row;
     if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
     else{

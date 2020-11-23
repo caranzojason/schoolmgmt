@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AssessmentSlipComponent } from './assessmentslip.component';
 import { CounterReportsComponent } from './countreport.component';
 import { ReportsComponent } from './reports.component';
+import { StudentReportsComponent } from './studentreport.component';
 
 export const ReportsRoute: Routes = [
 	{
@@ -39,7 +40,18 @@ export const ReportsRoute: Routes = [
 						{ title: 'Count Report' }
 					]
 				}
-            }
+            },
+			// {
+			// 	path: 'studentreport',
+			// 	component: StudentReportsComponent,
+			// 	data: {
+			// 		title: 'Student Report',
+			// 		urls: [
+            //             { title: 'Student Report', url: '/report/studentreport' },
+			// 			{ title: 'Student Report' }
+			// 		]
+			// 	}
+            // }
 		]
 	}
 ];

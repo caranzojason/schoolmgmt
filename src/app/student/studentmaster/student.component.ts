@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import {Student} from './model/Student'
 import { ThemePalette } from '@angular/material/core';
 import { ActivatedRoute,Router} from '@angular/router';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas'; 
 
 @Component({
     templateUrl: './student.component.html',
@@ -123,7 +125,23 @@ export class StudentComponent implements AfterViewInit {
       this.length = data.NoOfRecords;
     });
   }
-
+  downloadPDF() {
+    var data = document.getElementById('content');  
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      var imgWidth = 297;   
+      var pageHeight = 210;    
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      //var heightLeft = imgHeight; 
+  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jsPDF('l', 'mm', [297, 210]); // A4 size page of PDF  
+      var position = 0;  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, pageHeight)
+      //pdf.output('dataurlnewwindow'); // Generated PDF   
+      window.open(pdf.output('bloburl'), '_blank');
+    });  
+  } 
   toggleBackground() {
     this.background = this.background ? undefined : 'primary';
   }

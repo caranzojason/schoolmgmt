@@ -144,7 +144,15 @@ export const ROUTES: RouteInfo[] = [
         class: '',
         extralink: false,
         submenu: []
-      }
+      },
+      // {
+      //   path: '/report/studentreport',
+      //   title: 'Student Reports',
+      //   icon: 'mdi mdi-gauge',
+      //   class: '',
+      //   extralink: false,
+      //   submenu: []
+      // }
     ]
   }
 ];
