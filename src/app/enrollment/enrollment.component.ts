@@ -4,6 +4,7 @@ import {EnrollmentService} from './service/enrollment.service';
 import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../common/dialog/enrollmentdialog';
 import { EnrollmentDialogMsBox } from '../common/dialog/enrollDialogMsgBox';
+import { TermsAndConditionDialog } from '../common/dialog/termscondition';
 @Component({
     selector: 'app-enroll',
     styleUrls: ['./enrollment.scss'],
@@ -134,6 +135,7 @@ export class EnrollmentComponent implements AfterViewInit {
             console.log(`Dialog result: ${result}`);
           });
     }
+  
     setDialogBox(message){
         const dialogRef = this.dialog.open(EnrollmentDialogMsBox, {
             width: '300px',
