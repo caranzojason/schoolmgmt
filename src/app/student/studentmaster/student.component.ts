@@ -154,7 +154,7 @@ export class StudentComponent implements AfterViewInit {
         // document.getElementById("alldata").style.overflow = "inherit";
         // document.getElementById("alldata").style.maxHeight = "inherit";
     
-         html2canvas(data, { scrollY: -window.scrollY, scale: 1 }).then(
+         html2canvas(data, { scrollY: -window.scrollY, scale: 2 }).then(
           canvas => {
             const contentDataURL = canvas.toDataURL("image/png", 1.0);
             // enabling the scroll
