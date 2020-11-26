@@ -125,22 +125,65 @@ export class StudentComponent implements AfterViewInit {
       this.length = data.NoOfRecords;
     });
   }
-  downloadPDF() {
-    var data = document.getElementById('content');  
-    html2canvas(data).then(canvas => {  
-      // Few necessary setting options  
-      var imgWidth = 285;   
-      var pageHeight = 200;    
-      var imgHeight = canvas.height * imgWidth / canvas.width;  
-      //var heightLeft = imgHeight; 
+   downloadPDF() {
+   // var data = document.getElementById('content');  
+    // html2canvas(data,{scrollY: -window.scrollY}).then(canvas => {  
+
+    //   // // Few necessary setting options  
+    //   // var imgWidth = 297;   
+    //   // var pageHeight = 210;    
+    //   // var imgHeight = canvas.height * imgWidth / canvas.width;  
+    //   // //var heightLeft = imgHeight; 
   
-      const contentDataURL = canvas.toDataURL('image/png')  
-      let pdf = new jsPDF('l', 'mm', [297, 210]); // A4 size page of PDF  
-      var position = 0;  
-      pdf.addImage(contentDataURL, 'PNG', 5, 2, imgWidth, pageHeight)
-      //pdf.output('dataurlnewwindow'); // Generated PDF   
-      window.open(pdf.output('bloburl'), '_blank');
-    });  
+    //   // const contentDataURL = canvas.toDataURL('image/png')  
+    //   // let pdf = new jsPDF('l', 'mm', [297, 210]); // A4 size page of PDF  
+    //   // var position = 0;  
+    //   // pdf.addImage(contentDataURL, 'PNG', 0, 0, 0, imgHeight)
+    //   // //pdf.output('dataurlnewwindow'); // Generated PDF   
+    //   // window.open(pdf.output('bloburl'), '_blank');
+
+    //   $("pdfOpenHide").attr("hidden", 1);
+    //   // To disable the scroll
+    //   document.getElementById("alldata").style.overflow = "inherit";
+    //   document.getElementById("alldata").style.maxHeight = "inherit";
+
+    // });  
+    var data = document.getElementById("content");
+        //$("pdfOpenHide").attr("hidden", 1);
+        // To disable the scroll
+        // document.getElementById("alldata").style.overflow = "inherit";
+        // document.getElementById("alldata").style.maxHeight = "inherit";
+    
+         html2canvas(data, { scrollY: -window.scrollY, scale: 1 }).then(
+          canvas => {
+            const contentDataURL = canvas.toDataURL("image/png", 1.0);
+            // enabling the scroll
+            // document.getElementById("alldata").style.overflow = "scroll";
+            // document.getElementById("alldata").style.maxHeight = "150px";
+    
+            let pdf = new jsPDF("p", "mm", "a4"); // A4 size page of PDF
+    
+            let imgWidth = 300;
+            let pageHeight = pdf.internal.pageSize.height;
+            let imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+    
+            pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+    
+            while (heightLeft >= 0) {
+              position = heightLeft - imgHeight;
+              pdf.addPage();
+              pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+              heightLeft -= pageHeight;
+            }
+            window.open(
+              pdf.output("bloburl", { filename: "new-file.pdf" }),
+              "_blank"
+            );
+          }
+        );
   } 
   toggleBackground() {
     this.background = this.background ? undefined : 'primary';
