@@ -90,8 +90,9 @@
 
                 <mat-tab label="Student" style="margin-top: 30px;">
                     <ng-template matTabContent>
-                        <div id="content" #content >
-                            <div class="card-body" style="border-radius: 10px; margin-right: 20px;">
+                    <div>
+                        <div class="card-body" style="border-radius: 10px; margin-right: 20px;">
+                            <div id="content" #content >
                                 <div style="margin: -10px;padding: 10px;margin-bottom: 20px;border: 1px solid #c0c1c0;
                                 border-radius: 10px;">
                                     <div class="row" style="margin-bottom: -10px; margin-right: 0px;margin-left: 0px;">
@@ -531,6 +532,7 @@
                                             </div>
                                         </form>
                                     </div>
+                                </div>    
                                 <div class="modal-footer att-modal-footer">
                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="save()" type="button">Save</button>
