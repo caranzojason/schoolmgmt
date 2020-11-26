@@ -137,6 +137,7 @@ export class Inquiry implements AfterViewInit {
 
   public selectDepartment()
   {
+    console.log(this.enrollment);
       this.schoolsemesterList= [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}];
       if(this.enrollment.department != 5){//not equal to colege
           this._enrollService.getGrades(this.enrollment.department).subscribe((data:any) => 

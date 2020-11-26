@@ -44,6 +44,12 @@ export class StudentMasterService {
         .pipe(map((res: Student) => res));
     }
 
+    
+    updateStudent(data:Student): Observable<Student> {
+        return this._httpClient.post<Student>(this._env.api +'updateStudent',data)
+        .pipe(map((res: Student) => res));
+    }
+
     updateEnrolment(data:Student): Observable<Student> {
         return this._httpClient.post<Student>(this._env.api +'updateEnrol',data)
         .pipe(map((res: Student) => res));

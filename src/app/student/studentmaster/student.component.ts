@@ -257,6 +257,10 @@ export class StudentComponent implements AfterViewInit {
 
   public selectDepartment()
   {
+    console.log(this.enrollment);
+    this.enrollment.department = Number(this.enrollment.department);
+    this.enrollment.grade = Number(this.enrollment.grade);
+    console.log(this.enrollment);
       this.schoolsemesterList= [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}];
       if(this.enrollment.department != 5){//not equal to colege
           this._enrollService.getGrades(this.enrollment.department).subscribe((data:any) => 
@@ -270,11 +274,11 @@ export class StudentComponent implements AfterViewInit {
       if(this.enrollment.department == 1 || this.enrollment.department == 2){ //elem,junio
           this.trackStandardCourse =  [{id:0,name:"N/A"}];
           //asign to default value
-          if(this.enrollment.department == 1){
-              this.enrollment.grade = 1;
-          }else{
-              this.enrollment.grade = 9;
-          }
+          // if(this.enrollment.department == 1){
+          //     this.enrollment.grade = 1;
+          // }else{
+          //     this.enrollment.grade = 9;
+          // }
           this.gradesList = [{id:0,name:"N/A"}];
           this.schoolsemesterList = [{id:0,name:"N/A"}];
           
@@ -283,23 +287,25 @@ export class StudentComponent implements AfterViewInit {
       if(this.enrollment.department == 3 ) //senior
       {
           //set default selected value
-          this.enrollment.grade = 13;
-          this.enrollment.strand = 1;
-          this.enrollment.semester = 1;
+          // this.enrollment.grade = 13;
+          // this.enrollment.strand = 1;
+          // this.enrollment.semester = 1;
           this._enrollService.getStrand().subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
           });
       }
       if(this.enrollment.department == 4 || this.enrollment.department == 5 ){//,colege, master grad
-          this.enrollment.grade = 15;
-          this.enrollment.strand = 1;
-          this.enrollment.semester = 1;
+          // this.enrollment.grade = 15;
+          // this.enrollment.strand = 1;
+          // this.enrollment.semester = 1;
           this._enrollService.getCoursesByDeptId(this.enrollment.department).subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
           });
       }
+
+      console.log(this.gradesList);
   }
 
   public edit(row)
@@ -398,10 +404,13 @@ export class StudentComponent implements AfterViewInit {
     }
 
 
-    this._enrollService.createStudent(this.enrollment).subscribe((data:any) => 
+    this._enrollService.updateStudent(this.enrollment).subscribe((data:any) => 
     {
         console.log(data);
     });
+
+
+
   }
 
 
@@ -426,12 +435,15 @@ export class StudentComponent implements AfterViewInit {
   this.filterInput.nativeElement.value = "";
   this.dataSource.filter = "";
   this.filter = "";
-  this._enrollService.getEnrollmentList(0,this.pageSize,"").subscribe((data:any) => 
+
+  this._enrollService.getStudentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
   {
-    this.enrolmentList = data.Enrollment;
-    this.length = data.NoOfRecords;
+    this.enrolmentList = data.Student;
     this.dataSource = new MatTableDataSource( this.enrolmentList);
-    this.changeDetectorRefs.detectChanges();
+    // this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    // this.dataSource.paginator.length = data.NoOfRecords;
+    this.length = data.NoOfRecords;
   });
  }
 }

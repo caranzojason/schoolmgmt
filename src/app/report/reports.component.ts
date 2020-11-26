@@ -62,8 +62,8 @@ export class ReportsComponent implements OnInit {
       ];
 
     public semesterList = [
-    {id: 1, name: 'First Semister'},
-    {id: 2, name: 'Second Semister'},
+    {id: 1, name: 'First Semester'},
+    {id: 2, name: 'Second Semester'},
   
       ];
   public schoolyearList:any = [
@@ -252,7 +252,7 @@ onSearch()
       table: {
         widths: ['20.6%', '16.6%', '16.6%', '12.6%', '15.6%', '10.6%'],
         fillColor: '#555555',
-        headerRows: 2,
+        // headerRows: 2,
         fontSize: 12,
         
         body: this.buildTableBody(data, columns)
