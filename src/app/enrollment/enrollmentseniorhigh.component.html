@@ -506,7 +506,8 @@
             </div> 
         <div class="modal-footer att-modal-footer">
             <div>
-                <p >By clicking Enroll, you agree to our Terms & Conditions.</p>
+                <p (click)="myTermsAndCondition()" style="text-decoration-line: underline;
+                cursor: pointer;">By clicking Enroll, you agree to our Terms & Conditions.</p>
             </div>
             <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="cancel()"  type="button">Cancel</button>
             <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="enrol()" type="button">Enroll</button>

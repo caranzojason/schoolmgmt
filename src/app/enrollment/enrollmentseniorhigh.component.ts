@@ -4,6 +4,7 @@ import {EnrollmentService} from './service/enrollment.service';
 import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../common/dialog/enrollmentdialog';
 import { EnrollmentDialogMsBox } from '../common/dialog/enrollDialogMsgBox';
+import { TermsAndConditionDialog } from '../common/dialog/termscondition';
 @Component({
     selector: 'app-enroll',
     styleUrls: ['./enrollment.scss'],
@@ -129,6 +130,19 @@ export class EnrollmentSeniorComponent implements AfterViewInit {
         }
     }
 
+    myTermsAndCondition()
+    {
+        this.setDialogTermsCondition();
+    }
+    setDialogTermsCondition(){
+        const dialogRef = this.dialog.open(TermsAndConditionDialog, {
+            width: '1000px',
+            data: {  message: ""}
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+          });
+      }
     setDialog(message){
         const dialogRef = this.dialog.open(EnrollmentDialog, {
             width: '300px',
