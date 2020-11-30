@@ -328,7 +328,10 @@ public currentTabIndex = 1
         this.setDialog("School Year To is required!");
         return;
     }
-
+    if(this.enrollment.remarks == '' || this.enrollment.remarks == null){
+      this.setDialog("School Year To is required!");
+      return;
+  }
     this.enrollment.approved_by = "registrar"
     this._enrollService.updateStatus(this.enrollment).subscribe((data:any) => 
     {
