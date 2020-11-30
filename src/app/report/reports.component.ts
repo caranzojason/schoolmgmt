@@ -42,6 +42,7 @@ export class ReportsComponent implements OnInit {
       "strand":[],
       "semester":[],
       "gender":[],
+      "status":[],
       "IsCheckedReportSchool":false,
       "IsCheckedReportDept":false,
       "IsCheckedReportGender":false,
@@ -75,6 +76,18 @@ export class ReportsComponent implements OnInit {
   public studentTypeList:any = [
     {id:'yes',name:'Old Student'},
     {id:'no',name:'New Student'}
+  ];
+
+  public status:any = [
+    {id:'verified',name:'Verified'},
+    {id:'deleted',name:'Deleted'},
+    {id:'ForPayment',name:'For Payment'},
+    {id:'approved',name:'Approved'},
+    {id:'pending',name:'Pending'},
+    {id:'cancelled',name:'Cancelled'},
+    {id:'inactive',name:'Inactive'},
+    {id:'O',name:'Old'},
+    {id:'PaymentForApproval',name:'Payment For Approval'}
   ];
 
   enrollReportList: EnrollReport;
@@ -147,6 +160,10 @@ onSearch()
   if ( this.enrollReport.semester == "")
   {
     this.enrollReport.semester = [];
+  }
+  if ( this.enrollReport.status == "")
+  {
+    this.enrollReport.status = [];
   }
   console.log(JSON.stringify(this.enrollReport));
   // return;
