@@ -25,10 +25,13 @@ import { SpinnerService } from './core/loader/spinner.service';
 import { AuthInterceptorService } from './core/auth-interceptor.service';
 import { EnrollmentDialog } from './common/dialog/enrollmentdialog';
 import { StudentDialog } from './common/studentdialog/studentdialog';
+import { EnrollmentListDialog } from './common/enrollmentdialog/enrollmentdialog';
 import { PaymentDialog } from './common/paymentdialog/paymentlistdialog';
 import { EnvServiceProvider } from './core/env.service.provider';
 import {StudentService} from '../app/commonservice/student.service';
 import {BillingService} from '../app/commonservice/billing.service';
+import {EnrollmentService} from '../app/commonservice/enrollment.service';
+
 //material here
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -67,6 +70,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { MatTableFilterModule } from 'mat-table-filter';
 import { EnrollmentDialogMsBox } from './common/dialog/enrollDialogMsgBox';
 import { TermsAndConditionDialog } from './common/dialog/termscondition';
+import { NgSelectModule } from '@ng-select/ng-select';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,
@@ -86,6 +90,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarComponent,
     EnrollmentDialog,
     StudentDialog,
+    EnrollmentListDialog,
     PaymentDialog,
     EnrollmentDialogMsBox,
     TermsAndConditionDialog
@@ -140,7 +145,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
      MatTooltipModule,
      MatTreeModule,
      NgbModule,
-     MatTableFilterModule
+     MatTableFilterModule,
+     NgSelectModule
   ],
   providers: [
     EnvServiceProvider, 
@@ -151,9 +157,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     StudentService,
-    BillingService
+    BillingService,
+    EnrollmentService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EnrollmentDialog,StudentDialog,EnrollmentDialogMsBox,PaymentDialog,TermsAndConditionDialog]
+  entryComponents: [EnrollmentDialog,StudentDialog,EnrollmentListDialog,EnrollmentDialogMsBox,PaymentDialog,TermsAndConditionDialog]
 })
 export class AppModule {}

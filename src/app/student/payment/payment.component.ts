@@ -40,11 +40,12 @@ export class PaymentComponent {
 
       public paymentType = [
         { name: "Enrollment Fee", value: "EnrollmentFee" },
-        { name: "Bank Account Fee", value: "BankAccountFee" },
-        { name: "Enrolment Fee & Bank Account Fee", value: "EnrollmentFeeBankAcount" },
+        { name: "Back Account Fee", value: "Back Account Fee" },
+        { name: "Enrolment Fee & Back Account Fee", value: "EnrollmentFeeBackAcount" },
         { name: "Monthly Fee", value: "MonthlyFee" },
         { name: "Quarterly Fee", value: "QuarterlyFee" },
-        { name: "Yearly Fee", value: "YearlyFee" }
+        { name: "Yearly Fee", value: "YearlyFee" },
+        { name: "Others", value: "Others" }
       ];
 
     public selectedPaymentOption = "";

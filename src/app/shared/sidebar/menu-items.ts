@@ -154,5 +154,23 @@ export const ROUTES: RouteInfo[] = [
       //   submenu: []
       // }
     ]
+  },
+
+  {
+    path: '',
+    title: 'User',
+    icon: 'mdi mdi-file-pdf',
+    class: 'has-arrow',
+    extralink: false,
+    submenu: [
+      {
+        path: '/user/userrecovery',
+        title: 'Password Recovery',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
+      }
+    ]
   }
 ];

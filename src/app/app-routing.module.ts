@@ -32,6 +32,10 @@ export const Approutes: Routes = [
 				path: 'billing',
         loadChildren: 	() => import('./billing/billing.module').then(m => m.BillingModule)
       },
+      {
+				path: 'user',
+        loadChildren: 	() => import('./user/user.module').then(m => m.UserModule)
+      },
     ]
   },
   {

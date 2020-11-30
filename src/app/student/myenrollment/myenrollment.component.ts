@@ -90,7 +90,7 @@ constructor(private _enrollService:EnrollmentService,private _starterService:MyE
             this.message = "For Verification"
         }else if(this.enrollment.status == "ForPayment"){
             this.status  = "ForPayment"
-            this.message = "Your Enrollment is now verified and ready for payment! click payment on the left menu."
+            this.message = "Verified and is ready for payment."
         }else if(this.enrollment.status == "PaymentForApproval"){
             this.status  = "PaymentForApproval"
             this.message = "Your payment is now for approva/process."

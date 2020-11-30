@@ -2,15 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PaymentComponent } from './payment/payment.component';
-import { StudentRoutes } from './student.routing';
-import { FormsModule } from '@angular/forms';
-import {StudentService} from './service/student.service';
-import { MyEnrollmentComponent } from './myenrollment/myenrollment.component';
-import { MyEnrollmentService } from './myenrollment/myenrollmentservice';
-import {EnrollmentService} from '../enrollment/service/enrollment.service';
-import {StudentMasterService} from '../student/studentmaster/studentmaster.service';
-import { StudentComponent } from './studentmaster/student.component';
+import {UserRoutes} from './user.routing'
+import {FormsModule } from '@angular/forms';
+import {UserService} from './PasswordRecovery/user.service';
+import {PassrecoveryComponent} from  './PasswordRecovery/passrecovery.component'
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -22,7 +17,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -50,7 +44,7 @@ import { MatTableFilterModule } from 'mat-table-filter';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(StudentRoutes),
+    RouterModule.forChild(UserRoutes),
     NgbModule,
     FormsModule,
     //material here
@@ -93,16 +87,10 @@ import { MatTableFilterModule } from 'mat-table-filter';
     MatTableFilterModule
   ],
   declarations: [
-   PaymentComponent,
-   MyEnrollmentComponent,
-   StudentComponent
+    PassrecoveryComponent
   ],
   providers: [
-    StudentService,
-    EnrollmentService,
-    MyEnrollmentService,
-    StudentService,
-    StudentMasterService
+    UserService,
   ]
 })
-export class StudentModule {}
+export class UserModule {}

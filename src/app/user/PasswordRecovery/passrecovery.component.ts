@@ -1,39 +1,28 @@
-import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input,ChangeDetectorRef,ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input,ChangeDetectorRef,ElementRef} from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
-import { EnrollmentDialog } from '../common/dialog/enrollmentdialog';
+import { EnrollmentDialog } from '../../common/dialog/enrollmentdialog';
 import { PageEvent,MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { EnrollmentService } from './service/enrollment.service';
+import {UserService} from './user.service'
 import { MatDialog } from '@angular/material/dialog';
-import { Enrollment } from './model/Enrollment';
+import { Enrollment } from '../../commonmodel/Enrollment';
 import { ThemePalette } from '@angular/material/core';
 import { ActivatedRoute,Router} from '@angular/router';
-import { Payment } from './model/Payment';
-import { MatTableModule } from '@angular/material/table';
-import {MatTable} from '@angular/material';
 
 @Component({
-  templateUrl: './paymentapproval.component.html',
-  styleUrls: ['./inquiry.scss'],
+  templateUrl: './passrecovery.component.html',
+  styleUrls: ['./passrecovery.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaymentApprovalComponent implements AfterViewInit {
-  refNo:string = "";
+export class PassrecoveryComponent implements AfterViewInit {
   enrolmentList:Array<Enrollment>;
-  paymentList:Array<Payment>;
   subtitle: string;
-  displayedColumns: string[] = ['enrollment_ref_no', 'student_name', 'method','description','amount','status','actions'];
-//   dataSource: MatTableDataSource<Enrollment>;
-  dataSource: MatTableDataSource<Payment>;
+  displayedColumns: string[] = ['ref_no', 'lastname', 'email','schoolyearfrom','schoolyearto','status'];
+  dataSource: MatTableDataSource<Enrollment>;
   links = ['First', 'Second', 'Third'];
   activeLink = this.links[0];
   background: ThemePalette = undefined;
-  public payment:any = {paymentMethod:"",amountToPay:"",paymentDescription:""}
-  public firstName:any;
-  public lastName:any;
-  public alreadyMakePaymentB4:boolean = false;
-  public enrolNo:any;
   public enrollment:Enrollment = {
     "id": 0,
     "ref_no": "",
@@ -85,21 +74,6 @@ export class PaymentApprovalComponent implements AfterViewInit {
     "schoolyearto": 0,
     "semester": 0,
   }
-  public listpayment:Payment = {
-    "id": 0,
-    "ref_no": "",
-    "student_name":"",
-    "enrollment_ref_no":"",
-    "method":"",
-    "amount":0,
-    "description":"",
-    "attachment":"",
-    "approval_remarks":"",
-    "approval_status":0,
-    "approval_by":0,
-    "approval_date":"",
-    "created_at":"",
-  }
 
   public deparmentList:any;
   public gradesList:any =  [{id:0,name:""}];
@@ -114,18 +88,16 @@ export class PaymentApprovalComponent implements AfterViewInit {
   pageSizeOptions = [5, 10, 25, 100];
   pageIndex = 0;
   filter="";
-  filter1="";
   pageNo = 0;
   // MatPaginator Output
   pageEvent: PageEvent;
-  public enrolmentStatus:string = "pending";
 
-  @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   // @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
+  @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
   @ViewChild('tabs',{static:false}) tabGroup: MatTabGroup;
-  @ViewChild(MatTable,{static:false}) table: MatTable<any>;
-  constructor(private _enrollService:EnrollmentService,public dialog: MatDialog, private _route: ActivatedRoute, private changeDetectorRefs: ChangeDetectorRef) {
+
+  constructor(private _enrollService:UserService,public dialog: MatDialog, private _route: ActivatedRoute,private changeDetectorRefs: ChangeDetectorRef) {
     this.subtitle = 'for verification';
 
   }
@@ -135,35 +107,20 @@ export class PaymentApprovalComponent implements AfterViewInit {
     {
         this.deparmentList = data;
     })
-    this._enrollService.getPaymentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
-    {
-      this.paymentList = data.EnrollmentPayment;
-      this.dataSource = new MatTableDataSource( this.paymentList);
-     // this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      // this.dataSource.paginator.length = data.NoOfRecords;
-      this.length = data.NoOfRecords;
-      console.log(this.dataSource);
-    });
-  }
 
-  initData(){
-    this._enrollService.getAllDepartment().subscribe((data:any) => 
+    this._enrollService.getEnrollmentList(this.pageIndex,this.pageSize,"").subscribe((data:any) => 
     {
-        this.deparmentList = data;
-    })
-    this._enrollService.getPaymentList(0,this.pageSize,"").subscribe((data:any) => 
-    {
-      this.paymentList = data.EnrollmentPayment;
-      this.dataSource = new MatTableDataSource( this.paymentList);
+      console.log(data.NoOfRecords);
+      this.enrolmentList = data.Enrollment;
+      console.log(this.enrolmentList);
+      this.dataSource = new MatTableDataSource( this.enrolmentList);
       // this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       // this.dataSource.paginator.length = data.NoOfRecords;
       this.length = data.NoOfRecords;
-      
     });
   }
-
+ 
   toggleBackground() {
     this.background = this.background ? undefined : 'primary';
   }
@@ -175,11 +132,11 @@ export class PaymentApprovalComponent implements AfterViewInit {
     // if (this.dataSource.paginator) {
     //   this.dataSource.paginator.firstPage();
     // }
-
   }
 
   public selectDepartment()
   {
+    console.log(this.enrollment);
       this.schoolsemesterList= [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}];
       if(this.enrollment.department != 5){//not equal to colege
           this._enrollService.getGrades(this.enrollment.department).subscribe((data:any) => 
@@ -227,70 +184,18 @@ export class PaymentApprovalComponent implements AfterViewInit {
 
   public edit(row)
   {
-      let ref = row.enrollment_ref_no
-    this._enrollService.getEnrollRefNo(ref).subscribe((data:any) => 
-    {
-        this.enrollment = data;
-        console.log(this.enrollment);
-        if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
-        else{
-          const [year, month, day] = this.enrollment.dob.split('-');
-          const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
-          this.enrollment.dob = obj;
-        }
-        this.changeDetectorRefs.detectChanges();
-    });
+    console.log(row);
+    this.enrollment = row;
+    if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
+    else{
+      const [year, month, day] = this.enrollment.dob.split('-');
+      const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
+      this.enrollment.dob = obj;
+    }
+ 
     this.selectDepartment();
-    this.tabGroup.selectedIndex = 2
-  }
-  public paymentOptions = [
-    { name: "Cash", value: "Cash" },
-    { name: "Bank", value: "Bank" }
-  ];
-
-  public paymentType = [
-    { name: "Enrollment Fee", value: "EnrollmentFee" },
-    { name: "Back Account Fee", value: "Back Account Fee" },
-    { name: "Enrolment Fee & Back Account Fee", value: "EnrollmentFeeBackAcount" },
-    { name: "Monthly Fee", value: "MonthlyFee" },
-    { name: "Quarterly Fee", value: "QuarterlyFee" },
-    { name: "Yearly Fee", value: "YearlyFee" },
-    { name: "Others", value: "Others" },
-    
-  ];
-  public editPayment(row)
-  {
-    this.refNo = row.enrollment_ref_no;
-    this.initPayment(this.refNo);
     this.tabGroup.selectedIndex = 1
   }
-
-  public initPayment(enrolNo){
-    this.enrolNo = enrolNo;
-    this._enrollService.getEnrollRefNo(enrolNo).subscribe((data:any) => 
-    {
-      this.enrolmentStatus = data.status;
-      if(data.firstname === undefined){
-        this.setDialog('Reference No/Enrol no not Found!')
-        return;
-      }
-        this.firstName = data.firstname;
-        this.lastName = data.lastname
-
-        this._enrollService.getPayment(enrolNo).subscribe((data:any) => 
-        {
-          if(data.method !== undefined){
-            this.payment.paymentMethod = data.method;
-            this.payment.amountToPay = data.amount;
-            this.payment.paymentDescription = data.description;
-            this.payment.attachmentpath = data.attachmentpath;
-            this.payment.filename =data.filename;
-            this.alreadyMakePaymentB4 = true;
-            this.changeDetectorRefs.detectChanges();
-          }
-        })
-    });
-}
 
   getSelectedIndex(): number {
     return this.currentTabIndex;
@@ -299,17 +204,24 @@ export class PaymentApprovalComponent implements AfterViewInit {
   onTabChange(event: MatTabChangeEvent) {
     this.currentTabIndex = event.index
     if(event.index == 0){
-
-      this._enrollService.getPaymentList(0,this.pageSize,"").subscribe((data:any) => 
-      {
-        this.paymentList = data.EnrollmentPayment;
-        this.dataSource = new MatTableDataSource( this.paymentList);
-        this.changeDetectorRefs.detectChanges();
-      });
+      this.dataSource = new MatTableDataSource( this.enrolmentList);
+      // this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 
-  public verify(){
+  setDialog(message){
+    const dialogRef = this.dialog.open(EnrollmentDialog, {
+        width: '300px',
+        data: {  message: message}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+  }
+
+  public update(){
     var scope = this;
 
     if(this.enrollment.type == null){
@@ -423,103 +335,47 @@ export class PaymentApprovalComponent implements AfterViewInit {
         this.setDialog("School Year To is required!");
         return;
     }
-    this._enrollService.updateStatus(this.enrollment).subscribe((data:any) => 
+    scope.tabGroup.selectedIndex = 0;
+    this._enrollService.updateInquiry(this.enrollment).subscribe((data:any) => 
     {
-        const dialogRef = this.dialog.open(EnrollmentDialog, {
+       this.dialog.open(EnrollmentDialog, {
           width: '300px',
-          data: {  message: "Successfully Verified!"}
+          data: {  message: "Successfully Updated!"}
         });
-
-        dialogRef.afterClosed().subscribe(result => {
-          console.log(`Dialog result: ${result}`);
-          scope.tabGroup.selectedIndex = 0;
-          console.log(scope.tabGroup.selectedIndex );
-        });
+        this.refresh();
     });
   }
 
 
   pageEvents(event: any) {
-    this._enrollService.getPaymentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
+    this._enrollService.getEnrollmentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
     {
-      this.paymentList = data.EnrollmentPayment;
-      this.dataSource = new MatTableDataSource( this.paymentList);
-      this.changeDetectorRefs.detectChanges();
+      this.enrolmentList = data.Enrollment;
+      this.dataSource = new MatTableDataSource( this.enrolmentList);
     });
  }
 
  search(){
-   this._enrollService.getPaymentList(0,this.pageSize,this.filter).subscribe((data:any) => 
+   this._enrollService.getEnrollmentList(0,this.pageSize,this.filter).subscribe((data:any) => 
    {
-    this.paymentList = data.EnrollmentPayment;
-    this.dataSource = new MatTableDataSource( this.paymentList);
-    this.changeDetectorRefs.detectChanges();
-    console.log(this.length);
+     this.enrolmentList = data.Enrollment;
+     this.dataSource = new MatTableDataSource( this.enrolmentList);
+     this.changeDetectorRefs.detectChanges();
    });
- }
-
- setDialog(message){
-  const dialogRef = this.dialog.open(EnrollmentDialog, {
-      width: '300px',
-      data: {  message: message}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-}
-
- approvepayment(){
-  var scope = this;
-  scope.tabGroup.selectedIndex = 0;
-    this._enrollService.approvePayment(this.refNo ).subscribe((data:any) => 
-    {
-      if(data.ref_no !== undefined){
-     
-        this._enrollService.getPaymentList(0,this.pageSize,"").subscribe((data:any) => 
-        {
-          console.log(data);
-          this.paymentList = data.EnrollmentPayment;
-
-          this.dataSource.data = this.paymentList;
-           this.changeDetectorRefs.detectChanges();
-          // this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-          // this.dataSource.paginator.length = data.NoOfRecords;
-          this.length = data.NoOfRecords;
-         
-          this.setDialog("Successfully Approved!");
-        });
-      }
-    });
- }
-
- disaprovepayment(){
-  var scope = this;
-  scope.tabGroup.selectedIndex = 0;
-  this._enrollService.approvePayment(this.refNo ).subscribe((data:any) => 
-  {
-    //todo add are you sure
-    if(data.ref_no !== undefined){
-      this.setDialog("Successfully DisApproved!");
-      this.initData();
-      return;
-    }
-
-  });
  }
 
  refresh(){
   this.filterInput.nativeElement.value = "";
   this.dataSource.filter = "";
   this.filter = "";
-  this._enrollService.getPaymentList(0,this.pageSize,"").subscribe((data:any) => 
+  this._enrollService.getEnrollmentList(0,this.pageSize,"").subscribe((data:any) => 
   {
-    console.log( data.NoOfRecords);
-    this.paymentList = data.EnrollmentPayment;
+    this.enrolmentList = data.Enrollment;
     this.length = data.NoOfRecords;
-    this.dataSource = new MatTableDataSource( this.paymentList);
+    this.dataSource = new MatTableDataSource( this.enrolmentList);
     this.changeDetectorRefs.detectChanges();
   });
  }
+
+
 }

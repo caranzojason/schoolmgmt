@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-md-3" style="margin-bottom: 20px;">
                                 <form >
-                                    <label style="font-size: 13px;margin-bottom: 0px;">Reference/Enrol Number:</label>
+                                    <label style="font-size: 13px;margin-bottom: 0px;">Reference Number:</label>
                                     <div class="form-group">
                                         <div class="input-group">
                                         <input type="text"  name="ref" disabled  [(ngModel)]= "enrolNo"  class="form-control" placeholder="Reference Number Here" style=" font-size: 11px;padding: 5px;border-radius: 5px 0px 0px 5px;">
@@ -160,8 +160,8 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <label>Previous Attachment:</label><br>
-                                                        <label>  <a  target="_blank" href="http://127.0.0.1:8000/{{payment.attachmentpath}}">{{payment.filename}}</a> </label>
-                                                    </div>
+                                                        <label>  <a  target="_blank" href="https://schoolmanagementapi.sjcc.edu.ph/storage/app/public/{{payment.attachmentpath}}">{{payment.filename}}</a> </label>
+                                                   </div>
                                                 </div>
                     
                                             </form>
@@ -247,8 +247,8 @@
                                                     <div class="input-group">
                                                         <select name="filter" [(ngModel)]= "enrollment.gender"   class="form-control inputText">
                                                             <option></option>
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
+                                                            <option value="male">Male</option>
+                                                            <option value="female">Female</option>
                                                         </select>
                                                     </div>
                                                 </div>

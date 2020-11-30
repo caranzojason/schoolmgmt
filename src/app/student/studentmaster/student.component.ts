@@ -3,7 +3,9 @@
 import { Component, AfterViewInit, ViewChild,ChangeDetectionStrategy,Input,ChangeDetectorRef,ElementRef} from '@angular/core';
 import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
 import { MatTableDataSource } from '@angular/material/table';
+import { EnrollmentListDialog } from '../../common/enrollmentdialog/enrollmentdialog';
 import { EnrollmentDialog } from '../../common/dialog/enrollmentdialog';
+
 import { PageEvent,MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { StudentMasterService } from './studentmaster.service';
@@ -96,8 +98,11 @@ export class StudentComponent implements AfterViewInit {
   pageIndex = 0;
   filter="";
   pageNo = 0;
+  schoolyearfrom:any;
+  schoolyearto:any;
   // MatPaginator Output
   pageEvent: PageEvent;
+  studentAction:string = "";
 
   // @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
   @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
@@ -107,6 +112,33 @@ export class StudentComponent implements AfterViewInit {
   constructor(private _enrollService:StudentMasterService,public dialog: MatDialog, private _route: ActivatedRoute,private changeDetectorRefs: ChangeDetectorRef) {
     this.subtitle = 'for verification';
 
+  }
+
+
+      
+  setEnrolDialog(){
+    const dialogRef = this.dialog.open(EnrollmentListDialog, {
+        width: '1000px',
+        data: {  message: "test"}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.enrollment = result;
+        if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
+        else{
+          const [year, month, day] = this.enrollment.dob.split('-');
+          const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
+          this.enrollment.dob = obj;
+        }
+     
+        this.selectDepartment();
+        this.changeDetectorRefs.detectChanges();
+        console.log(result);  
+      });
+  }
+
+  getEnrolList(){
+    this.setEnrolDialog();
   }
   
   ngAfterViewInit() {
@@ -196,7 +228,7 @@ export class StudentComponent implements AfterViewInit {
   }
 
   addNew(){
-    console.log('add new');
+    this.studentAction = "add";
     this.enrollment = {
       "id": 0,
       "ref_no": "",
@@ -257,21 +289,25 @@ export class StudentComponent implements AfterViewInit {
 
   public selectDepartment()
   {
-    console.log(this.enrollment);
     this.enrollment.department = Number(this.enrollment.department);
     this.enrollment.grade = Number(this.enrollment.grade);
-    console.log(this.enrollment);
+    this.enrollment.courseId = Number(this.enrollment.courseId);
+    this.enrollment.strand = Number(this.enrollment.strand);
+
       this.schoolsemesterList= [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}];
-      if(this.enrollment.department != 5){//not equal to colege
+      if( Number(this.enrollment.department) != 5 ){//not equal to colege
           this._enrollService.getGrades(this.enrollment.department).subscribe((data:any) => 
           {
               this.gradesList = data;
+              console.log(this.gradesList);
+              this.changeDetectorRefs.detectChanges();
           });
       }else{
           this.gradesList = [{id:0,name:"N/A"}];
+          this.changeDetectorRefs.detectChanges();
       }
 
-      if(this.enrollment.department == 1 || this.enrollment.department == 2){ //elem,junio
+      if( Number(this.enrollment.department) == 1 ||  Number(this.enrollment.department) == 2){ //elem,junio
           this.trackStandardCourse =  [{id:0,name:"N/A"}];
           //asign to default value
           // if(this.enrollment.department == 1){
@@ -284,7 +320,7 @@ export class StudentComponent implements AfterViewInit {
           
       }
 
-      if(this.enrollment.department == 3 ) //senior
+      if( Number(this.enrollment.department) == 3 ) //senior
       {
           //set default selected value
           // this.enrollment.grade = 13;
@@ -293,23 +329,29 @@ export class StudentComponent implements AfterViewInit {
           this._enrollService.getStrand().subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
+              this.changeDetectorRefs.detectChanges();
           });
-      }
-      if(this.enrollment.department == 4 || this.enrollment.department == 5 ){//,colege, master grad
+      } else if( Number(this.enrollment.department == 4) ||  Number(this.enrollment.department == 5)){//,colege, master grad
           // this.enrollment.grade = 15;
           // this.enrollment.strand = 1;
           // this.enrollment.semester = 1;
           this._enrollService.getCoursesByDeptId(this.enrollment.department).subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
+              this.changeDetectorRefs.detectChanges();
           });
       }
+     
+    
+      this.tabGroup.selectedIndex = 1
+    
 
-      console.log(this.gradesList);
+
   }
 
   public edit(row)
   {
+    this.studentAction = "edit";
     this.enrollment = row;
     if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
     else{
@@ -319,7 +361,7 @@ export class StudentComponent implements AfterViewInit {
     }
  
     this.selectDepartment();
-    this.tabGroup.selectedIndex = 1
+
   }
 
   getSelectedIndex(): number {
@@ -335,6 +377,7 @@ export class StudentComponent implements AfterViewInit {
     }
   }
 
+
   setDialog(message){
     const dialogRef = this.dialog.open(EnrollmentDialog, {
         width: '300px',
@@ -342,8 +385,9 @@ export class StudentComponent implements AfterViewInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
       });
-  }
+}
 
   public save(){
 
@@ -403,16 +447,22 @@ export class StudentComponent implements AfterViewInit {
         return;
     }
 
+    console.log(this.studentAction);
 
-    this._enrollService.updateStudent(this.enrollment).subscribe((data:any) => 
-    {
-        console.log(data);
-    });
-
-
-
+    if(this.studentAction == "add"){
+      this._enrollService.createStudent(this.enrollment).subscribe((data:any) => 
+      {
+          console.log(data);
+          this.setDialog("Successfully Created");
+      });
+    }else if(this.studentAction == "edit"){
+      this._enrollService.updateStudent(this.enrollment).subscribe((data:any) => 
+      {
+          console.log(data);
+          this.setDialog("Successfully Updated");
+      });
+    }
   }
-
 
   pageEvents(event: any) {
     this._enrollService.getStudentList(event.pageIndex,event.pageSize,this.filter).subscribe((data:any) => 
