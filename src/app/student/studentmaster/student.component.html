@@ -403,7 +403,7 @@
                                                 </div>
                                                   <div class="form-group">
                                                       <div class="input-group">
-                                                        <input type="text" [(ngModel)]= "enrollment.dob"   name="dp2" ngbDatepicker #Date="ngbDatepicker"   name="lName" class="form-control form-control-date" style="font-size: 15px;
+                                                        <input type="text" [(ngModel)]= "enrollment.dob" [maxDate]="maxDate"  [minDate]="minDate" [startDate]="startDate"  name="dp2" ngbDatepicker #Date="ngbDatepicker"   name="lName" class="form-control form-control-date" style="font-size: 15px;
                                                         border: none;
                                                         padding: 0px 0px 0px 10px;
                                                         height: 15px;
@@ -771,6 +771,7 @@
                                               </form>
                                         </div>
                                     </div>
+                                    
                                 </div>   
                                     <!-- <div style="padding: 1px;margin-top: -15px;">
                                         <form class="form-inline">
@@ -798,6 +799,36 @@
                                           </form>
                
                                     </div> -->
+                                    <div class="row" style="margin-bottom: -10px;margin-left: 30px;margin-right: 30px;">
+                                      <div class="col-md-3" >
+                                          <form >
+                                              <label style="font-size: 13px;">Are you an indigenous?</label>
+                                              <div class="form-group">
+                                                  <div class="input-group">
+                                                  <input type="radio" id="yes" name="indigenous" [(ngModel)]="enrollment.indigenous" value="yes">
+                                                  <label for="yes" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Yes</label>
+                                                  <input type="radio" id="no" name="indigenous" [(ngModel)]="enrollment.indigenous"  value="no">
+                                                  <label for="no" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">No</label>
+                                                  </div>
+                                              </div>
+                                          </form>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <form >
+                                              <label style="font-size: 13px;">Choice of Learning Modality</label>
+                                              <div class="form-group">
+                                                  <div class="input-group">
+                                                  <input type="radio" id="blend_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"   value="blend_mode">
+                                                  <label for="mblend_modeale" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Blend Mode</label>
+                                                  <input type="radio" id="online_mode" name="learning_modality" [(ngModel)]="enrollment.learning_modality"  value="online_mode">
+                                                  <label for="online_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Online Mode</label>
+                                                  <input type="radio" id="modular_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"  value="modular_mode">
+                                                  <label for="modular_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Modular Mode</label>
+                                                  </div>
+                                              </div>
+                                          </form>
+                                      </div>
+                                  </div> 
                                 </div>    
                                 <div class="modal-footer att-modal-footer">
                                     <button class="btn btn-info btn-secondary btn-modal-footer-x" type="button">Cancel</button>
