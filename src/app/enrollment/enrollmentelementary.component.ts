@@ -69,7 +69,9 @@ export class EnrollmentElementaryComponent implements AfterViewInit {
     public trackStandardCourse:any = [{id:0,name:""}];
     public schoolyearList:any = [{id:2020,name:"2020"},{id:2021,name:"2021"},{id:2022,name:"2022"}];
     public schoolsemesterList:any = [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}]; //3 is summer
-
+    maxDate ={year: new Date().getUTCFullYear()+30,month: 12, day: 31}
+    minDate ={year: new Date().getUTCFullYear()-90,month: 12, day: 31}
+    startDate={year: new Date().getUTCFullYear()-15,month: new Date().getUTCMonth(), day: 1}
     constructor(private _enrollService:EnrollmentService,public dialog: MatDialog) {
         this._enrollService.getAllDepartment().subscribe((data:any) => 
         {

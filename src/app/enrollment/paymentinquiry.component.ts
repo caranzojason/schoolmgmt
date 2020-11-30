@@ -116,7 +116,10 @@ import {MatTable} from '@angular/material';
   // MatPaginator Output
   pageEvent: PageEvent;
   public enrolmentStatus:string = "pending";
-
+  maxDate ={year: new Date().getUTCFullYear()+30,month: 12, day: 31}
+  minDate ={year: new Date().getUTCFullYear()-90,month: 12, day: 31}
+  startDate={year: new Date().getUTCFullYear()-15,month: new Date().getUTCMonth(), day: 1}
+  
   @ViewChild('filterInput',{static:false}) filterInput: ElementRef;
   // @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort,{static:false}) sort: MatSort;

@@ -226,7 +226,7 @@
                     <form >
                         <label style="font-size: 13px;margin-bottom: 0px;">Date of Birth</label>
                         <div class="input-group">
-                            <input class="form-control form-control-date" [(ngModel)]= "enrollment.dob"   name="dp2" ngbDatepicker #Date="ngbDatepicker">
+                            <input class="form-control form-control-date" [(ngModel)]= "enrollment.dob" [maxDate]="maxDate"  [minDate]="minDate" [startDate]="startDate"  name="dp2" ngbDatepicker #Date="ngbDatepicker">
                             <div class="input-group-append">
                                 <button class="btn btn-light btn-filter-date" (click)="Date.toggle()" type="button">
                                     <i class="fa fa-calendar"></i>

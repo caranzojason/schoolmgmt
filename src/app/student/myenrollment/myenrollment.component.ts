@@ -70,6 +70,9 @@ export class MyEnrollmentComponent implements AfterViewInit {
 public deparmentList:any;
 public gradesList:any =  [{id:0,name:""}];
 public trackStandardCourse:any = [{id:0,name:""}];
+maxDate ={year: new Date().getUTCFullYear()+30,month: 12, day: 31}
+minDate ={year: new Date().getUTCFullYear()-90,month: 12, day: 31}
+startDate={year: new Date().getUTCFullYear()-15,month: new Date().getUTCMonth(), day: 1}
 
 constructor(private _enrollService:EnrollmentService,private _starterService:MyEnrollmentService, 
             private _cookieService:CookieService,public dialog: MatDialog) {

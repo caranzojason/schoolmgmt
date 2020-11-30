@@ -8,7 +8,7 @@
                                     <input type="checkbox" id="1"  name="School" [(ngModel)]="enrollReport.IsCheckedReportSchool" style="margin: 5px;" />School Year:
                                 </label> -->
                                 <div class="input-group">
-                                    <label style="font-size: 13px;margin-bottom: 0px;">
+                                    <label style="font-size: 13px;margin-bottom: 0px;width: 200px;">
                                         School Year From:
                                     </label>
                                     <div>
@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="input-group">
-                                    <label style="font-size: 13px;margin-bottom: 0px;">
+                                    <label style="font-size: 13px;margin-bottom: 0px;width: 200px;">
                                         School Year From:
                                     </label>
                                     <div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
                     <div class="input-group">
-                        <label style="font-size: 13px;margin-bottom: 0px;">
+                        <label style="font-size: 13px;margin-bottom: 0px;width: 200px;">
                             Student Type:
                         </label>
 
@@ -137,6 +137,23 @@
                                     bindValue="name"
                                     [multiple]="true"
                                     [(ngModel)]="enrollReport.gender">
+                                </ng-select>
+                            </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <!-- <input type="checkbox" id="5" name="Strand" [(ngModel)]="enrollReport.IsCheckedReportStrand" style="margin: 5px;" /> -->
+                                Status 
+                            </label>
+                            <div>
+                                <ng-select [items]="status"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.status">
                                 </ng-select>
                             </div>
                     </div>

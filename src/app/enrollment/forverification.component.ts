@@ -82,7 +82,9 @@ public gradesList:any =  [{id:0,name:""}];
 public trackStandardCourse:any = [{id:0,name:""}];
 public schoolyearList:any = [{id:2020,name:"2020"},{id:2021,name:"2021"},{id:2022,name:"2022"}];
 public schoolsemesterList:any = [{id:1,name:"1"},{id:2,name:"2"},{id:3,name:"summer"}]; //3 is summer
-
+maxDate ={year: new Date().getUTCFullYear()+30,month: 12, day: 31}
+minDate ={year: new Date().getUTCFullYear()-90,month: 12, day: 31}
+startDate={year: new Date().getUTCFullYear()-15,month: new Date().getUTCMonth(), day: 1}
 public currentTabIndex = 1 
 
   @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
@@ -326,7 +328,10 @@ public currentTabIndex = 1
         this.setDialog("School Year To is required!");
         return;
     }
-
+    if(this.enrollment.remarks == '' || this.enrollment.remarks == null){
+      this.setDialog("School Year To is required!");
+      return;
+  }
     this.enrollment.approved_by = "registrar"
     this._enrollService.updateStatus(this.enrollment).subscribe((data:any) => 
     {
