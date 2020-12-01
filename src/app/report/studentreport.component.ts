@@ -79,6 +79,7 @@ export class StudentReportsComponent implements OnInit {
     "schoolyearfrom": 0,
     "schoolyearto": 0,
     "semester": 0,
+    "subjectToEnroll":"",
   }
 
    ngOnInit() { }

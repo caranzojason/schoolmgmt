@@ -74,6 +74,7 @@ export class Inquiry implements AfterViewInit {
     "schoolyearfrom": 0,
     "schoolyearto": 0,
     "semester": 0,
+    "subjectToEnroll":""
   }
 
   public deparmentList:any;

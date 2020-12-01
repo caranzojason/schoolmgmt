@@ -82,7 +82,8 @@ import {MatTable} from '@angular/material';
     "school_year": 0,
     "schoolyearfrom": "",
     "schoolyearto": "",
-    "semester": 0
+    "semester": 0,
+    "subjectToEnroll":""
   }
   public listpayment:Payment = {
     "id": 0,

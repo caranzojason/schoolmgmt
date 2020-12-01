@@ -82,6 +82,7 @@ export class StudentComponent implements AfterViewInit {
     "gradename":"",
     "strandname":"",
     "coursename":""
+    
   }
 
   public deparmentList:any;

@@ -84,6 +84,7 @@ export class PaymentApprovalComponent implements AfterViewInit {
     "schoolyearfrom": 0,
     "schoolyearto": 0,
     "semester": 0,
+    "subjectToEnroll":""
   }
   public listpayment:Payment = {
     "id": 0,
