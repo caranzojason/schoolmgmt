@@ -5,6 +5,7 @@ import {MyEnrollmentService} from './myenrollmentservice';
 import { CookieService } from 'ngx-cookie';
 import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../../common/dialog/enrollmentdialog';
+import { TermsAndConditionDialog } from 'src/app/common/dialog/termscondition';
 
 @Component({
   templateUrl: './myenrollment.component.html',
@@ -149,6 +150,21 @@ public selectDepartment()
         });
     }
 }
+
+myTermsAndCondition()
+{
+    this.setDialogTermsCondition();
+}
+setDialogTermsCondition(){
+    const dialogRef = this.dialog.open(TermsAndConditionDialog, {
+        width: '1000px',
+        data: {  message: ""}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+  }
+
 setDialog(message){
     const dialogRef = this.dialog.open(EnrollmentDialog, {
         width: '300px',
