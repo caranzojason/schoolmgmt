@@ -6,6 +6,12 @@
         border-radius: 10px;">
        <h3>Enrolment Status: {{this.message}}</h3>
         </div>
+        <div style="box-shadow: 0px 1px 3px 0px #c8cec8;
+        border-radius: 10px;">
+       <h3>Verifier Remarks: <input type="text" [(ngModel)]="enrollment.remarks"  name="lName" style="border: none;
+        background: none;
+        color: #465a65;" ></h3>
+        </div>
         <div class="col-md-6">
             <form >
                 <label style="font-size: 13px;">Are you an old student??</label>
@@ -454,7 +460,8 @@
             </div> 
         <div class="modal-footer att-modal-footer">
             <div>
-                <p >By clicking Enroll, you agree to our Terms & Conditions.</p>
+                <p (click)="myTermsAndCondition()" style="text-decoration-line: underline;
+                cursor: pointer;">By clicking Enroll, you agree to our Terms & Conditions.</p>
             </div>
             <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="cancel()" type="button">Cancel</button>
             <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="enrol()" type="button">Update</button>

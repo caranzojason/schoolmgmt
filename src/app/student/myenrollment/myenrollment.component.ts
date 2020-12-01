@@ -5,6 +5,7 @@ import {MyEnrollmentService} from './myenrollmentservice';
 import { CookieService } from 'ngx-cookie';
 import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../../common/dialog/enrollmentdialog';
+import { TermsAndConditionDialog } from 'src/app/common/dialog/termscondition';
 
 @Component({
   templateUrl: './myenrollment.component.html',
@@ -73,7 +74,10 @@ public trackStandardCourse:any = [{id:0,name:""}];
 maxDate ={year: new Date().getUTCFullYear()+30,month: 12, day: 31}
 minDate ={year: new Date().getUTCFullYear()-90,month: 12, day: 31}
 startDate={year: new Date().getUTCFullYear()-15,month: new Date().getUTCMonth(), day: 1}
-
+// myRemarks = "Model example A — For example, according \n to Frederick Douglass, " + 
+//             "the song O Canaan, Sweet Canaan spoke of slaves’ longing for heaven, " +
+//             " but it also expressed their desire to escape to the North. Careful listeners heard " +
+//             "this second meaning in the following lyrics: “I don’t expect to stay / Much longer here. / Run to Jesus, shun the danger. / I don’t expect to stay.”"
 constructor(private _enrollService:EnrollmentService,private _starterService:MyEnrollmentService, 
             private _cookieService:CookieService,public dialog: MatDialog) {
     this._enrollService.getAllDepartment().subscribe((data:any) => 
@@ -149,6 +153,21 @@ public selectDepartment()
         });
     }
 }
+
+myTermsAndCondition()
+{
+    this.setDialogTermsCondition();
+}
+setDialogTermsCondition(){
+    const dialogRef = this.dialog.open(TermsAndConditionDialog, {
+        width: '1000px',
+        data: {  message: ""}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+  }
+
 setDialog(message){
     const dialogRef = this.dialog.open(EnrollmentDialog, {
         width: '300px',
