@@ -100,6 +100,9 @@ constructor(private _enrollService:EnrollmentService,private _starterService:MyE
         }else if(this.enrollment.status == "approved"){
             this.status  = "APPROVED"
             this.message = "Your payment is recieved and approved you are now succesfully enrolled!"
+        }else if(this.enrollment.status == "cancelled"){
+            this.status  = "CANCELLED"
+            this.message = "We regret to inform you that your enrollment was cancell!"
         }
         this.selectDepartment();
     })

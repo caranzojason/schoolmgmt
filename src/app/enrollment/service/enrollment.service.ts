@@ -60,6 +60,12 @@ export class EnrollmentService {
         .pipe(map((res: Enrollment) => res));
     }
 
+    enrolDisapprove(data:Enrollment): Observable<Enrollment> {
+        return this._httpClient.post<Enrollment>(this._env.api +'enrolDisapprove',data)
+        .pipe(map((res: Enrollment) => res));
+    }
+
+    
 
     updateInquiry(data:Enrollment): Observable<Enrollment> {
         return this._httpClient.post<Enrollment>(this._env.api +'updateInquiry',data)

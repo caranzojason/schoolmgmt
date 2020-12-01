@@ -18,7 +18,7 @@ import { ActivatedRoute,Router} from '@angular/router';
 export class PassrecoveryComponent implements AfterViewInit {
   enrolmentList:Array<Enrollment>;
   subtitle: string;
-  displayedColumns: string[] = ['ref_no', 'lastname', 'email','schoolyearfrom','schoolyearto','status'];
+  displayedColumns: string[] = ['firstname','lastname','ref_no', 'dob','schoolyearfrom','schoolyearto','status'];
   dataSource: MatTableDataSource<Enrollment>;
   links = ['First', 'Second', 'Third'];
   activeLink = this.links[0];

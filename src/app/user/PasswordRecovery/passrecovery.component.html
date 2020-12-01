@@ -17,14 +17,19 @@
                       <td mat-cell *matCellDef="let row"> {{row.ref_no}} </td>
                     </ng-container>
                 
-                    <ng-container matColumnDef="lastname">
+                    <ng-container matColumnDef="dob">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Password </th>
                       <td mat-cell *matCellDef="let row"> {{row.dob}} </td>
                     </ng-container>
                 
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Email </th>
-                      <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                    <ng-container matColumnDef="firstname">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Firstname </th>
+                      <td mat-cell *matCellDef="let row"> {{row.firstname}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lastname">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="th-matt-header"> Lastname </th>
+                      <td mat-cell *matCellDef="let row"> {{row.lastname}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="schoolyearfrom">

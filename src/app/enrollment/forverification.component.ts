@@ -178,7 +178,11 @@ public currentTabIndex = 1
 
   public edit(row)
   {
+   
     this.enrollment = row;
+    this.enrollment.schoolyearfrom = Number(this.enrollment.schoolyearfrom);
+    this.enrollment.schoolyearto = Number(this.enrollment.schoolyearto);
+    console.log(this.enrollment);
     if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
     else{
       const [year, month, day] = this.enrollment.dob.split('-');
@@ -216,7 +220,6 @@ public currentTabIndex = 1
 
   public verify(){
     var scope = this;
-
     if(this.enrollment.type == null){
       this.setDialog("Please select old or new student!");
       return;
@@ -314,7 +317,7 @@ public currentTabIndex = 1
 
 
     if(this.enrollment.learning_modality == ''){
-        this.setDialog("Learnig modality is required!");
+        this.setDialog("Learning Modality is required!");
         return;
     }
 
@@ -328,10 +331,7 @@ public currentTabIndex = 1
         this.setDialog("School Year To is required!");
         return;
     }
-    if(this.enrollment.remarks == '' || this.enrollment.remarks == null){
-      this.setDialog("School Year To is required!");
-      return;
-  }
+
     this.enrollment.approved_by = "registrar"
     this._enrollService.updateStatus(this.enrollment).subscribe((data:any) => 
     {
@@ -349,6 +349,23 @@ public currentTabIndex = 1
     });
   }
 
+  public disaprrove(){
+    var scope = this;
+    this._enrollService.enrolDisapprove(this.enrollment).subscribe((data:any) => 
+    {
+      this.refresh();
+        const dialogRef = this.dialog.open(EnrollmentDialog, {
+          width: '300px',
+          data: {  message: "Successfully Cancelled!"}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+          scope.tabGroup.selectedIndex = 0;
+          console.log(scope.tabGroup.selectedIndex );
+        });
+    });
+  }
   
  refresh(){
   this._enrollService.getEnrollmentForVerification().subscribe((data:Array<Enrollment>) => 

@@ -161,6 +161,7 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
   
           dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
+            
           });
     }
 
@@ -227,7 +228,7 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
 
       
         if(this.enrollment.learning_modality == ''){
-            this.setDialog("Learnig modality is required!");
+            this.setDialog("Learning Modality is required!");
             return;
         }
 

@@ -5,6 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../common/dialog/enrollmentdialog';
 import { EnrollmentDialogMsBox } from '../common/dialog/enrollDialogMsgBox';
 import { TermsAndConditionDialog } from '../common/dialog/termscondition';
+import { Router} from '@angular/router';
+
 @Component({
     selector: 'app-enroll',
     styleUrls: ['./enrollment.scss'],
@@ -72,7 +74,7 @@ export class EnrollmentSeniorComponent implements AfterViewInit {
     maxDate ={year: new Date().getUTCFullYear()+30,month: 12, day: 31}
     minDate ={year: new Date().getUTCFullYear()-90,month: 12, day: 31}
     startDate={year: new Date().getUTCFullYear()-15,month: new Date().getUTCMonth(), day: 1}
-    constructor(private _enrollService:EnrollmentService,public dialog: MatDialog) {
+    constructor(private _enrollService:EnrollmentService,public dialog: MatDialog,private _router:Router) {
         this._enrollService.getAllDepartment().subscribe((data:any) => 
         {
             this.deparmentList = data;
@@ -161,6 +163,7 @@ export class EnrollmentSeniorComponent implements AfterViewInit {
   
           dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
+            this._router.navigate(['/authentication/login'],{ replaceUrl: true });
           });
     }
 
@@ -226,7 +229,7 @@ export class EnrollmentSeniorComponent implements AfterViewInit {
         }
 
         if(this.enrollment.learning_modality == ''){
-            this.setDialog("Learnig modality is required!");
+            this.setDialog("Learning Modality is required");
             return;
         }
 
