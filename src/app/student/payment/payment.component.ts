@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input,ChangeDetectionStrategy,ChangeDetectorRef } from '@angular/core';
 import {StudentService} from '../service/student.service'
 import {MatDialog} from '@angular/material/dialog';
 import {EnrollmentDialog} from '../../common/dialog/enrollmentdialog';
@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie';
   }
 `],
 styleUrls: ['./payment.scss'],
+changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentComponent {
     public alreadyMakePaymentB4:boolean = false;
@@ -51,7 +52,7 @@ export class PaymentComponent {
     public selectedPaymentOption = "";
     public fileToUpload: File = null;
 
-    constructor(private _studService:StudentService,public dialog: MatDialog,private _cookieService: CookieService,) {
+    constructor(private _studService:StudentService,public dialog: MatDialog,private _cookieService: CookieService,private changeDetectorRefs: ChangeDetectorRef) {
       let enrolNo = this._cookieService.get("username");
       this.initData(enrolNo);
     }
@@ -92,8 +93,9 @@ export class PaymentComponent {
           return;
         }
           this.firstName = data.firstname;
-          this.lastName = data.lastname
+          this.lastName = data.lastname;
 
+          this.changeDetectorRefs.detectChanges();
           this._studService.getPayment(enrolNo).subscribe((data:any) => 
           {
             if(data.method !== undefined){
@@ -103,6 +105,7 @@ export class PaymentComponent {
               this.payment.attachmentpath = data.attachmentpath;
               this.payment.filename =data.filename;
               this.alreadyMakePaymentB4 = true;
+              this.changeDetectorRefs.detectChanges();
             }
           })
       });
@@ -163,18 +166,34 @@ export class PaymentComponent {
       this.studentPayment.method = this.payment.paymentMethod;
       this.studentPayment.amount = this.payment.amountToPay;
       this.studentPayment.description = this.payment.paymentDescription;
-  
-      
-      this._studService.makePayment(this.studentPayment).subscribe((data:any) => 
+
+      this._studService.getPayment(this.enrolNo).subscribe((data:any) => 
       {
-        this._studService.uploadFile(this.enrolNo,this.formData).subscribe(event => {
-        
-          this.setDialog('Payment sucessfuly saved! Payment is now under for approval!')
-         }, error => {
-          console.log(error);
-        });
-        this.initData(this.enrolNo);
+        if(data.method !== undefined){
+          this.payment.paymentMethod = data.method;
+          this.payment.amountToPay = data.amount;
+          this.payment.paymentDescription = data.description;
+          this.payment.attachmentpath = data.attachmentpath;
+          this.payment.filename =data.filename;
+          this.alreadyMakePaymentB4 = true;
+          this.changeDetectorRefs.detectChanges();
+          this.setDialog('Payment alredy approved!')
+        }else{
+          this._studService.makePayment(this.studentPayment).subscribe((data:any) => 
+          {
+            this._studService.uploadFile(this.enrolNo,this.formData).subscribe(event => {
+            
+              this.setDialog('Payment sucessfuly saved! Payment is now under for approval!')
+             }, error => {
+              console.log(error);
+            });
+            this.initData(this.enrolNo);
+          });
+        }
+    
       });
+
+
     }
 
     public cancel(){

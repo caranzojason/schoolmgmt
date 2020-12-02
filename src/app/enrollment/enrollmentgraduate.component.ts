@@ -62,6 +62,7 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
         "schoolyearfrom": 0,
         "schoolyearto": 0,
         "semester": 0,
+        "subjectToEnroll": ""
     }
 
     public deparmentList:any;
@@ -300,7 +301,8 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
           "school_year": 0,
           "schoolyearfrom": "",
           "schoolyearto": "",
-          "semester": 0
+          "semester": 0,
+          "subjectToEnroll": ""
       }
     }
 }
