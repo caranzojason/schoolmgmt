@@ -62,7 +62,7 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
         "schoolyearfrom": 0,
         "schoolyearto": 0,
         "semester": 0,
-        "subjectToEnroll": ""
+        "subjectToEnroll":""
     }
 
     public deparmentList:any;
@@ -242,7 +242,10 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
             this.setDialog("School Year To is required!");
             return;
         }
-
+        if(this.enrollment.subjectToEnroll == 0){
+            this.setDialog("Subject to enroll is required!");
+            return;
+        }
         this._enrollService.saveEnrolment(this.enrollment).subscribe((data:any) => 
         {
      
@@ -302,7 +305,7 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
           "schoolyearfrom": "",
           "schoolyearto": "",
           "semester": 0,
-          "subjectToEnroll": ""
+          "subjectToEnroll":""
       }
     }
 }

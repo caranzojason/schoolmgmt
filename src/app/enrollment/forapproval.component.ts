@@ -70,6 +70,7 @@ export class ForApprovalComponent implements AfterViewInit {
     "schoolyearfrom": 0,
     "schoolyearto": 0,
     "semester": 0,
+    "subjectToEnroll":"",
 }
 
 public deparmentList:any;
@@ -303,7 +304,7 @@ public currentTabIndex = 1
 
 
   if(this.enrollment.learning_modality == ''){
-      this.setDialog("Learnig modality is required!");
+      this.setDialog("Learning modality is required!");
       return;
   }
 

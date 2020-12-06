@@ -66,6 +66,7 @@ export class MyEnrollmentComponent implements AfterViewInit {
     "schoolyearfrom": "",
     "schoolyearto": "",
     "semester": 0,
+    "subjectToEnroll":""
 }
 
 public deparmentList:any;
@@ -340,6 +341,7 @@ public enrol(){
         "schoolyearfrom": "",
         "schoolyearto": "",
         "semester": 0,
+        "subjectToEnroll":""
     }
   }
 }

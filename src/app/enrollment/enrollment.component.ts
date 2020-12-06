@@ -62,7 +62,7 @@ export class EnrollmentComponent implements AfterViewInit {
         "schoolyearfrom": 0,
         "schoolyearto": 0,
         "semester": 0,
-        "subjectToEnroll": ""
+        "subjectToEnroll":"",
     }
 
     public deparmentList:any;
@@ -212,7 +212,7 @@ export class EnrollmentComponent implements AfterViewInit {
         }
 
         if(this.enrollment.learning_modality == ''){
-            this.setDialog("Learnig modality is required!");
+            this.setDialog("Learning modality is required!");
             return;
         }
 
@@ -285,7 +285,7 @@ export class EnrollmentComponent implements AfterViewInit {
           "schoolyearfrom": "",
           "schoolyearto": "",
           "semester": 0,
-          "subjectToEnroll": ""
+          "subjectToEnroll":""
       }
     }
 }

@@ -82,6 +82,7 @@ export class StudentComponent implements AfterViewInit {
     "gradename":"",
     "strandname":"",
     "coursename":""
+    
   }
 
   public deparmentList:any;
@@ -353,8 +354,10 @@ export class StudentComponent implements AfterViewInit {
 
   public edit(row)
   {
+    
     this.studentAction = "edit";
     this.enrollment = row;
+    console.log(this.enrollment);
     if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
     else{
       const [year, month, day] = this.enrollment.dob.split('-');
@@ -458,6 +461,7 @@ export class StudentComponent implements AfterViewInit {
           this.setDialog("Successfully Created");
       });
     }else if(this.studentAction == "edit"){
+      console.log(this.enrollment);
       this._enrollService.updateStudent(this.enrollment).subscribe((data:any) => 
       {
           console.log(data);

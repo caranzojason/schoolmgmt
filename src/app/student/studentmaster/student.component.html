@@ -183,7 +183,7 @@
                                               </form>
                                               <form class="form-inline">
                                                 <div class="form-group">
-                                                  <label for="inputname" style="font-size: 15px;margin-bottom: 0px;width: 200px;justify-content: left;margin-left: 20px;">Gender: </label>
+                                                  <label for="inputname" style="font-size: 15px;margin-bottom: 0px;width: 200px;justify-content: left;margin-left: 20px;">Sex: </label>
                                                 </div>
                                                   <div class="form-group">
                                                       <div class="input-group">
@@ -323,18 +323,32 @@
                                                       </div>
                                                   </div>
                                               </form>
-                                              <form class="form-inline">
+                                              <form class="form-inline" *ngIf="enrollment.department < 4">
                                                 <div class="form-group">
-                                                  <label for="inputname" style="font-size: 15px;margin-bottom: 0px;width: 200px;justify-content: left;margin-left: 20px;">Course & Strand/Course: </label>
+                                                  <label for="inputname" style="font-size: 15px;margin-bottom: 0px;width: 200px;justify-content: left;margin-left: 20px;">Strand: </label>
                                                 </div>
-                                                  <div class="form-group">
+                                                  <div class="form-group" >
                                                       <div class="input-group">
-                                                        <!-- <input type="text"  [(ngModel)]= "enrollment.studentno"  name="lName" class="form-control form-control-fp" style="font-size: 13px;
-                                                        border: none;
-                                                        padding: 0px 0px 0px 10px;
-                                                        height: 15px;
-                                                        margin-bottom: 0px;"> -->
                                                              <select name="strand" [(ngModel)]= "enrollment.strand"   class="form-control form-control-fp" style="font-size: 15px;
+                                                            font-weight: 400;
+                                                            color: #1c1d1d;
+                                                             padding: 0px 0px 0px 10px;
+                                                             height: 20px;
+                                                             margin-bottom: 0px;">
+                                                                <option  name="o" *ngFor = "let o of trackStandardCourse"   [ngValue]="o.id">
+                                                                    {{o.name}}
+                                                                </option>
+                                                            </select>
+                                                      </div>
+                                                  </div>
+                                              </form>
+                                              <form class="form-inline" *ngIf="enrollment.department > 3">
+                                                <div class="form-group">
+                                                  <label for="inputname" style="font-size: 15px;margin-bottom: 0px;width: 200px;justify-content: left;margin-left: 20px;">Course: </label>
+                                                </div>
+                                                  <div class="form-group" >
+                                                      <div class="input-group">
+                                                             <select name="courseId" [(ngModel)]= "enrollment.courseId"   class="form-control form-control-fp" style="font-size: 15px;
                                                             font-weight: 400;
                                                             color: #1c1d1d;
                                                              padding: 0px 0px 0px 10px;
@@ -822,8 +836,8 @@
                                                   <label for="mblend_modeale" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Blend Mode</label>
                                                   <input type="radio" id="online_mode" name="learning_modality" [(ngModel)]="enrollment.learning_modality"  value="online_mode">
                                                   <label for="online_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Online Mode</label>
-                                                  <input type="radio" id="modular_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"  value="modular_mode">
-                                                  <label for="modular_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Modular Mode</label>
+                                                  <!-- <input type="radio" id="modular_mode" name="learning_modality"  [(ngModel)]="enrollment.learning_modality"  value="modular_mode">
+                                                  <label for="modular_mode" style="padding-left: 10px;padding-right: 10px ;font-size: 11px;">Modular Mode</label> -->
                                                   </div>
                                               </div>
                                           </form>

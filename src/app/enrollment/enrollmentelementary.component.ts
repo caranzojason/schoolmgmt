@@ -64,7 +64,7 @@ export class EnrollmentElementaryComponent implements AfterViewInit {
         "schoolyearfrom": 0,
         "schoolyearto": 0,
         "semester": 0,
-        "subjectToEnroll": ""
+        "subjectToEnroll":""
     }
 
     public deparmentList:any;
@@ -303,7 +303,7 @@ export class EnrollmentElementaryComponent implements AfterViewInit {
           "schoolyearfrom": "",
           "schoolyearto": "",
           "semester": 0,
-          "subjectToEnroll": ""
+          "subjectToEnroll":""
       }
     }
 }

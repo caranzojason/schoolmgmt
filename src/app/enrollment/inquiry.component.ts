@@ -74,6 +74,7 @@ export class Inquiry implements AfterViewInit {
     "schoolyearfrom": 0,
     "schoolyearto": 0,
     "semester": 0,
+    "subjectToEnroll":""
   }
 
   public deparmentList:any;
@@ -324,7 +325,7 @@ export class Inquiry implements AfterViewInit {
 
 
     if(this.enrollment.learning_modality == ''){
-        this.setDialog("Learnig modality is required!");
+        this.setDialog("Learning modality is required!");
         return;
     }
 

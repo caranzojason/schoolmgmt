@@ -183,7 +183,7 @@ export class PaymentComponent {
           {
             this._studService.uploadFile(this.enrolNo,this.formData).subscribe(event => {
             
-              this.setDialog('Payment sucessfuly saved! Payment is now under for approval!')
+              this.setDialog('Payment transaction is successful. Please wait for approval.')
              }, error => {
               console.log(error);
             });

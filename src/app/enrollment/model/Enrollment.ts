@@ -50,7 +50,7 @@ export interface Enrollment{
     schoolyearfrom: any,
     schoolyearto: any,
     semester: Number,
-    subjectToEnroll:any;
+    subjectToEnroll:any,
 }
 /*
 "id": 1,

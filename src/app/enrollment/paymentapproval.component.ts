@@ -84,6 +84,7 @@ export class PaymentApprovalComponent implements AfterViewInit {
     "schoolyearfrom": 0,
     "schoolyearto": 0,
     "semester": 0,
+    "subjectToEnroll":""
   }
   public listpayment:Payment = {
     "id": 0,
@@ -411,7 +412,7 @@ export class PaymentApprovalComponent implements AfterViewInit {
 
 
     if(this.enrollment.learning_modality == ''){
-        this.setDialog("Learnig modality is required!");
+        this.setDialog("Learning modality is required!");
         return;
     }
 
