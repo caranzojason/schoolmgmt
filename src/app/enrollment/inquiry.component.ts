@@ -154,11 +154,11 @@ export class Inquiry implements AfterViewInit {
       if(this.enrollment.department == 1 || this.enrollment.department == 2){ //elem,junio
           this.trackStandardCourse =  [{id:0,name:"N/A"}];
           //asign to default value
-          if(this.enrollment.department == 1){
-              this.enrollment.grade = 1;
-          }else{
-              this.enrollment.grade = 9;
-          }
+          // if(this.enrollment.department == 1){
+          //     this.enrollment.grade = 1;
+          // }else{
+          //     this.enrollment.grade = 9;
+          // }
           this.gradesList = [{id:0,name:"N/A"}];
           this.schoolsemesterList = [{id:0,name:"N/A"}];
           
@@ -167,18 +167,18 @@ export class Inquiry implements AfterViewInit {
       if(this.enrollment.department == 3 ) //senior
       {
           //set default selected value
-          this.enrollment.grade = 13;
-          this.enrollment.strand = 1;
-          this.enrollment.semester = 1;
+          // this.enrollment.grade = 13;
+          // this.enrollment.strand = 1;
+          // this.enrollment.semester = 1;
           this._enrollService.getStrand().subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
           });
       }
       if(this.enrollment.department == 4 || this.enrollment.department == 5 ){//,colege, master grad
-          this.enrollment.grade = 15;
-          this.enrollment.strand = 1;
-          this.enrollment.semester = 1;
+          // this.enrollment.grade = 15;
+          // this.enrollment.strand = 1;
+          // this.enrollment.semester = 1;
           this._enrollService.getCoursesByDeptId(this.enrollment.department).subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
@@ -190,6 +190,10 @@ export class Inquiry implements AfterViewInit {
   {
     console.log(row);
     this.enrollment = row;
+    this.enrollment.schoolyearfrom = Number(this.enrollment.schoolyearfrom);
+    this.enrollment.schoolyearto = Number(this.enrollment.schoolyearto);
+    this.enrollment.grade = Number(this.enrollment.grade);
+    this.enrollment.strand = Number(this.enrollment.strand);
     if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
     else{
       const [year, month, day] = this.enrollment.dob.split('-');

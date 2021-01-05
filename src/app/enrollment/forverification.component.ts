@@ -1,4 +1,4 @@
-import { Component, AfterViewInit,ViewChild } from '@angular/core';
+import { Component, AfterViewInit,ViewChild,ChangeDetectorRef} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -92,7 +92,7 @@ public currentTabIndex = 1
   @ViewChild(MatSort,{static:false}) sort: MatSort;
   @ViewChild('tabs',{static:false}) tabGroup: MatTabGroup;
 
-  constructor(private _enrollService:EnrollmentService,public dialog: MatDialog) {
+  constructor(private _enrollService:EnrollmentService,public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
     this.subtitle = 'for verification';
 
   }
@@ -144,11 +144,11 @@ public currentTabIndex = 1
       if(this.enrollment.department == 1 || this.enrollment.department == 2){ //elem,junio
           this.trackStandardCourse =  [{id:0,name:"N/A"}];
           //asign to default value
-          if(this.enrollment.department == 1){
-              this.enrollment.grade = 1;
-          }else{
-              this.enrollment.grade = 9;
-          }
+          // if(this.enrollment.department == 1){
+          //     this.enrollment.grade = 1;
+          // }else{
+          //     this.enrollment.grade = 9;
+          // }
           this.gradesList = [{id:0,name:"N/A"}];
           this.schoolsemesterList = [{id:0,name:"N/A"}];
           
@@ -157,23 +157,24 @@ public currentTabIndex = 1
       if(this.enrollment.department == 3 ) //senior
       {
           //set default selected value
-          this.enrollment.grade = 13;
-          this.enrollment.strand = 1;
-          this.enrollment.semester = 1;
+          // this.enrollment.grade = 13;
+          // this.enrollment.strand = 1;
+          // this.enrollment.semester = 1;
           this._enrollService.getStrand().subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
           });
       }
       if(this.enrollment.department == 4 || this.enrollment.department == 5 ){//,colege, master grad
-          this.enrollment.grade = 15;
-          this.enrollment.strand = 1;
-          this.enrollment.semester = 1;
+          // this.enrollment.grade = 15;
+          // this.enrollment.strand = 1;
+          // this.enrollment.semester = 1;
           this._enrollService.getCoursesByDeptId(this.enrollment.department).subscribe((data:any) => 
           {
               this.trackStandardCourse = data;
           });
       }
+      this.changeDetectorRefs.detectChanges();
   }
 
 
@@ -183,16 +184,19 @@ public currentTabIndex = 1
     this.enrollment = row;
     this.enrollment.schoolyearfrom = Number(this.enrollment.schoolyearfrom);
     this.enrollment.schoolyearto = Number(this.enrollment.schoolyearto);
-    console.log(this.enrollment);
+    this.enrollment.strand = Number(this.enrollment.strand);
+    this.enrollment.grade = Number(this.enrollment.grade);
     if(typeof this.enrollment.dob === 'object' && this.enrollment.dob !== null){ }
     else{
       const [year, month, day] = this.enrollment.dob.split('-');
       const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
       this.enrollment.dob = obj;
+      this.changeDetectorRefs.detectChanges();
     }
  
     this.selectDepartment();
     this.tabGroup.selectedIndex = 1
+ 
   }
 
   getSelectedIndex(): number {

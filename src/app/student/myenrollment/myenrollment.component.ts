@@ -90,6 +90,10 @@ constructor(private _enrollService:EnrollmentService,private _starterService:MyE
     this._starterService.getEnrollmentByRefNo(refNo).subscribe((data:any) => 
     {
         this.enrollment = data;
+        this.enrollment.schoolyearfrom = Number(this.enrollment.schoolyearfrom);
+        this.enrollment.schoolyearto = Number(this.enrollment.schoolyearto);
+        this.enrollment.strand = Number(this.enrollment.strand);
+        this.enrollment.grade = Number(this.enrollment.grade);
         const [year, month, day] = this.enrollment.dob.split('-');
         const obj = { year: parseInt(year), month: parseInt(month), day: parseInt(day.split(' ')[0].trim()) };
         this.enrollment.dob = obj;
@@ -116,6 +120,7 @@ ngAfterViewInit() {}
 
 public selectDepartment()
 {
+
     if(this.enrollment.department != 5){//not equal to colege
         this._enrollService.getGrades(this.enrollment.department).subscribe((data:any) => 
         {
@@ -138,16 +143,16 @@ public selectDepartment()
     if(this.enrollment.department == 3 ) //senior
     {
         //set default selected value
-        this.enrollment.grade = 13;
-        this.enrollment.strand = 1;
+        // this.enrollment.grade = 13;
+        // this.enrollment.strand = 1;
         this._enrollService.getStrand().subscribe((data:any) => 
         {
             this.trackStandardCourse = data;
         });
     }
     if(this.enrollment.department == 4 || this.enrollment.department == 5 ){//,colege
-        this.enrollment.grade = 15;
-        this.enrollment.strand = 1;
+        // this.enrollment.grade = 15;
+        // this.enrollment.strand = 1;
         this._enrollService.getCoursesByDeptId(this.enrollment.department).subscribe((data:any) => 
         {
             this.trackStandardCourse = data;
