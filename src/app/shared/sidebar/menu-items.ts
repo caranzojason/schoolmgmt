@@ -20,7 +20,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/enrollment/inquiry',
-        title: 'Inquiry',
+        title: 'Verified History',
         icon: 'mdi mdi-gauge',
         class: '',
         extralink: false,
@@ -28,15 +28,23 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: '/enrollment/paymentapproval',
-        title: 'For Approval(Payment)',
+        title: 'Payment For Approval',
         icon: 'mdi mdi-gauge',
         class: '',
         extralink: false,
         submenu: []
       },
+      // {
+      //   path: '/enrollment/paymentapprovalwalkin',
+      //   title: 'Walk-in Payment',
+      //   icon: 'mdi mdi-gauge',
+      //   class: '',
+      //   extralink: false,
+      //   submenu: []
+      // },
       {
         path: '/enrollment/paymentinquiry',
-        title: 'Inquiry(Payment)',
+        title: 'Payment Approval History',
         icon: 'mdi mdi-gauge',
         class: '',
         extralink: false,

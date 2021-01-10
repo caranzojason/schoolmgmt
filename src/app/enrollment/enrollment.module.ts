@@ -54,6 +54,7 @@ import { EnrollmentHighSchoolComponent } from './enrollmenthighschool.component'
 import { EnrollmentElementaryComponent } from './enrollmentelementary.component';
 import { EnrollmentSeniorComponent } from './enrollmentseniorhigh.component';
 import { EnrollmentGraduateComponent } from './enrollmentgraduate.component';
+import { PaymentApprovalWalkinComponent } from './paymentapprovalwalkin.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule, RouterModule.forChild(EnrollmentRoutes),ReactiveFormsModule,
@@ -95,7 +96,7 @@ import { EnrollmentGraduateComponent } from './enrollmentgraduate.component';
     NgbModule],
   declarations: [ForVerificationComponent,ForApprovalComponent,EnrollmentComponent,Inquiry,PaymentApprovalComponent,
     PaymentInquiryComponent,EnrollmentDialogComponent,EnrollmentCollegeComponent,
-    EnrollmentHighSchoolComponent,EnrollmentElementaryComponent,EnrollmentSeniorComponent,EnrollmentGraduateComponent],
+    EnrollmentHighSchoolComponent,EnrollmentElementaryComponent,EnrollmentSeniorComponent,EnrollmentGraduateComponent,PaymentApprovalWalkinComponent],
   entryComponents: [EnrollmentDialogComponent],
   providers: [
     EnrollmentService,

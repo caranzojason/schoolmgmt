@@ -197,10 +197,10 @@ export class EnrollmentGraduateComponent implements AfterViewInit {
             return;
         }
 
-        if(this.enrollment.grade == 0){
-            this.setDialog("Grade is required!");
-            return;
-        }
+        // if(this.enrollment.grade == 0){
+        //     this.setDialog("Grade is required!");
+        //     return;
+        // }
 
         if(this.enrollment.address == ''){
             this.setDialog("Address is required!");

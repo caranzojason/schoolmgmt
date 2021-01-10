@@ -225,117 +225,117 @@ public currentTabIndex = 1
 
   public verify(){
     var scope = this;
-    if(this.enrollment.type == null){
-      this.setDialog("Please select old or new student!");
-      return;
-    }
+    // if(this.enrollment.type == null){
+    //   this.setDialog("Please select old or new student!");
+    //   return;
+    // }
   
-    if(this.enrollment.lastname == ""){
-        this.setDialog("LastName is required!");
-        return;
-    }
+    // if(this.enrollment.lastname == ""){
+    //     this.setDialog("LastName is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.firstname == ""){
-        this.setDialog("Firstname is required!");
-        return;
-    }
+    // if(this.enrollment.firstname == ""){
+    //     this.setDialog("Firstname is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.age <= 0){
-        this.setDialog("Age is required!");
-        return;
-    }
+    // if(this.enrollment.age <= 0){
+    //     this.setDialog("Age is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.gender == ''){
-        this.setDialog("Gender is required!");
-        return;
-    }
+    // if(this.enrollment.gender == ''){
+    //     this.setDialog("Gender is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.department == 0){
-        this.setDialog("Department is required!");
-        return;
-    }
+    // if(this.enrollment.department == 0){
+    //     this.setDialog("Department is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.grade == 0){
-        this.setDialog("Grade is required!");
-        return;
-    }
+    // if(this.enrollment.grade == 0){
+    //     this.setDialog("Grade is required!");
+    //     return;
+    // }
 
     // if(this.enrollment.strand == 0 && (this.enrollment.department > 2)){
     //     this.setDialog("Track & Strand is required!");
     //     return;
     // }
 
-    if(this.enrollment.address == ''){
-        this.setDialog("Address is required!");
-        return;
-    }
+    // if(this.enrollment.address == ''){
+    //     this.setDialog("Address is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.dob == ''){
-        this.setDialog("Date of birth is required!");
-        return;
-    }
+    // if(this.enrollment.dob == ''){
+    //     this.setDialog("Date of birth is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.place_of_birth == ''){
-        this.setDialog("Place of birth is required!");
-        return;
-    }
+    // if(this.enrollment.place_of_birth == ''){
+    //     this.setDialog("Place of birth is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.contactno == ''){
-        this.setDialog("Contact No is required!");
-        return;
-    }
+    // if(this.enrollment.contactno == ''){
+    //     this.setDialog("Contact No is required!");
+    //     return;
+    // }
     
-    if(this.enrollment.email == ''){
-        this.setDialog("Email is required!");
-        return;
-    }
+    // if(this.enrollment.email == ''){
+    //     this.setDialog("Email is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.fathername == ''){
-        this.setDialog("Father's name is required!");
-        return;
-    }
+    // if(this.enrollment.fathername == ''){
+    //     this.setDialog("Father's name is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.fathercontact == ''){
-        this.setDialog("Father's Contact No is required!");
-        return;
-    }
+    // if(this.enrollment.fathercontact == ''){
+    //     this.setDialog("Father's Contact No is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.mothername == ''){
-        this.setDialog("Mother's name is required!");
-        return;
-    }
+    // if(this.enrollment.mothername == ''){
+    //     this.setDialog("Mother's name is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.mothercontact == ''){
-        this.setDialog("Mother's Contact No required!");
-        return;
-    }
+    // if(this.enrollment.mothercontact == ''){
+    //     this.setDialog("Mother's Contact No required!");
+    //     return;
+    // }
 
-    if((this.enrollment.fathername == '' && this.enrollment.mothername == '') && this.enrollment.guardian_name == '' ){
-        this.setDialog("Guardian Name required!");
-        return;
-    }
+    // if((this.enrollment.fathername == '' && this.enrollment.mothername == '') && this.enrollment.guardian_name == '' ){
+    //     this.setDialog("Guardian Name required!");
+    //     return;
+    // }
 
-    if(this.enrollment.guardian_name != '' && this.enrollment.guardian_contactno == '' ){
-        this.setDialog("Guardian Contact required!");
-        return;
-    }
+    // if(this.enrollment.guardian_name != '' && this.enrollment.guardian_contactno == '' ){
+    //     this.setDialog("Guardian Contact required!");
+    //     return;
+    // }
 
 
-    if(this.enrollment.learning_modality == ''){
-        this.setDialog("Learning Modality is required!");
-        return;
-    }
+    // if(this.enrollment.learning_modality == ''){
+    //     this.setDialog("Learning Modality is required!");
+    //     return;
+    // }
 
-    console.log(this.enrollment.schoolyearfrom);
-    if(this.enrollment.schoolyearfrom == 0|| this.enrollment.schoolyearto == null){
-        this.setDialog("School Year from is required!");
-        return;
-    }
+    // console.log(this.enrollment.schoolyearfrom);
+    // if(this.enrollment.schoolyearfrom == 0|| this.enrollment.schoolyearto == null){
+    //     this.setDialog("School Year from is required!");
+    //     return;
+    // }
 
-    if(this.enrollment.schoolyearto == 0 || this.enrollment.schoolyearto == null){
-        this.setDialog("School Year To is required!");
-        return;
-    }
+    // if(this.enrollment.schoolyearto == 0 || this.enrollment.schoolyearto == null){
+    //     this.setDialog("School Year To is required!");
+    //     return;
+    // }
 
     this.enrollment.approved_by = "registrar"
     this._enrollService.updateStatus(this.enrollment).subscribe((data:any) => 

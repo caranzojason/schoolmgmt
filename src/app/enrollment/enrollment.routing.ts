@@ -11,6 +11,7 @@ import { EnrollmentSeniorComponent } from './enrollmentseniorhigh.component';
 import { PaymentApprovalComponent } from './paymentapproval.component';
 import { PaymentInquiryComponent } from './paymentinquiry.component';
 import { EnrollmentGraduateComponent } from './enrollmentgraduate.component';
+import { PaymentApprovalWalkinComponent } from './paymentapprovalwalkin.component';
 
 export const EnrollmentRoutes: Routes = [
 	{
@@ -51,11 +52,22 @@ export const EnrollmentRoutes: Routes = [
 			},
 			{
 				path: 'paymentapproval',
-				component: PaymentApprovalComponent,
+				component: PaymentApprovalComponent ,
 				data: {
 					title: 'For Approval(Payment)',
 					urls: [
 						{ title: 'Enrollment', url: '/enrollment/paymentapproval' },
+						{ title: 'For Approval(Payment)' }
+					]
+				}
+			},
+			{
+				path: 'paymentapprovalwalkin',
+				component: PaymentApprovalWalkinComponent,
+				data: {
+					title: 'Walk in(Payment)',
+					urls: [
+						{ title: 'Enrollment', url: '/enrollment/paymentapprovalwalkin' },
 						{ title: 'For Approval(Payment)' }
 					]
 				}
