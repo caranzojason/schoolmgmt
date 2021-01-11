@@ -153,6 +153,14 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: []
       },
+      {
+        path: '/report/studentsubjectReports',
+        title: 'Subject Reports',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
       // {
       //   path: '/report/studentreport',
       //   title: 'Student Reports',

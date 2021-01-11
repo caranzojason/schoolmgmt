@@ -1,0 +1,216 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                    <div class="col-md-6" style="padding: 1px;">
+                                <!-- <label style="font-size: 13px;margin-bottom: 0px;">
+                                    <input type="checkbox" id="1"  name="School" [(ngModel)]="enrollReport.IsCheckedReportSchool" style="margin: 5px;" />School Year:
+                                </label> -->
+                                <div class="input-group">
+                                    <label style="font-size: 13px;margin-bottom: 0px;width: 200px;">
+                                        School Year From:
+                                    </label>
+                                    <div>
+                                        <ng-select [items]="schoolyearList"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [multiple]="true"
+                                            [(ngModel)]="enrollReport.schoolyearfrom">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label style="font-size: 13px;margin-bottom: 0px;width: 200px;">
+                                        School Year From:
+                                    </label>
+                                    <div>
+                                        <ng-select [items]="schoolyearList"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [multiple]="true"
+                                            [(ngModel)]="enrollReport.schoolyearto">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    <div class="input-group">
+                        <label style="font-size: 13px;margin-bottom: 0px;width: 200px;">
+                            Student Type:
+                        </label>
+
+                        <div>
+                            <ng-select [items]="studentTypeList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.type">
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    <div class="col-md-4">
+                        <label style="font-size: 13px;margin-bottom: 0px;">
+                            <!-- <input type="checkbox" id="2" name="Department"[(ngModel)]="enrollReport.IsCheckedReportDept" style="margin: 5px;" /> -->
+                            Department: 
+                        </label>
+                        <div>
+                            <ng-select [items]="deparmentList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.department">
+                            </ng-select>
+                        </div>
+                        
+                 </div>
+                <div class="col-md-4" >
+                        <label style="font-size: 13px;margin-bottom: 0px;">
+                            <!-- <input type="checkbox" id="3" name="Grade"[(ngModel)]="enrollReport.IsCheckedReportGrade" style="margin: 5px;" /> -->
+                            Grade: 
+                        </label>
+                        <div>
+                            <ng-select [items]="gradeList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.grade">
+                            </ng-select>
+                        </div>
+                </div>
+                <div class="col-md-4" >
+                        <label style="font-size: 13px;margin-bottom: 0px;">
+                            <!-- <input type="checkbox" id="4" name="Course" [(ngModel)]="enrollReport.IsCheckedReportCourse" style="margin: 5px;" /> -->
+                            Course: 
+                        </label>
+                       <div>
+                            <ng-select [items]="coursetList"
+                                bindLabel="name"
+                                bindValue="id"
+                                [multiple]="true"
+                                [(ngModel)]="enrollReport.course">
+                            </ng-select>
+                        </div>
+                </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <!-- <input type="checkbox" id="5" name="Strand" [(ngModel)]="enrollReport.IsCheckedReportStrand" style="margin: 5px;" /> -->
+                                Track & Strand: 
+                            </label>
+                            <div>
+                                <ng-select [items]="strandList"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.strand">
+                                </ng-select>
+                            </div>
+                    </div>
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <!-- <input type="checkbox" id="6" name="Semester" [(ngModel)]="enrollReport.IsCheckedReportSem" style="margin: 5px;" /> -->
+                                Semester: 
+                            </label>
+                            <div>
+                                <ng-select [items]="semesterList"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.semester">
+                                </ng-select>
+                            </div>
+                    </div>
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <!-- <input type="checkbox" id="7" name="Gender" [(ngModel)]="enrollReport.IsCheckedReportGender" style="margin: 5px;" /> -->
+                                Gender 
+                            </label>
+                            <div>
+                                <ng-select [items]="genderList"
+                                    bindLabel="name"
+                                    bindValue="name"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.gender">
+                                </ng-select>
+                            </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: -5 px; margin-right: 0px;margin-left: 0px;">
+                    
+                    <div class="col-md-4" >
+                            <label style="font-size: 13px;margin-bottom: 0px;">
+                                <!-- <input type="checkbox" id="5" name="Strand" [(ngModel)]="enrollReport.IsCheckedReportStrand" style="margin: 5px;" /> -->
+                                Status 
+                            </label>
+                            <div>
+                                <ng-select [items]="status"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    [multiple]="true"
+                                    [(ngModel)]="enrollReport.status">
+                                </ng-select>
+                            </div>
+                    </div>
+                </div>
+                <div style="padding:5px;float: right;">
+                    <button class="btn btn-info btn-secondary btn-modal-footer-x" (click)="onSearch()" type="button" style="font-size: 12px;"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table >
+                          <thead >
+                            <tr>
+                              <th > <h6 >Name</h6></th>
+                              <th > <h6 >Gender</h6></th>
+                              <th > <h6 >Department</h6></th>
+                              <th > <h6 >Strand & Course</h6></th>
+                              <th > <h6 >Semester</h6></th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                              <tr *ngFor="let enrol of enrollReportList; let i =index" >
+                                  <td ><h5 >{{enrol.NAME}}</h5></td>
+                                  <td ><h5 >{{enrol.GENDER}}</h5></td>
+                                  <td ><h5 >{{enrol.DEPARTMENT}}</h5></td>
+                                  <td ><h5 >{{enrol.STRAND}}</h5></td>
+                                  <td ><h5 >{{enrol.SEMESTER}}</h5></td>
+                              </tr> 
+                          </tbody>
+                    </table>
+                  </div>
+                </div>
+        </div> -->
+    </div>
+    <!-- <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="shadow-sm card action-buttons">
+                    <button (click)="generatePdf('open')"
+                      class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
+                      <i class="material-icons" style="font-size: 13px;">
+                        picture_as_pdf
+                      </i> <span>Open PDF</span></button>
+                    <button (click)="generatePdf('download')"
+                      class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
+                      <i class="material-icons" style="font-size: 13px;">
+                        cloud_download
+                      </i><span>Download PDF</span></button>
+                    <button (click)="generatePdf('print')"
+                      class="btn btn-info btn-secondary btn-modal-footer-x mat-button mat-button-base" style="margin: 5px;font-size: 12px;">
+                      <i class="material-icons" style="font-size: 13px;">
+                        print
+                      </i><span>Print PDF</span></button>
+                  </div>
+            </div>
+        </div>
+    </div> -->
+</div>

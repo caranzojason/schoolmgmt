@@ -43,6 +43,7 @@ export class CounterReportsComponent implements OnInit {
       "semester":[],
       "gender":[],
       "status":[],
+      "Subject":[],
       "IsCheckedReportSchool":false,
       "IsCheckedReportDept":false,
       "IsCheckedReportGender":false,
