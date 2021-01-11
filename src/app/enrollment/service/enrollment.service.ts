@@ -55,6 +55,14 @@ export class EnrollmentService {
         .pipe(map((res: any) => res));
     }
 
+    getEnrollmentForPayment(){
+        return this._httpClient.get<any>(this._env.api+'enrollgetgetForwalkin')
+        .pipe(map((res: any) => res));
+    }
+
+
+    
+
     updateStatus(data:Enrollment): Observable<Enrollment> {
         return this._httpClient.post<Enrollment>(this._env.api +'enrolVerify',data)
         .pipe(map((res: Enrollment) => res));

@@ -68,3 +68,39 @@
 {
     font-size: 13px;
 }
+
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+
+  .example-action-button {
+    margin-top: 8px;
+    margin-right: 8px;
+  }
+  .th-matt-header
+  {
+    background: #398bf7;
+    color: #ffffff;
+  }
+  table.mat-table {
+    border-spacing: 0;
+    /* box-shadow: 2px -2px 6px 2px #eaefea; */
+    border: 1px solid #e0e0e0;
+}
+.inputText
+{
+    font-size: 11px;
+    padding: 5px;
+    border-radius: 5px;
+    color: #5a5a5a;
+    font-weight: 500;
+}

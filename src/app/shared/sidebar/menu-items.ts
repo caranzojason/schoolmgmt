@@ -34,14 +34,14 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: []
       },
-      // {
-      //   path: '/enrollment/paymentapprovalwalkin',
-      //   title: 'Walk-in Payment',
-      //   icon: 'mdi mdi-gauge',
-      //   class: '',
-      //   extralink: false,
-      //   submenu: []
-      // },
+      {
+        path: '/enrollment/paymentapprovalwalkin',
+        title: 'Walk-in Payment',
+        icon: 'mdi mdi-gauge',
+        class: '',
+        extralink: false,
+        submenu: []
+      },
       {
         path: '/enrollment/paymentinquiry',
         title: 'Payment Approval History',
