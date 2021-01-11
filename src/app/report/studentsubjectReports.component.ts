@@ -18,11 +18,11 @@ import { ReportService } from './service/service.report';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
-  templateUrl: './reports.component.html',
+  templateUrl: './studentsubjectReports.component.html',
   styleUrls: ['./reports.scss'],
 })
 
-export class ReportsComponent implements OnInit {
+export class SubjectReportsComponent implements OnInit {
   displayedColumns: string[] = ['ref_no', 'lastname', 'firstname', 'email','status','actions'];
     dataSource: MatTableDataSource<Enrollment>;
     @ViewChild(MatSort,{static:false}) sort: MatSort;
@@ -100,6 +100,7 @@ export class ReportsComponent implements OnInit {
     this._reportService.getEnrollmentForVerification().subscribe((data) => 
     {
         this.enrolmentList = data;
+        
     });
 
     this.getGradeAll();
@@ -184,11 +185,12 @@ onSearch()
        tempArr.push(
          { 
           NAME: en[i].NAME, 
-          DEPARTMENT: en[i].DEPARTMENT,
-          GRADE: en[i].Grade, 
-          STRAND: en[i].STRAND, 
-          COURSE: en[i].COURSE,
-          SEMESTER: en[i].SEMESTER,
+          //DEPARTMENT: en[i].DEPARTMENT,
+          SUBJECT: en[i].Subject,
+        //   GRADE: en[i].Grade, 
+        //   STRAND: en[i].STRAND, 
+        //   COURSE: en[i].COURSE,
+        //   SEMESTER: en[i].SEMESTER,
           // GENDER: en[i].GENDER,
           }
         );
@@ -196,7 +198,7 @@ onSearch()
           content: 
           [
             {
-              text: 'Reports',
+              text: 'Student Subject Reports',
               bold: true,
               fontSize: 20,
               alignment: 'center',
@@ -227,7 +229,7 @@ onSearch()
                 }
               ]
             },
-            this.table(tempArr, ['NAME','DEPARTMENT','GRADE','STRAND','COURSE','SEMESTER'])
+            this.table(tempArr, ['NAME','SUBJECT'])
           ],
           styles: {
             header: {
@@ -268,7 +270,7 @@ onSearch()
     return {
       fontSize: 12,
       table: {
-        widths: ['20.6%', '16.6%', '16.6%', '12.6%', '15.6%', '10.6%'],
+        widths: ['30.6%', '69%'],
         fillColor: '#555555',
         // headerRows: 2,
         fontSize: 12,

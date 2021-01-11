@@ -3,6 +3,7 @@ import { AssessmentSlipComponent } from './assessmentslip.component';
 import { CounterReportsComponent } from './countreport.component';
 import { ReportsComponent } from './reports.component';
 import { StudentReportsComponent } from './studentreport.component';
+import { SubjectReportsComponent } from './studentsubjectReports.component';
 
 export const ReportsRoute: Routes = [
 	{
@@ -38,6 +39,17 @@ export const ReportsRoute: Routes = [
 					urls: [
                         { title: 'Count Report', url: '/report/countreport' },
 						{ title: 'Count Report' }
+					]
+				}
+			},
+			{
+				path: 'studentsubjectReports',
+				component: SubjectReportsComponent,
+				data: {
+					title: 'Subject Report',
+					urls: [
+                        { title: 'Subject Report', url: '/report/studentsubjectReports' },
+						{ title: 'Subject Report' }
 					]
 				}
             },

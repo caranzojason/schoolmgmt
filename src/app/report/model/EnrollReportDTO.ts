@@ -9,6 +9,7 @@ export class EnrollReport{
     semester:any;
     gender:any;
     status:any;
+    Subject:any;
     IsCheckedReportSchool:boolean;
     IsCheckedReportDept:boolean;
     IsCheckedReportGender:boolean;
