@@ -136,6 +136,7 @@ public currentTabIndex = 1
      { name: "Enrolment Fee & Back Account Fee", value: "EnrollmentFeeBackAcount" },
      { name: "Monthly Fee", value: "MonthlyFee" },
      { name: "Quarterly Fee", value: "QuarterlyFee" },
+     { name: "PROMISORY NOTE", value: "PromisoryNote" },
      { name: "Yearly Fee", value: "YearlyFee" },
      { name: "Others", value: "Others" }
    ];
@@ -285,15 +286,16 @@ public currentTabIndex = 1
     return;
   }
 
-  if(this.payment.amountToPay == 0){
-    this.setDialog('Amount to Pay is required')
-    return;
-  }
-
   if(this.payment.paymentDescription == ""){
     this.setDialog('Payment description is required')
     return;
   }
+
+  if(this.payment.amountToPay == 0 && this.payment.paymentDescription !==  'PROMISORY NOTE'){
+    this.setDialog('Amount to Pay is required')
+    return;
+  }
+
 
   // if(!this.isUploaded && this.payment.filename == '' ){
   //   this.setDialog('Please upload file!')
@@ -317,7 +319,7 @@ public currentTabIndex = 1
       this.changeDetectorRefs.detectChanges();
       this.setDialog('Payment alredy approved!')
     }else{
-      this._enrollService.makePayment(this.studentPayment).subscribe((data:any) => 
+      this._enrollService.makePaymentWalkin(this.studentPayment).subscribe((data:any) => 
       {
         this.setDialog('Payment transaction is successful. Please wait for approval.')
         // this._enrollService.uploadFile(this.enrolNo,this.formData).subscribe(event => {

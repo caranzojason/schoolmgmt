@@ -160,4 +160,12 @@ export class EnrollmentService {
         .pipe(map((res: any) => res));
     }
 
+    makePaymentWalkin(payment:any): Observable<any> {
+        console.log("pay");
+        return this._httpClient.post<any>(this._env.api +'enrollmentMakePaymentWalkin',payment)
+        .pipe(map((res: any) => res));
+    }
+
+    
+
 }

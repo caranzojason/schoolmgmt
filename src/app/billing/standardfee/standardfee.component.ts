@@ -130,18 +130,26 @@ export class StandardFeeComponent {
 
     public edit(row)
     {
-        this._yearlyFeeService.getYearlyFeeById(row.Id).subscribe((data:any) => 
+        this._yearlyFeeService.getAllDepartment().subscribe((data:any) => 
         {
-            this.yearlyFee = data;
-            this._yearlyFeeService.getYearlyFeeDetailByMastereId(this.yearlyFee.Id).subscribe((data:any) => 
+            this.deparmentList = data;
+           
+            this._yearlyFeeService.getYearlyFeeById(row.Id).subscribe((data:any) => 
             {
-                this.billingFee = data;
-                console.log(this.billingFee);
-                this.dataSourceForm = new MatTableDataSource( this.billingFee);
-                // this.selectDepartment();
-                this.tabGroup.selectedIndex = 1
+                this.yearlyFee = data;
+                this.yearlyFee = {"schoolyearfrom":Number(data.schoolyearfrom),"schoolyearto":Number(data.schoolyearto),"Id":data.Id,"departmentId":Number(data.departmentId),"gradeId":Number(data.gradeId),"strandId":Number(data.strandId),"courseId":Number(data.courseId),"semester":Number(data.semester)};
+                this.selectDepartment();
+                this._yearlyFeeService.getYearlyFeeDetailByMastereId(this.yearlyFee.Id).subscribe((data:any) => 
+                {
+                    this.billingFee = data;
+                    console.log(this.billingFee);
+                    this.dataSourceForm = new MatTableDataSource( this.billingFee);
+                    // this.selectDepartment();
+                    this.tabGroup.selectedIndex = 1
+                });
             });
-        });
+        })
+
     }
 
     removeFee(row){
@@ -182,12 +190,12 @@ export class StandardFeeComponent {
             this.yearlyFee.semester = 0;
             this.yearlyFee.courseId = 0;
             
-            //asign to default value
-            if(this.yearlyFee.departmentId == 1){
-                this.yearlyFee.gradeId = 1;
-            }else{
-                this.yearlyFee.gradeId = 9;
-            }
+            // //asign to default value
+            // if(this.yearlyFee.departmentId == 1){
+            //     this.yearlyFee.gradeId = 1;
+            // }else{
+            //     this.yearlyFee.gradeId = 9;
+            // }
             this.gradesList = [{id:0,name:"N/A"}];
             this.schoolsemesterList = [{id:0,name:"N/A"}];
             
